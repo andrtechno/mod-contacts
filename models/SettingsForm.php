@@ -4,15 +4,22 @@ namespace panix\mod\contacts\models;
 
 use panix\engine\SettingsModel;
 
+
 class SettingsForm extends SettingsModel {
 
     protected $category = 'contacts';
     protected $module = 'contacts';
-    public $pagenum;
+    public $email;
+    public $phone;
+    public $feedback_tpl_body;
 
     public function rules() {
         return [
-            [['pagenum'], "required"],
+            [['email'], "required"],
+            [['feedback_tpl_body'], 'string'],
+            
+  
+            
         ];
     }
 

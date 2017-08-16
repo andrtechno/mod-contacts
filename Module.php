@@ -16,12 +16,22 @@ class Module extends WebModule {
     public function getNav() {
         return [
             [
-                'label' => 'Станицы',
+                'label' => Yii::t('contacts/default', 'MODULE_NAME'),
                 "url" => ['/admin/contacts'],
                 'icon' => 'icon-phone'
             ],
             [
-                'label' => 'Настройки',
+                'label' => Yii::t('contacts/default', 'MAPS'),
+                "url" => ['/admin/contacts/maps'],
+                'icon' => 'icon-location-map'
+            ],
+            [
+                'label' => Yii::t('contacts/default', 'MARKERS'),
+                "url" => ['/admin/contacts/markers'],
+                'icon' => 'icon-location-marker'
+            ],
+            [
+                'label' => Yii::t('app','SETTINGS'),
                 "url" => ['/admin/contacts/settings'],
                 'icon' => 'icon-settings'
             ]
@@ -41,8 +51,11 @@ class Module extends WebModule {
 
     protected function getDefaultModelClasses() {
         return [
-            'Pages' => 'panix\mod\contacts\models\Pages',
-            'PagesSearch' => 'panix\mod\contacts\models\PagesSearch',
+            'Maps' => 'panix\mod\contacts\models\Maps',
+            'MapsSearch' => 'panix\mod\contacts\models\MapsSearch',
+            'Markers' => 'panix\mod\contacts\models\Markers',
+            'MarkersSearch' => 'panix\mod\contacts\models\MarkersSearch',
+            
         ];
     }
 
