@@ -10,6 +10,7 @@ class Module extends WebModule {
 
     public $routes = [
         'page/<url>' => 'contacts/default/view',
+        'contacts/captach'=>'contacts/default/captcha'
     ];
 
     public function getNav() {
