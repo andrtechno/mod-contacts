@@ -1,6 +1,6 @@
 <?php
 
-namespace panix\contacts\models;
+namespace panix\mod\contacts\models;
 
 use panix\engine\SettingsModel;
 

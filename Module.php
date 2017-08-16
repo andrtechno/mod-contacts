@@ -1,6 +1,6 @@
 <?php
 
-namespace panix\contacts;
+namespace panix\mod\contacts;
 
 use Yii;
 use panix\engine\WebModule;
@@ -40,8 +40,8 @@ class Module extends WebModule {
 
     protected function getDefaultModelClasses() {
         return [
-            'Pages' => 'panix\contacts\models\Pages',
-            'PagesSearch' => 'panix\contacts\models\PagesSearch',
+            'Pages' => 'panix\mod\contacts\models\Pages',
+            'PagesSearch' => 'panix\mod\contacts\models\PagesSearch',
         ];
     }
 

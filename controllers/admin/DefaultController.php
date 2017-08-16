@@ -1,10 +1,10 @@
 <?php
 
-namespace panix\contacts\controllers\admin;
+namespace panix\mod\contacts\controllers\admin;
 
 use Yii;
-use panix\contacts\models\Pages;
-use panix\contacts\models\PagesSearch;
+use panix\mod\contacts\models\Pages;
+use panix\mod\contacts\models\PagesSearch;
 use panix\engine\controllers\AdminController;
 use panix\engine\grid\sortable\SortableGridAction;
 
