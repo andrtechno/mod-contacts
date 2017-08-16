@@ -1,8 +1,8 @@
 <?php
 
 return [
-  'MODULE_NAME'=>'Стат страницы',
-    'MODULE_DESC'=>'Статичные страницы',
+  'MODULE_NAME'=>'Контакты',
+    'MODULE_DESC'=>'Контакты',
     'CREATE_BTN'=>'Создать страницу',
 ];
 ?>

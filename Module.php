@@ -32,7 +32,7 @@ class Module extends WebModule {
             'name' => Yii::t('contacts/default', 'MODULE_NAME'),
             'author' => 'andrew.panix@gmail.com',
             'version' => '1.0',
-            'icon' => 'icon-edit',
+            'icon' => 'icon-phone',
             'description' => Yii::t('contacts/default', 'MODULE_DESC'),
             'url' => ['/admin/contacts'],
         ];
