@@ -10,14 +10,7 @@ use panix\engine\grid\sortable\SortableGridAction;
 
 class DefaultController extends AdminController {
 
-    public function actions() {
-        return [
-            'dnd_sort' => [
-                'class' => SortableGridAction::className(),
-                'modelName' => Pages::className(),
-                ],
-        ];
-    }
+
 
     public function actionIndex() {
         $this->pageName = Yii::t('contacts/default', 'MODULE_NAME');
@@ -32,12 +25,12 @@ class DefaultController extends AdminController {
             $this->pageName
         ];
 
-        $searchModel = new PagesSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->getQueryParams());
+       // $searchModel = new PagesSearch();
+       // $dataProvider = $searchModel->search(Yii::$app->request->getQueryParams());
 
         return $this->render('index', [
-                    'dataProvider' => $dataProvider,
-                    'searchModel' => $searchModel,
+              //      'dataProvider' => $dataProvider,
+               //     'searchModel' => $searchModel,
                 ]);
     }
 
