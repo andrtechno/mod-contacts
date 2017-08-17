@@ -26,7 +26,7 @@ class Maps extends WebModel {
      */
     public function rules() {
         return [
-            [['name','zoom','height','width'], 'required'],
+            [['name','zoom','height','width','center'], 'required'],
             [['name','center'], 'string', 'max' => 255],
             [['night_mode','grayscale'], 'boolean'],
 

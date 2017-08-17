@@ -61,7 +61,11 @@ class Markers extends WebModel {
         $query->where('id=:id', ['id' => $this->id]);
         $result = $query->one();
 
-        $this->coords = $result['coords'];
+       $this->coords = $result['coords'];
+       //$this->coords = $this->find()->addSelect(['coords'=>new \yii\db\Expression("CONCAT(X(coords),',',Y(coords))")]);
+      // $this->coords = $this->find()->addSelect(['coords'=>new \yii\db\Expression("CONCAT(X(coords),',',Y(coords))")]);
+
+       // $this->coords =$this->find()->getCoords2();
         parent::afterFind();
     }
 

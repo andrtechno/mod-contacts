@@ -17,7 +17,7 @@ use yii\bootstrap\ActiveForm;
 $form = ActiveForm::begin([
             'layout' => 'horizontal',
             'fieldConfig' => [
-                'template' => "{label}\n{beginWrapper}\n{input}\n{hint}\n{error}\n{endWrapper}",
+                'template' => "{label}\n{beginWrapper}\n{hint}\n{input}\n{error}\n{endWrapper}",
                 'horizontalCssClasses' => [
                     'label' => 'col-sm-4',
                     'offset' => 'col-sm-offset-4',
@@ -26,16 +26,16 @@ $form = ActiveForm::begin([
                     'hint' => '',
                 ],
             ],
-            'options' => ['class' => 'form-horizontal']
         ]);
 ?>
         <?= $form->field($model, 'name')->textInput(['maxlength' => 255]) ?>
+        <?= $form->field($model, 'center')->textInput(['maxlength' => 255]) ?>
         <?= $form->field($model, 'zoom')->textInput(['maxlength' => 255]) ?>
         <?= $form->field($model, 'width')->textInput(['maxlength' => 255]) ?>
         <?= $form->field($model, 'height')->textInput(['maxlength' => 255]) ?>
-        <?= $form->field($model, 'center')->textInput(['maxlength' => 255]) ?>
+        
         <?= $form->field($model, 'grayscale')->checkbox() ?>
-        <?= $form->field($model, 'night_mode')->hint('Пожалуйста, введите имя')->checkbox() ?>
+        <?= $form->field($model, 'night_mode')->checkbox()->hint('me hint') ?>
 
 
 <?php
