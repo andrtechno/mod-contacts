@@ -27,7 +27,9 @@ class Maps extends WebModel {
     public function rules() {
         return [
             [['name','zoom','height','width'], 'required'],
-            [['name','center'], 'string', 'max' => 255]
+            [['name','center'], 'string', 'max' => 255],
+            [['night_mode','grayscale'], 'boolean'],
+
         ];
     }
     public function getMarkers() {

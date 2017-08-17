@@ -12,7 +12,8 @@ return [
     'STREETVIEWCONTROL'=>'StreetViewControl',
     'SCALECONTROL'=>'ScaleControl отображение высота масштаба в метрах',
     'ROTATECONTROL'=>'RotateControl',
-    
+    'NIGHT_MODE'=>'Актевировать ночной режим карты, с 22 до 04',
+    'GRAYSCALE'=>'Актевировать черно белаю карту',
     'CENTER' => 'Центр карты',
     'DRAG'=>'Перемещение карты мышью',
     'AUTO_SHOW_ROUTERS'=>'Автоматически показывать маршруты',

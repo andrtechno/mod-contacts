@@ -27,14 +27,18 @@ class Markers extends WebModel {
      */
     public function rules() {
         return [
-            [['name', 'map_id', 'coords'], 'required'],
+            [['name', 'map_id', 'coords', 'opacity'], 'required'],
             [['coords'], 'trim'],
-            [['name'], 'string', 'max' => 255]
+            [['name'], 'string', 'max' => 255],
+            [['content_body'], 'string'],
+            [['opacity'], 'number'],
         ];
     }
+
     public function getMap() {
         return $this->hasOne(Maps::className(), ['id' => 'map_id']);
     }
+
     public function beforeSave($insert) {
         if (parent::beforeSave($insert)) {
             $coord = explode(',', $this->coords);
@@ -66,5 +70,18 @@ class Markers extends WebModel {
         return (object) ['lat' => $toArray[0], 'lng' => $toArray[1]];
     }
 
+    public function getOpacityList() {
+        return [
+            '0.1' => '10%',
+            '0.2' => '20%',
+            '0.3' => '30%',
+            '0.4' => '40%',
+            '0.5' => '50%',
+            '0.6' => '60%',
+            '0.7' => '70%',
+            '0.8' => '80%',
+            '0.9' => '90%',
+            '1' => '100%'];
+    }
 
 }

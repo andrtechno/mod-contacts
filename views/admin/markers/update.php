@@ -3,7 +3,6 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\ArrayHelper;
-
 ?>
 
 
@@ -33,20 +32,25 @@ use yii\helpers\ArrayHelper;
         <?= $form->field($model, 'name')->textInput(['maxlength' => 255]) ?>
         <?= $form->field($model, 'coords')->textInput(['maxlength' => 255]) ?>
 
-<?php
-
-
-    echo $form->field($model, 'map_id')->dropDownList(ArrayHelper::map(panix\mod\contacts\models\Maps::find()->all(),'id','name'),[
-        'prompt' => 'Укажите производителя'
-    ]);
-    ?>
-
+        <?php
+        echo $form->field($model, 'map_id')->dropDownList(ArrayHelper::map(panix\mod\contacts\models\Maps::find()->all(), 'id', 'name'), [
+            'prompt' => '--- Укажите карту ---'
+        ]);
+        ?>
+        <?php
+        echo $form->field($model, 'opacity')->dropDownList($model->getOpacityList(), [
+            'prompt' => '--- Укажите прозрачность ---'
+        ]);
+        ?>
+        <?=
+        $form->field($model, 'content_body')->widget(panix\ext\tinymce\TinyMce::className(), ['options' => ['rows' => 6]]);
+        ?>
 
         <div class="form-group text-center">
-            <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'CREATE') : Yii::t('app', 'UPDATE'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'CREATE') : Yii::t('app', 'UPDATE'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
         </div>
 
-        <?php ActiveForm::end(); ?>
+            <?php ActiveForm::end(); ?>
 
 
 
