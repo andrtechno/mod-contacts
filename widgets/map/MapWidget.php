@@ -26,7 +26,10 @@ class MapWidget extends \yii\base\Widget {
             'center' => new LatLng($model->getCenter()),
             'zoom' => $model->zoom,
         ]);
+        
+         $this->map->appendScript('var bounds = new google.maps.LatLngBounds();');
         foreach ($model->markers as $marker) {
+            //$this->map->appendScript('bounds.extend(myLatLng);');
             $markers = new Marker([
                 'position' => new LatLng($marker->getCoords()),
                 'title' => 'My Home Town',
@@ -37,8 +40,11 @@ class MapWidget extends \yii\base\Widget {
                     ])
             );
             $this->map->addOverlay($markers);
- 
+            
+            $this->map->appendScript('bounds.extend(new google.maps.LatLng('.$marker->getCoords()->lat.','.$marker->getCoords()->lng.'));');
         }
+        $this->map->appendScript('gmap0.fitBounds(bounds);');
+       echo ($this->map->getJs());
     //    print_r($this->map->getBoundsFromCenterAndZoom());
 
 
