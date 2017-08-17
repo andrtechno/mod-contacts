@@ -4,15 +4,16 @@ namespace panix\mod\contacts\models;
 
 use Yii;
 use panix\engine\WebModel;
+use panix\mod\contacts\models\MarkersQuery;
 
-/**
- * This is the model class for table "pages".
- *
- * @property integer $id
- * @property string $name
- */
 class Markers extends WebModel {
+
     const MODULE_ID = 'contacts';
+
+    public static function find() {
+        return new MarkersQuery(get_called_class());
+    }
+
     /**
      * @inheritdoc
      */
@@ -39,15 +40,18 @@ class Markers extends WebModel {
         return parent::beforeSave($insert);
     }
 
-  /*  protected function beforeFind() {
-        parent::beforeFind();
-        $alias = $this->getTableAlias(true);
-        $criteria = new CDbCriteria;
-        $criteria->select = array(
-            "*",
-            new CDbExpression("CONCAT(X({$alias}.`coords`),',',Y({$alias}.`coords`)) AS coords"),
-        );
-        $this->dbCriteria->mergeWith($criteria);
+    public function afterFind() {
+        $query = new \yii\db\Query();
+        $query->addSelect(['coords' => new \yii\db\Expression("CONCAT(X(coords),',',Y(coords))")]);
+        $query->from(self::tableName());
+
+        $result = $query->one();
+
+        //$test = $this->find()->addSelect(['*', 'coords' => new \yii\db\Expression("CONCAT(X(coords),',',Y(coords))")]);
+//print_r($test);
+//die;
+        $this->coords = $result['coords'];
+        parent::afterFind();
     }
-*/
+
 }
