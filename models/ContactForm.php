@@ -12,7 +12,6 @@ class ContactForm extends Model {
 
     public $name;
     public $email;
-    public $subject;
     public $body;
     public $verifyCode;
 
@@ -22,22 +21,15 @@ class ContactForm extends Model {
     public function rules() {
         return [
             // name, email, subject and body are required
-            [['name', 'email', 'subject', 'body','verifyCode'], 'required'],
+            [['name', 'email', 'body'], 'required'],
+// verifyCode needs to be entered correctly
+            //   ['verifyCode', 'captcha','captchaAction'=>'/contacts/default/captcha'],
+            //   [['verifyCode'], 'required'],
             // email has to be a valid email address
             ['email', 'email'],
-            // verifyCode needs to be entered correctly
-            ['verifyCode', 'captcha','captchaAction'=>'/contacts/default/captcha'],//
         ];
     }
 
-    /**
-     * @return array customized attribute labels
-     */
-    public function attributeLabels() {
-        return [
-            'verifyCode' => 'Verification Code',
-        ];
-    }
 
     /**
      * Sends an email to the specified email address using the information collected by this model.
@@ -46,12 +38,20 @@ class ContactForm extends Model {
      */
     public function send($email) {
         if ($this->validate()) {
-            Yii::$app->mailer->compose()
-                    ->setTo($email)
-                    ->setFrom([$this->email => $this->name])
-                    ->setSubject($this->subject)
-                    ->setTextBody($this->body)
-                    ->send();
+            $mail = Yii::$app->mailer;
+            //$mail->viewPath = '@contacts/mail';
+            $mail->compose('@contacts/mail/feedback',[
+                'test'=>'my param',
+                'name'=>'Tester'
+            ])
+            ->setTo($email)
+            ->setFrom([$this->email => $this->name])
+            ->setSubject(Yii::t('contacts/default','FB_FROM_SUBJECT',[
+                'sitename'=>Yii::$app->settings->get('app','sitename'),
+                'user_name'=>$this->name
+            ]))
+            //$mail->setTextBody($this->body);
+            ->send();
 
             return true;
         } else {
