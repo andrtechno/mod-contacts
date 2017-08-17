@@ -2,15 +2,22 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
-use dosamigos\google\maps\LatLng;
-use dosamigos\google\maps\overlays\InfoWindow;
-use dosamigos\google\maps\overlays\Marker;
-use dosamigos\google\maps\Map;
+
 ?>
 <div class="row">
     <div class="col-sm-6">
         <?php
-        $coords = [];
+       echo panix\mod\contacts\widgets\map\MapWidget::widget(['map_id'=>1]);
+        ?>
+        
+        
+        
+        
+        
+        
+        
+        <?php
+        /*$coords = [];
         $coords[] = new LatLng(['lat' => 46.468252, 'lng' => 30.740576]);
         $coords[] = new LatLng(['lat' => 46.453163, 'lng' => 30.751179]);
 
@@ -36,7 +43,7 @@ use dosamigos\google\maps\Map;
             $map->addOverlay($markers);
         }
 
-        echo $map->display();
+        echo $map->display();*/
         ?>
     </div>
     <div class="col-sm-6">

@@ -34,6 +34,7 @@ use yii\bootstrap\ActiveForm;
         <?= $form->field($model, 'zoom')->textInput(['maxlength' => 255]) ?>
         <?= $form->field($model, 'width')->textInput(['maxlength' => 255]) ?>
         <?= $form->field($model, 'height')->textInput(['maxlength' => 255]) ?>
+        <?= $form->field($model, 'center')->textInput(['maxlength' => 255]) ?>
 
 
 
