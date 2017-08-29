@@ -19,7 +19,7 @@ yii\grid\GridView::widget([
     'columns' => [
         'name',
         [
-            'class' => 'panix\engine\grid\ActionColumn',
+            'class' => 'panix\engine\grid\columns\ActionColumn',
 
         ],
 

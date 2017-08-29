@@ -23,10 +23,10 @@ yii\grid\GridView::widget([
         ],
         'name',
         [
-            'class' => 'panix\engine\grid\ActionColumn',
+            'class' => 'panix\engine\grid\columns\ActionColumn',
 
                 ],
-            // ['class' => 'panix\engine\grid\ActionColumn'],
+            // ['class' => 'panix\engine\grid\columns\ActionColumn'],
             ],
         ]);
         ?>
