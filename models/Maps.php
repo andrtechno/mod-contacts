@@ -3,7 +3,7 @@
 namespace panix\mod\contacts\models;
 
 use Yii;
-use panix\engine\WebModel;
+
 
 
 /**
@@ -12,7 +12,7 @@ use panix\engine\WebModel;
  * @property integer $id
  * @property string $name
  */
-class Maps extends WebModel {
+class Maps extends \panix\engine\db\ActiveRecord {
     const MODULE_ID = 'contacts';
     /**
      * @inheritdoc

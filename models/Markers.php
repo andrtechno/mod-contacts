@@ -3,11 +3,10 @@
 namespace panix\mod\contacts\models;
 
 use Yii;
-use panix\engine\WebModel;
 use panix\mod\contacts\models\MarkersQuery;
 use panix\mod\contacts\models\Maps;
 
-class Markers extends WebModel {
+class Markers extends \panix\engine\db\ActiveRecord {
 
     const MODULE_ID = 'contacts';
 
