@@ -7,35 +7,47 @@ use panix\engine\WebModule;
 
 class Module extends WebModule {
 
-
+    public $icon = 'phone';
     public $routes = [
-        'page/<url>' => 'contacts/default/view',
-        'contacts/captach'=>'contacts/default/captcha'
+        'contacts/captach' => 'contacts/default/captcha'
     ];
 
-    public function getNav() {
+    public function getAdminMenu() {
         return [
-            [
-                'label' => Yii::t('contacts/default', 'MODULE_NAME'),
-                "url" => ['/admin/contacts'],
-                'icon' => 'icon-phone'
+            'modules' => [
+                'items' => [
+                    [
+                        'label' => Yii::t('contacts/default', 'MODULE_NAME'),
+                        'url' => ['/admin/contacts'],
+                        'icon' => $this->icon,
+                        'items' => [
+                            [
+                                'label' => Yii::t('contacts/default', 'MAPS'),
+                                'url' => ['/admin/contacts/maps'],
+                                'icon' => 'location-map',
+                            ],
+                            [
+                                'label' => Yii::t('contacts/default', 'MARKERS'),
+                                'url' => ['/admin/contacts/markers'],
+                                'icon' => 'location-marker',
+                            ],
+                            [
+                                'label' => Yii::t('app', 'SETTINGS'),
+                                "url" => ['/admin/contacts/settings'],
+                                'icon' => 'settings'
+                            ]
+                        ]
+                    ],
+                ],
             ],
-            [
-                'label' => Yii::t('contacts/default', 'MAPS'),
-                "url" => ['/admin/contacts/maps'],
-                'icon' => 'icon-location-map'
-            ],
-            [
-                'label' => Yii::t('contacts/default', 'MARKERS'),
-                "url" => ['/admin/contacts/markers'],
-                'icon' => 'icon-location-marker'
-            ],
-            [
-                'label' => Yii::t('app','SETTINGS'),
-                "url" => ['/admin/contacts/settings'],
-                'icon' => 'icon-settings'
-            ]
         ];
+    }
+
+    public function getAdminSidebar() {
+        $menu = $this->getAdminMenu();
+        //  $mod = new \panix\engine\widgets\nav\Nav;
+        //   $items = $mod->findMenu($this->id);
+        return \yii\helpers\ArrayHelper::merge($menu['modules']['items'],$menu['modules']['items'][0]['items']);
     }
 
     public function getInfo() {
@@ -43,19 +55,9 @@ class Module extends WebModule {
             'label' => Yii::t('contacts/default', 'MODULE_NAME'),
             'author' => 'andrew.panix@gmail.com',
             'version' => '1.0',
-            'icon' => 'icon-phone',
+            'icon' => $this->icon,
             'description' => Yii::t('contacts/default', 'MODULE_DESC'),
             'url' => ['/admin/contacts'],
-        ];
-    }
-
-    protected function getDefaultModelClasses() {
-        return [
-            'Maps' => 'panix\mod\contacts\models\Maps',
-            'MapsSearch' => 'panix\mod\contacts\models\MapsSearch',
-            'Markers' => 'panix\mod\contacts\models\Markers',
-            'MarkersSearch' => 'panix\mod\contacts\models\MarkersSearch',
-            
         ];
     }
 
