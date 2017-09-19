@@ -7,7 +7,7 @@ use panix\lib\google\maps\LatLng;
 use panix\lib\google\maps\overlays\InfoWindow;
 use panix\lib\google\maps\overlays\Marker;
 use panix\lib\google\maps\Map;
-
+use panix\mod\contacts\models\Maps;
 /**
  * Description of Map
  *
@@ -71,7 +71,7 @@ class MapWidget extends \yii\base\Widget {
     }
 
     protected function findModel($id) {
-        $model = Yii::$app->getModule("contacts")->model("Maps");
+        $model = new Maps;
         if (($model = $model::find(['id' => $id])->one()) !== null) {
             return $model;
         } else {

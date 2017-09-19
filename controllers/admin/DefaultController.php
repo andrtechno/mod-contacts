@@ -6,7 +6,7 @@ use Yii;
 use panix\mod\contacts\models\Pages;
 use panix\mod\contacts\models\PagesSearch;
 use panix\engine\controllers\AdminController;
-use panix\engine\grid\sortable\SortableGridAction;
+
 
 class DefaultController extends AdminController {
 

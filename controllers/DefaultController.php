@@ -5,7 +5,7 @@ namespace panix\mod\contacts\controllers;
 use Yii;
 use panix\engine\controllers\WebController;
 use panix\mod\contacts\models\ContactForm;
-use yii\web\NotFoundHttpException;
+
 
 class DefaultController extends WebController {
 

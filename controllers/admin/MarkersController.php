@@ -34,7 +34,7 @@ class MarkersController extends AdminController {
     public function actionUpdate($id = false) {
 
         if ($id === true) {
-            $model = Yii::$app->getModule("contacts")->model("Markers");
+            $model = new Markers;
         } else {
             $model = $this->findModel($id);
         }
@@ -61,17 +61,17 @@ class MarkersController extends AdminController {
             $model->save();
             return Yii::$app->getResponse()->redirect(['/admin/contacts/markers']);
         }
-        echo $this->render('update', [
+        return $this->render('update', [
                     'model' => $model,
         ]);
     }
 
     protected function findModel($id) {
-        $model = Yii::$app->getModule("contacts")->model("Markers");
+        $model = new Markers;
         if (($model = $model::findOne($id)) !== null) {
             return $model;
         } else {
-            throw new \yii\web\NotFoundHttpException(Yii::t('app/error', '404'));
+            $this->error404();
         }
     }
 

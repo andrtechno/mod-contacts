@@ -23,7 +23,7 @@ class MapsController extends AdminController {
         $searchModel = new MapsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->getQueryParams());
 
-        echo $this->render('index', [
+        return $this->render('index', [
                     'dataProvider' => $dataProvider,
                     'searchModel' => $searchModel,
         ]);
@@ -46,7 +46,7 @@ class MapsController extends AdminController {
         
         
         if ($id === true) {
-            $model = Yii::$app->getModule("contacts")->model("Maps");
+            $model = new Maps;
         } else {
             $model = $this->findModel($id);
         }
@@ -61,17 +61,17 @@ class MapsController extends AdminController {
             $model->save();
             return Yii::$app->getResponse()->redirect(['/admin/contacts/maps']);
         }
-        echo $this->render('update', [
+        return $this->render('update', [
                     'model' => $model,
         ]);
     }
 
     protected function findModel($id) {
-        $model = Yii::$app->getModule("contacts")->model("Maps");
+        $model = new Maps;
         if (($model = $model::findOne($id)) !== null) {
             return $model;
         } else {
-            throw new \yii\web\NotFoundHttpException(Yii::t('app/error', '404'));
+            $this->error404();
         }
     }
 
