@@ -56,7 +56,7 @@ use yii\bootstrap\ActiveForm;
         <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
         <?= $form->field($model, 'name') ?>
         <?= $form->field($model, 'email') ?>
-        <?= $form->field($model, 'body')->textArea(['rows' => 6]) ?>
+        <?= $form->field($model, 'text')->textArea(['rows' => 6]) ?>
         <?=
         $form->field($model, 'verifyCode')->widget(yii\captcha\Captcha::className(), [
             'captchaAction' => 'default/captcha',
@@ -64,7 +64,7 @@ use yii\bootstrap\ActiveForm;
         ])
         ?>
         <div class="form-group">
-            <?= Html::submitButton('Submit', ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
+            <?= Html::submitButton(Yii::t('app','SEND'), ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
         </div>
         <?php ActiveForm::end(); ?>
 

@@ -3,16 +3,15 @@
 namespace panix\mod\contacts\models;
 
 use Yii;
-use yii\base\Model;
 
 /**
  * ContactForm is the model behind the contact form.
  */
-class ContactForm extends Model {
-
+class ContactForm extends \panix\engine\base\Model {
+    protected $module = 'contacts';
     public $name;
     public $email;
-    public $body;
+    public $text;
     public $verifyCode;
 
     /**
@@ -21,7 +20,7 @@ class ContactForm extends Model {
     public function rules() {
         return [
             // name, email, subject and body are required
-            [['name', 'email', 'body'], 'required'],
+            [['name', 'email', 'text'], 'required'],
 // verifyCode needs to be entered correctly
             //   ['verifyCode', 'captcha','captchaAction'=>'/contacts/default/captcha'],
             //   [['verifyCode'], 'required'],
