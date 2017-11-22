@@ -12,6 +12,7 @@ class ContactForm extends \panix\engine\base\Model {
     public $name;
     public $email;
     public $text;
+    public $phone;
     public $verifyCode;
 
     /**
@@ -20,7 +21,7 @@ class ContactForm extends \panix\engine\base\Model {
     public function rules() {
         return [
             // name, email, subject and body are required
-            [['name', 'email', 'text'], 'required'],
+            [['name', 'email', 'text','phone'], 'required'],
 // verifyCode needs to be entered correctly
             //   ['verifyCode', 'captcha','captchaAction'=>'/contacts/default/captcha'],
             //   [['verifyCode'], 'required'],

@@ -12,10 +12,11 @@ class SettingsForm extends SettingsModel {
     public $email;
     public $phone;
     public $feedback_tpl_body;
+    public $feedback_captach;
 
     public function rules() {
         return [
-            [['email'], "required"],
+            [['email','feedback_captach'], "required"],
             [['feedback_tpl_body'], 'string'],
             
   
