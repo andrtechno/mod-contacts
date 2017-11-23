@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use panix\engine\widgets\inputmask\InputMask;
 
 $config = Yii::$app->settings->get('contacts');
 ?>
@@ -57,7 +58,7 @@ $config = Yii::$app->settings->get('contacts');
         <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
         <?= $form->field($model, 'name') ?>
         <?= $form->field($model, 'email') ?>
-        <?= $form->field($model, 'phone') ?>
+        <?= $form->field($model, 'phone')->widget(InputMask::className()); ?>
         <?= $form->field($model, 'text')->textArea(['rows' => 6]) ?>
         <?php if ($config['feedback_captach'] || Yii::$app->user->isGuest) { ?>
             <?=
