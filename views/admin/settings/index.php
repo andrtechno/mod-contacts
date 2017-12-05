@@ -3,6 +3,7 @@
 use panix\engine\Html;
 use panix\engine\bootstrap\ActiveForm;
 use panix\ext\taginput\TagInput;
+use panix\engine\widgets\inputmask\InputMask;
 ?>
 <?php
 $form = ActiveForm::begin([
@@ -20,6 +21,8 @@ $form = ActiveForm::begin([
                 ->widget(TagInput::className(), ['placeholder' => 'E-mail'])
                 ->hint('Введите E-mail и нажмите Enter');
         ?>
+<?= $form->field($model, 'address'); ?>
+<?= $form->field($model, 'phone')->widget(InputMask::className()); ?>
         <?= $form->field($model, 'feedback_captach')->checkbox() ?>
         <?=
         $form->field($model, 'feedback_tpl_body')->widget(panix\ext\tinymce\TinyMce::className(), [
