@@ -11,7 +11,32 @@ class Module extends WebModule {
     public $routes = [
         'contacts/captach' => 'contacts/default/captcha'
     ];
+    public function getPhones() {
+        $cfg = Yii::$app->settings->get($this->id);
+        if ($cfg['phone']) {
+            return explode(',', $cfg['phone']);
+        } else {
+            return false;
+        }
+    }
 
+    public function getEmails() {
+        $cfg = Yii::$app->settings->get($this->id);
+        if ($cfg['email']) {
+            return explode(',', $cfg['email']);
+        } else {
+            return false;
+        }
+    }
+
+    public function getAddress() {
+        $cfg = Yii::$app->settings->get($this->id);
+        if ($cfg['address']) {
+            return $cfg['address'];
+        } else {
+            return false;
+        }
+    }
     public function getAdminMenu() {
         return [
             'modules' => [

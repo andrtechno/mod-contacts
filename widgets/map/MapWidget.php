@@ -11,7 +11,8 @@ use panix\mod\contacts\models\Maps;
 /**
  * Description of Map
  *
- * @author CORNER CMS development team <dev@corner-cms.com>
+ * @author PIXELION CMS development team <dev@pixelion.com.ua>
+ * @link http://pixelion.com.ua PIXELION CMS
  */
 class MapWidget extends \yii\base\Widget {
 
