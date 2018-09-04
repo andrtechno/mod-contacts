@@ -1,6 +1,6 @@
 mod-contacts
 ===========
-Module for CORNER CMS
+Module for PIXELION CMS
 
 [![Latest Stable Version](https://poser.pugx.org/panix/mod-contacts/v/stable)](https://packagist.org/packages/panix/mod-contacts) [![Total Downloads](https://poser.pugx.org/panix/mod-contacts/downloads)](https://packagist.org/packages/panix/mod-contacts) [![Monthly Downloads](https://poser.pugx.org/panix/mod-contacts/d/monthly)](https://packagist.org/packages/panix/mod-contacts) [![Daily Downloads](https://poser.pugx.org/panix/mod-contacts/d/daily)](https://packagist.org/packages/panix/mod-contacts) [![Latest Unstable Version](https://poser.pugx.org/panix/mod-contacts/v/unstable)](https://packagist.org/packages/panix/mod-contacts) [![License](https://poser.pugx.org/panix/mod-contacts/license)](https://packagist.org/packages/panix/mod-contacts)
 
