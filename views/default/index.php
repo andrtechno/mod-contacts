@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\bootstrap\ActiveForm;
+use yii\bootstrap4\ActiveForm;
 use panix\engine\widgets\inputmask\InputMask;
 
 $config = Yii::$app->settings->get('contacts');
@@ -58,11 +58,11 @@ $config = Yii::$app->settings->get('contacts');
         <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
         <?= $form->field($model, 'name') ?>
         <?= $form->field($model, 'email') ?>
-        <?= $form->field($model, 'phone')->widget(InputMask::className()); ?>
+        <?= $form->field($model, 'phone')->widget(InputMask::class); ?>
         <?= $form->field($model, 'text')->textArea(['rows' => 6]) ?>
         <?php if ($config['feedback_captach'] || Yii::$app->user->isGuest) { ?>
             <?=
-            $form->field($model, 'verifyCode')->widget(yii\captcha\Captcha::className(), [
+            $form->field($model, 'verifyCode')->widget(yii\captcha\Captcha::class, [
                 'captchaAction' => 'default/captcha',
                 'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-6">{input}</div></div>',
             ])

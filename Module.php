@@ -45,7 +45,7 @@ class Module extends WebModule {
 
     public function getAdminSidebar() {
         $menu = $this->getAdminMenu();
-        //  $mod = new \panix\engine\widgets\nav\Nav;
+        //  $mod = new \panix\engine\bootstrap\Nav;
         //   $items = $mod->findMenu($this->id);
         return \yii\helpers\ArrayHelper::merge($menu['modules']['items'],$menu['modules']['items'][0]['items']);
     }

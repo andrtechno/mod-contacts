@@ -33,7 +33,7 @@ class Maps extends \panix\engine\db\ActiveRecord {
         ];
     }
     public function getMarkers() {
-        return $this->hasMany(Markers::className(), ['map_id' => 'id']);
+        return $this->hasMany(Markers::class, ['map_id' => 'id']);
     }
  
     public function beforeSave($insert) {

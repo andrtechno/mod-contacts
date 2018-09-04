@@ -35,7 +35,7 @@ class Markers extends \panix\engine\db\ActiveRecord {
     }
 
     public function getMap() {
-        return $this->hasOne(Maps::className(), ['id' => 'map_id']);
+        return $this->hasOne(Maps::class, ['id' => 'map_id']);
     }
 
     public function beforeSave($insert) {

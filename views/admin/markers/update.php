@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\bootstrap\ActiveForm;
+use yii\bootstrap4\ActiveForm;
 use yii\helpers\ArrayHelper;
 ?>
 
@@ -43,7 +43,7 @@ use yii\helpers\ArrayHelper;
         ]);
         ?>
         <?=
-        $form->field($model, 'content_body')->widget(panix\ext\tinymce\TinyMce::className(), ['options' => ['rows' => 6]]);
+        $form->field($model, 'content_body')->widget(panix\ext\tinymce\TinyMce::class, ['options' => ['rows' => 6]]);
         ?>
 
         <div class="form-group text-center">

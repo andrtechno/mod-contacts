@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-//use yii\bootstrap\Alert;
+//use panix\engine\bootstrap\Alert;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\pages\models\Pages */
