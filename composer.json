@@ -14,7 +14,8 @@
     ],
     "require": {
         "panix/engine": "*",
-        "panix/lib-google-maps": "*"
+        "panix/lib-google-maps": "*",
+        "panix/wgt-telinput": "*"
     },
     "autoload": {
         "psr-4": {
