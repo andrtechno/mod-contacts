@@ -1,9 +1,11 @@
-{$tests} la
+{use class="yii\helpers\Html"}
+{$test} la
+
 
 `{#adminEmail#}`
 
-{$this.test}
 
-{{test}}
+
+
 
 {Html::mailto('eugenia@example.com')}

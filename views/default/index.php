@@ -60,7 +60,7 @@ $config = Yii::$app->settings->get('contacts');
         <?= $form->field($model, 'email') ?>
         <?= $form->field($model, 'phone')->widget(InputMask::class); ?>
         <?= $form->field($model, 'text')->textArea(['rows' => 6]) ?>
-        <?php if ($config['feedback_captach'] || Yii::$app->user->isGuest) { ?>
+        <?php if ($config->feedback_captach || Yii::$app->user->isGuest) { ?>
             <?=
             $form->field($model, 'verifyCode')->widget(yii\captcha\Captcha::class, [
                 'captchaAction' => 'default/captcha',
