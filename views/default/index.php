@@ -13,11 +13,6 @@ $config = Yii::$app->settings->get('contacts');
         ?>
 
 
-
-
-
-
-
         <?php
         /* $coords = [];
           $coords[] = new LatLng(['lat' => 46.468252, 'lng' => 30.740576]);
@@ -68,6 +63,7 @@ $config = Yii::$app->settings->get('contacts');
             ])
             ?>
         <?php } ?>
+        <?= $form->field($model, 'reCaptcha')->widget(\panix\engine\widgets\recaptcha\ReCaptcha::class) ?>
         <div class="form-group">
             <?= Html::submitButton(Yii::t('app', 'SEND'), ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
         </div>

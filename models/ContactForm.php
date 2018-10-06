@@ -2,6 +2,7 @@
 
 namespace panix\mod\contacts\models;
 
+use panix\engine\widgets\recaptcha\ReCaptchaValidator;
 use Yii;
 
 /**
@@ -15,13 +16,15 @@ class ContactForm extends \panix\engine\base\Model
     public $text;
     public $phone;
     public $verifyCode;
+    public $reCaptcha;
 
     /**
      * @return array the validation rules.
      */
     public function rules()
     {
-        return [
+        return [ //'secret' => 'your secret key',
+            ['reCaptcha', ReCaptchaValidator::class,  'uncheckedMessage' => 'Please confirm that you are not a bot.'],
             // name, email, subject and body are required
             [['name', 'email', 'text', 'phone'], 'required'],
 // verifyCode needs to be entered correctly
@@ -46,17 +49,15 @@ class ContactForm extends \panix\engine\base\Model
             $mail->htmlLayout = '@contacts/mail/layouts/html';
             $mail->compose([
                 'html' => '@contacts/mail/feedback',
-              //  'view' => 'feedback'
-            ],[
-                'test'=>'my param',
-                'content'=>'Tester'
-            ])
-
-
-            /*$mail->compose('@contacts/mail/feedback', [
+                //  'view' => 'feedback'
+            ], [
                 'test' => 'my param',
-                'name' => 'Tester'
-            ])*/
+                'content' => 'Tester'
+            ])
+                /*$mail->compose('@contacts/mail/feedback', [
+                    'test' => 'my param',
+                    'name' => 'Tester'
+                ])*/
                 ->setTo($email)
                 ->setFrom([$this->email => $this->name])
                 ->setSubject(Yii::t('contacts/default', 'FB_FROM_SUBJECT', [
