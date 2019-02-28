@@ -43,7 +43,7 @@ class Module extends WebModule {
                 'items' => [
                     [
                         'label' => Yii::t('contacts/default', 'MODULE_NAME'),
-                        'url' => ['/admin/contacts'],
+                        //'url' => ['/admin/contacts'],
                         'icon' => $this->icon,
                         'items' => [
                             [
