@@ -2,11 +2,13 @@
 
 namespace panix\mod\contacts\widgets\map;
 
+
 use Yii;
 use panix\lib\google\maps\LatLng;
 use panix\lib\google\maps\overlays\InfoWindow;
 use panix\lib\google\maps\overlays\Marker;
 use panix\lib\google\maps\Map;
+use panix\lib\google\maps\MapAsset;
 use panix\mod\contacts\models\Maps;
 /**
  * Description of Map
@@ -23,7 +25,7 @@ class MapWidget extends \yii\base\Widget {
     public function init() {
         parent::init();
         $view = Yii::$app->getView();
-        \panix\mod\contacts\assets\MapAsset::register($view);
+        MapAsset::register($view);
         $model = $this->findModel($this->map_id);
 
         $mapOptions = [
