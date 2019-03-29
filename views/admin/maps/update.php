@@ -1,75 +1,58 @@
 <?php
 
 use yii\helpers\Html;
-use yii\bootstrap4\ActiveForm;
+use panix\engine\bootstrap\ActiveForm;
+
 ?>
-
-
-
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <h3 class="panel-title"><?= Html::encode($this->context->pageName) ?></h3>
-    </div>
-    <div class="panel-body">
-
-
-<?php
-$form = ActiveForm::begin([
-            'layout' => 'horizontal',
-            'fieldConfig' => [
-                'template' => "{label}\n{beginWrapper}\n{hint}\n{input}\n{error}\n{endWrapper}",
-                'horizontalCssClasses' => [
-                    'label' => 'col-sm-4',
-                    'offset' => 'col-sm-offset-4',
-                    'wrapper' => 'col-sm-8',
-                    'error' => '',
-                    'hint' => '',
-                ],
-            ],
-        ]);
-?>
-        <?= $form->field($model, 'name')->textInput(['maxlength' => 255]) ?>
-        <?= $form->field($model, 'center')->textInput(['maxlength' => 255]) ?>
-        <?= $form->field($model, 'zoom')->textInput(['maxlength' => 255]) ?>
-        <?= $form->field($model, 'width')->textInput(['maxlength' => 255]) ?>
-        <?= $form->field($model, 'height')->textInput(['maxlength' => 255]) ?>
-        
-        <?= $form->field($model, 'grayscale')->checkbox() ?>
-        <?= $form->field($model, 'night_mode')->checkbox()->hint('me hint') ?>
-
-
-<?php
-$morning = "Доброе утро!";
-$day = "Добрый день!";
-$evening = "Добрый вечер!";
-$night = "Доброй ночи!";
-
-$minute = date("i");
-$hour = date("H");
-
-if ($hour >= 04) {
-    $hello = $morning;
-}
-if ($hour >= 10) {
-    $hello = $day;
-}
-if ($hour >= 16) {
-    $hello = $evening;
-}
-if ($hour >= 22 or $hour < 04) {
-    $hello = $night;
-}
-
-echo "Время: $minute:$minute, $hello";
-?> 
-
-        <div class="form-group text-center">
-<?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'CREATE') : Yii::t('app', 'UPDATE'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+<div class="row">
+<div class="col-md-7">
+    <div class="card bg-light">
+        <div class="card-header">
+            <h5><?= Html::encode($this->context->pageName) ?></h5>
         </div>
-
-<?php ActiveForm::end(); ?>
-
-
-
+        <div class="card-body">
+            <?php
+            $form = ActiveForm::begin([
+                   'fieldConfig'=>[
+                       'horizontalCssClasses' => [
+                           'label' => 'col-sm-4 col-lg-4 col-form-label',
+                           'offset' => 'col-sm-offset-4',
+                           'wrapper' => 'col-sm-8 col-lg-8',
+                           'error' => '',
+                           'hint' => '',
+                       ],
+                   ]
+            ]);
+            ?>
+            <?= $form->field($model, 'name')->textInput(['maxlength' => 255]) ?>
+            <?= $form->field($model, 'center')->textInput(['maxlength' => 255]) ?>
+            <?= $form->field($model, 'zoom')->dropDownList($model->getZoomList()) ?>
+            <?= $form->field($model, 'width')->textInput(['maxlength' => 255]) ?>
+            <?= $form->field($model, 'height')->textInput(['maxlength' => 255]) ?>
+            <?= $form->field($model, 'grayscale')->checkbox() ?>
+            <?= $form->field($model, 'night_mode')->checkbox()->hint('me hint') ?>
+            <div class="form-group text-center">
+                <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'CREATE') : Yii::t('app', 'UPDATE'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+            </div>
+            <?php ActiveForm::end(); ?>
+        </div>
     </div>
+</div>
+<div class="col-md-5">
+    <div class="card bg-light">
+        <div class="card-header">
+            <h5><?= Html::encode($this->context->pageName) ?></h5>
+        </div>
+        <div class="card-body">
+            <?php
+            echo panix\mod\contacts\widgets\map\MapWidget::widget([
+                'map_id' => Yii::$app->request->get('id'),
+                'options' => [
+                    'width' => '100%'
+                ]
+            ]);
+            ?>
+        </div>
+    </div>
+</div>
 </div>

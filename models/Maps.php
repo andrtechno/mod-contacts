@@ -3,40 +3,50 @@
 namespace panix\mod\contacts\models;
 
 use Yii;
+use panix\engine\db\ActiveRecord;
 
 
-
-/**
- * This is the model class for table "pages".
- *
- * @property integer $id
- * @property string $name
- */
-class Maps extends \panix\engine\db\ActiveRecord {
+class Maps extends ActiveRecord
+{
     const MODULE_ID = 'contacts';
+
     /**
      * @inheritdoc
      */
-    public static function tableName() {
+    public static function tableName()
+    {
         return '{{%contacts_maps}}';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules() {
+    public function rules()
+    {
         return [
-            [['name','zoom','height','width','center'], 'required'],
-            [['name','center'], 'string', 'max' => 255],
-            [['night_mode','grayscale'], 'boolean'],
+            [['name', 'zoom', 'height', 'width', 'center'], 'required'],
+            [['name', 'center'], 'string', 'max' => 255],
+            ['zoom', 'in', 'range' => $this->getZoomList()],
+            //['center', 'validateLatLng'],
+
+            [['night_mode', 'grayscale'], 'boolean'],
 
         ];
     }
-    public function getMarkers() {
+
+    public function validateLatLng($attribute)
+    {
+        list($lat,$lng) = explode(',',$this->{$attribute});
+        $this->addError($attribute,'err');
+    }
+
+    public function getMarkers()
+    {
         return $this->hasMany(Markers::class, ['map_id' => 'id']);
     }
- 
-    public function beforeSave($insert) {
+
+    public function beforeSave($insert)
+    {
         if (parent::beforeSave($insert)) {
             $coord = explode(',', $this->center);
             $this->center = new \yii\db\Expression("GeomFromText(:point)", array(':point' => 'POINT(' . $coord[0] . ' ' . $coord[1] . ')'));
@@ -46,7 +56,8 @@ class Maps extends \panix\engine\db\ActiveRecord {
         }
     }
 
-    public function afterFind() {
+    public function afterFind()
+    {
         $query = new \yii\db\Query();
         $query->addSelect(['center' => new \yii\db\Expression("CONCAT(X(center),',',Y(center))")]);
 
@@ -57,9 +68,16 @@ class Maps extends \panix\engine\db\ActiveRecord {
         $this->center = $result['center'];
         parent::afterFind();
     }
-    public function getCenter() {
+
+    public function getCenter()
+    {
         $toArray = explode(',', $this->center);
-        return (object) ['lat' => $toArray[0], 'lng' => $toArray[1]];
+        return (object)['lat' => $toArray[0], 'lng' => $toArray[1]];
+    }
+
+    public function getZoomList()
+    {
+        return range(1, 20);
     }
 
 

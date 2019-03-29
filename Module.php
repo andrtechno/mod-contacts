@@ -47,18 +47,18 @@ class Module extends WebModule {
                         'icon' => $this->icon,
                         'items' => [
                             [
-                                'label' => Yii::t('contacts/default', 'MAPS'),
-                                'url' => ['/admin/contacts/maps'],
+                                'label' => Yii::t('contacts/admin', 'MAPS'),
+                                'url' => ['/contacts/maps'],
                                 'icon' => 'location-map',
                             ],
                             [
-                                'label' => Yii::t('contacts/default', 'MARKERS'),
-                                'url' => ['/admin/contacts/markers'],
+                                'label' => Yii::t('contacts/admin', 'MARKERS'),
+                                'url' => ['/contacts/markers'],
                                 'icon' => 'location-marker',
                             ],
                             [
                                 'label' => Yii::t('app', 'SETTINGS'),
-                                "url" => ['/admin/contacts/settings'],
+                                "url" => ['/contacts/settings'],
                                 'icon' => 'settings'
                             ]
                         ]
