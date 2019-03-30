@@ -8,7 +8,7 @@ use yii\data\ActiveDataProvider;
 use panix\mod\contacts\models\Maps;
 
 /**
- * PagesSearch represents the model behind the search form about `app\modules\pages\models\Pages`.
+ * PagesSearch represents the model behind the search form about `app\common\modules\pages\models\Pages`.
  */
 class MapsSearch extends Maps {
 

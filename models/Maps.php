@@ -29,7 +29,7 @@ class Maps extends ActiveRecord
             ['zoom', 'in', 'range' => $this->getZoomList()],
             //['center', 'validateLatLng'],
 
-            [['night_mode', 'grayscale'], 'boolean'],
+           // [['night_mode', 'grayscale'], 'boolean'],
 
         ];
     }

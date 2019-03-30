@@ -4,7 +4,7 @@ use yii\helpers\Html;
 //use panix\engine\bootstrap\Alert;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\pages\models\Pages */
+/* @var $model app\common\modules\pages\models\Pages */
 
 $this->title = Yii::t('app', 'Create Pages');
 
