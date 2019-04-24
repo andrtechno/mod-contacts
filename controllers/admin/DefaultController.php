@@ -51,8 +51,6 @@ class DefaultController extends AdminController {
 
 
 
-
-
         $model = $this->findModel($id);
         //$model->setScenario("admin");
         $post = Yii::$app->request->post();

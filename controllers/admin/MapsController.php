@@ -33,11 +33,9 @@ class MapsController extends AdminController
 
     public function actionUpdate($id = false)
     {
-        if ($id === true) {
-            $model = new Maps;
-        } else {
-            $model = $this->findModel($id);
-        }
+        $model = Maps::findModel($id);
+
+
         $this->pageName = Yii::t('contacts/admin', ($id) ? 'UPDATE_MAP' : 'CREATE_MAP');
         $this->buttons = [
             [
@@ -63,15 +61,4 @@ class MapsController extends AdminController
             'model' => $model,
         ]);
     }
-
-    protected function findModel($id)
-    {
-        $model = new Maps;
-        if (($model = $model::findOne($id)) !== null) {
-            return $model;
-        } else {
-            $this->error404();
-        }
-    }
-
 }

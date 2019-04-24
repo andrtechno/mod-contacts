@@ -33,12 +33,7 @@ class MarkersController extends AdminController {
 
     public function actionUpdate($id = false) {
 
-        if ($id === true) {
-            $model = new Markers;
-        } else {
-            $model = $this->findModel($id);
-        }
-
+        $model = Markers::findModel($id);
         $this->pageName = Yii::t('contacts/admin', 'CREATE_MARKER');
         $this->buttons = [
             [
@@ -65,14 +60,4 @@ class MarkersController extends AdminController {
                     'model' => $model,
         ]);
     }
-
-    protected function findModel($id) {
-        $model = new Markers;
-        if (($model = $model::findOne($id)) !== null) {
-            return $model;
-        } else {
-            $this->error404();
-        }
-    }
-
 }
