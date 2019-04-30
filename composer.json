@@ -13,7 +13,6 @@
         }
     ],
     "require": {
-        "panix/engine": "*",
         "panix/lib-google-maps": "*",
         "panix/wgt-telinput": "*"
     },
