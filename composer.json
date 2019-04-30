@@ -4,7 +4,7 @@
     "keywords": ["pixelion-cms", "module", "pages"],
     "homepage": "https://github.com/andrtechno/mod-contacts",
     "type": "yii2-extension",
-    "license": "BSD 3-Clause",
+    "license": "MIT",
     "authors": [
         {
             "name": "PIXELION CMS",
