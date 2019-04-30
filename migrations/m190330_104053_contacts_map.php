@@ -1,4 +1,7 @@
 <?php
+
+namespace panix\mod\contacts\migrations;
+
 /**
  * Generation migrate by PIXELION CMS
  *
@@ -11,9 +14,11 @@
 use panix\engine\db\Migration;
 use panix\mod\contacts\models\Maps;
 
-class m190330_104053_contacts_map extends Migration {
+class m190330_104053_contacts_map extends Migration
+{
 
-    public function up() {
+    public function up()
+    {
         $this->createTable(Maps::tableName(), [
             'id' => $this->primaryKey()->unsigned(),
             'name' => $this->string(255)->notNull(),
@@ -36,7 +41,8 @@ class m190330_104053_contacts_map extends Migration {
         ], $this->tableOptions);
     }
 
-    public function down() {
+    public function down()
+    {
         echo "m190330_104053_contacts_map cannot be reverted.\n";
         $this->dropTable(Maps::tableName());
         return false;

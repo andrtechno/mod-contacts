@@ -1,4 +1,7 @@
 <?php
+
+namespace panix\mod\contacts\migrations;
+
 /**
  * Generation migrate by PIXELION CMS
  *
@@ -11,10 +14,12 @@
 use panix\engine\db\Migration;
 use panix\mod\contacts\models\Markers;
 
-class m190330_104130_contacts_map_markers extends Migration {
+class m190330_104130_contacts_map_markers extends Migration
+{
 
     // Use up()/down() to run migration code without a transaction.
-    public function up() {
+    public function up()
+    {
         $this->createTable(Markers::tableName(), [
             'id' => $this->primaryKey()->unsigned(),
             'map_id' => $this->string(255)->null(),
@@ -33,7 +38,8 @@ class m190330_104130_contacts_map_markers extends Migration {
         $this->createIndex('map_id', Markers::tableName(), 'map_id');
     }
 
-    public function down() {
+    public function down()
+    {
         echo "m190330_104130_contacts_map_markers cannot be reverted.\n";
         $this->dropTable(Markers::tableName());
         return false;
