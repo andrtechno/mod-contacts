@@ -7,7 +7,7 @@ use panix\engine\SettingsModel;
 
 class SettingsForm extends SettingsModel {
 
-    protected $category = 'contacts';
+    public static $category = 'contacts';
     protected $module = 'contacts';
     public $email;
     public $phone;
