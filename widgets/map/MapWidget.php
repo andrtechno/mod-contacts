@@ -31,7 +31,7 @@ class MapWidget extends Widget
         parent::init();
         $view = Yii::$app->getView();
         MapAsset::register($view);
-        $model = $this->findModel($this->map_id);
+        $model = Maps::findModel($this->map_id,'Map not found.');
 
 
         $mapOptions = ArrayHelper::merge([
@@ -68,13 +68,4 @@ class MapWidget extends Widget
         echo $this->map->display();
     }
 
-    protected function findModel($id)
-    {
-        $model = new Maps;
-        if (($model = $model::find(['id' => $id])->one()) !== null) {
-            return $model;
-        } else {
-            throw new \yii\web\NotFoundHttpException(Yii::t('app/error', '404'));
-        }
-    }
 }
