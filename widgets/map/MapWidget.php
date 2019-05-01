@@ -2,6 +2,7 @@
 
 namespace panix\mod\contacts\widgets\map;
 
+use panix\mod\contacts\models\Markers;
 use Yii;
 use panix\lib\google\maps\LatLng;
 use panix\lib\google\maps\overlays\InfoWindow;
@@ -43,6 +44,7 @@ class MapWidget extends Widget
 
         $this->map->appendScript('var bounds = new google.maps.LatLngBounds();');
         foreach ($model->markers as $marker) {
+            /** @var Markers $marker */
             $markers = new Marker([
                 'position' => new LatLng($marker->getCoords()),
                 'title' => $marker->name,
