@@ -22,7 +22,7 @@ $form = ActiveForm::begin([
 ?>
 
 <?= $form->field($model, 'name')->textInput(['maxlength' => 255]) ?>
-<?= $form->field($model, 'seo_alias')->textInput(['maxlength' => 255]) ?>
+<?= $form->field($model, 'slug')->textInput(['maxlength' => 255]) ?>
 <?= $form->field($model, 'text')->textArea(['rows' => 6]) ?>
 
 <div class="form-group text-center">
