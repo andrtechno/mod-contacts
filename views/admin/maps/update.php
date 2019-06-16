@@ -30,7 +30,7 @@ use panix\engine\bootstrap\ActiveForm;
             <?= $form->field($model, 'width')->textInput(['maxlength' => 255]) ?>
             <?= $form->field($model, 'height')->textInput(['maxlength' => 255]) ?>
             <div class="form-group text-center">
-                <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'CREATE') : Yii::t('app', 'UPDATE'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+                <?= $model->submitButton(); ?>
             </div>
             <?php ActiveForm::end(); ?>
         </div>
