@@ -4,14 +4,25 @@ namespace panix\mod\contacts;
 
 use Yii;
 use panix\engine\WebModule;
+use yii\base\BootstrapInterface;
 
-class Module extends WebModule {
+class Module extends WebModule implements BootstrapInterface
+{
 
     public $icon = 'phone';
-    public $routes = [
-        'contacts/captach' => 'contacts/default/captcha'
-    ];
-    public function getPhones() {
+
+
+    public function bootstrap($app)
+    {
+        $app->getUrlManager()->addRules([
+            'contacts' => 'contacts/default/index',
+            'contacts/captcha' => 'contacts/default/captcha'
+        ], true);
+
+    }
+
+    public function getPhones()
+    {
         $cfg = Yii::$app->settings->get($this->id);
         if ($cfg['phone']) {
             return explode(',', $cfg['phone']);
@@ -20,7 +31,8 @@ class Module extends WebModule {
         }
     }
 
-    public function getEmails() {
+    public function getEmails()
+    {
         $cfg = Yii::$app->settings->get($this->id);
         if ($cfg['email']) {
             return explode(',', $cfg['email']);
@@ -29,7 +41,8 @@ class Module extends WebModule {
         }
     }
 
-    public function getAddress() {
+    public function getAddress()
+    {
         $cfg = Yii::$app->settings->get($this->id);
         if ($cfg['address']) {
             return $cfg['address'];
@@ -37,7 +50,9 @@ class Module extends WebModule {
             return false;
         }
     }
-    public function getAdminMenu() {
+
+    public function getAdminMenu()
+    {
         return [
             'modules' => [
                 'items' => [
@@ -68,14 +83,16 @@ class Module extends WebModule {
         ];
     }
 
-    public function getAdminSidebar() {
+    public function getAdminSidebar()
+    {
         $menu = $this->getAdminMenu();
         //  $mod = new \panix\engine\bootstrap\Nav;
         //   $items = $mod->findMenu($this->id);
-        return \yii\helpers\ArrayHelper::merge($menu['modules']['items'],$menu['modules']['items'][0]['items']);
+        return \yii\helpers\ArrayHelper::merge($menu['modules']['items'], $menu['modules']['items'][0]['items']);
     }
 
-    public function getInfo() {
+    public function getInfo()
+    {
         return [
             'label' => Yii::t('contacts/default', 'MODULE_NAME'),
             'author' => 'andrew.panix@gmail.com',

@@ -10,6 +10,7 @@ use yii\helpers\Html;
 
 $list = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
 ?>
+<div class="alert alert-info">Если поле оставить пустым, то это будет выходной.</div>
 <table class="table table-striped">
     <tr>
         <th>День</th>

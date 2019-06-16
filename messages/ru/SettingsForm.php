@@ -12,8 +12,6 @@ return [
     'FRIDAY_TIME' => 'Пятница',
     'SATURDAY_TIME' => 'Суббота',
     'SUNDAY_TIME' => 'Воскресение',
-
-
     'MONDAY_TIME_END' => 'Понедельник',
     'TUESDAY_TIME_END' => 'Вторник',
     'WEDNESDAY_TIME_END' => 'Среда',
@@ -21,4 +19,5 @@ return [
     'FRIDAY_TIME_END' => 'Пятница',
     'SATURDAY_TIME_END' => 'Суббота',
     'SUNDAY_TIME_END' => 'Воскресение',
+    'DAY_OFF'=>'выходной'
 ];
