@@ -29,8 +29,6 @@ use panix\engine\bootstrap\ActiveForm;
             <?= $form->field($model, 'zoom')->dropDownList($model->getZoomList()) ?>
             <?= $form->field($model, 'width')->textInput(['maxlength' => 255]) ?>
             <?= $form->field($model, 'height')->textInput(['maxlength' => 255]) ?>
-            <?= $form->field($model, 'grayscale')->checkbox() ?>
-            <?= $form->field($model, 'night_mode')->checkbox()->hint('me hint') ?>
             <div class="form-group text-center">
                 <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'CREATE') : Yii::t('app', 'UPDATE'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
             </div>

@@ -55,7 +55,7 @@ class MapsController extends AdminController
         $post = Yii::$app->request->post();
         if ($model->load($post) && $model->validate()) {
             $model->save();
-            return Yii::$app->getResponse()->redirect(['/contacts/maps']);
+            return Yii::$app->getResponse()->redirect('index');
         }
         return $this->render('update', [
             'model' => $model,
