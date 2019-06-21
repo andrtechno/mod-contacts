@@ -46,8 +46,8 @@ $config = Yii::$app->settings->get('contacts');
         <?php } ?>
 
         <?php foreach ($config->phone as $phone) { ?>
-            <div class="mb-1"><?= Html::tel($phone['number'], ['class' => 'phone']); ?> <?= $phone['name']; ?>
-                (<?= CMS::phoneOperator($phone['number']); ?>)
+            <div class="mb-1">
+                <?= Html::tel($phone['number'], ['class' => 'phone '.CMS::slug(CMS::phoneOperator($phone['number']))]); ?> <?= $phone['name']; ?>
             </div>
         <?php } ?>
 
