@@ -22,8 +22,6 @@ class SettingsController extends AdminController {
         ];
         $model = new SettingsForm();
         if ($model->load(Yii::$app->request->post())) {
-            //$model->schedule = Json::encode($model->schedule);
-            //$model->phone = Json::encode($model->phone);
             $model->save();
         }
         return $this->render('index', [

@@ -5,7 +5,8 @@ return [
     'FEEDBACK_TPL_BODY' => 'Шаблон письма',
     'PHONE' => 'Телефон',
     'ADDRESS' => 'Адрес',
-    'MONDAY_TIME' => 'Понедельник',
+
+    /*'MONDAY_TIME' => 'Понедельник',
     'TUESDAY_TIME' => 'Вторник',
     'WEDNESDAY_TIME' => 'Среда',
     'THURSDAY_TIME' => 'Четрвег',
@@ -18,6 +19,16 @@ return [
     'THURSDAY_TIME_END' => 'Четрвег',
     'FRIDAY_TIME_END' => 'Пятница',
     'SATURDAY_TIME_END' => 'Суббота',
-    'SUNDAY_TIME_END' => 'Воскресение',
-    'DAY_OFF'=>'выходной'
+    'SUNDAY_TIME_END' => 'Воскресение',*/
+    'START_TIME'=>'Начало работы',
+    'END_TIME'=>'Конец работы',
+    'DAY_OFF'=>'выходной',
+    'DAY'=>'День недели',
+    'MONDAY'=>'Пн',
+    'TUESDAY'=>'Вт',
+    'WEDNESDAY'=>'Ср',
+    'THURSDAY'=>'Чт',
+    'FRIDAY'=>'Пт',
+    'SATURDAY'=>'Сб',
+    'SUNDAY'=>'Вс'
 ];

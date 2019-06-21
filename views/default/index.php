@@ -3,32 +3,46 @@
 use panix\engine\CMS;
 use panix\engine\Html;
 use yii\bootstrap4\ActiveForm;
-
+use panix\mod\contacts\models\SettingsForm;
 
 $config = Yii::$app->settings->get('contacts');
 
-$schedules = $config->schedule;
 
-print_r($schedules);
 ?>
+<?php foreach ($config->schedule as $key => $schedule) { ?>
+    <div class="mb-1">
+        <strong><?= SettingsForm::getDayList()[$key]; ?>.</strong>
+
+        <?php if (!empty($schedule['start_time']) || !empty($schedule['end_time'])) { ?>
+            с <?= $schedule['start_time']; ?> до <?= $schedule['end_time']; ?>
+        <?php } else { ?>
+            <?= SettingsForm::t('DAY_OFF'); ?>
+        <?php } ?>
+        <?php if (date('N') == $key + 1) { ?>
+            (сегодня)
+        <?php } ?>
+    </div>
+<?php } ?>
 
 <?php foreach ($config->phone as $phone) { ?>
-    <div class="mb-1"><?= Html::tel($phone['phone'], ['class' => 'phone']); ?> <?= $phone['name']; ?> (<?= CMS::phoneOperator($phone['phone']); ?>)</div>
+    <div class="mb-1"><?= Html::tel($phone['number'], ['class' => 'phone']); ?> <?= $phone['name']; ?>
+        (<?= CMS::phoneOperator($phone['number']); ?>)
+    </div>
 
     <?php
 
 
     $phoneNumberUtil = \libphonenumber\PhoneNumberUtil::getInstance();
 
-   // $phoneNumberObject = $phoneNumberUtil->parse('0117 496 0123', 'GB');
-    $phoneNumberObject = $phoneNumberUtil->parse($phone['phone']);
-   // $phoneNumberObject = $phoneNumberUtil->parse('00 44 117 496 0123', 'FR');
-   // $phoneNumberObject = $phoneNumberUtil->parse('117 496 0123', 'GB');
- //   print_r($phoneNumberObject);
+    // $phoneNumberObject = $phoneNumberUtil->parse('0117 496 0123', 'GB');
+    $phoneNumberObject = $phoneNumberUtil->parse($phone['number']);
+    // $phoneNumberObject = $phoneNumberUtil->parse('00 44 117 496 0123', 'FR');
+    // $phoneNumberObject = $phoneNumberUtil->parse('117 496 0123', 'GB');
+    //   print_r($phoneNumberObject);
 
 
-   // var_dump($phoneNumberUtil->getRegionCodeForNumber($phoneNumberObject));
-   // var_dump($phoneNumberUtil->format($phoneNumberObject, \libphonenumber\PhoneNumberFormat::INTERNATIONAL));
+    // var_dump($phoneNumberUtil->getRegionCodeForNumber($phoneNumberObject));
+    // var_dump($phoneNumberUtil->format($phoneNumberObject, \libphonenumber\PhoneNumberFormat::INTERNATIONAL));
     ?>
 <?php } ?>
     <div class="row">
@@ -95,16 +109,3 @@ print_r($schedules);
             <?php ActiveForm::end(); ?>
         </div>
     </div>
-
-<?php
-$list = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
-
-foreach ($list as $day) {
-    $activeClass = ($day === strtolower(date('l'))) ? 'text-bold' : '';
-    $start = $config->{$day . '_time'};
-    $end = $config->{$day . '_time_end'}
-    ?>
-    <div class="<?= $activeClass; ?>">
-        <?= $model->getAttributeLabel('monday_time'); ?>
-        с <?= $start; ?> до <?= $end; ?></div>
-<?php }

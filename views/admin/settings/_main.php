@@ -4,7 +4,6 @@
  * @var panix\engine\bootstrap\ActiveForm $form
  */
 
-\yii\helpers\VarDumper::dump(Yii::$app->settings->get('contacts'),10,true);
 ?>
 
 <?=
@@ -23,8 +22,8 @@ $form->field($model, 'feedback_tpl_body')->widget(\panix\ext\tinymce\TinyMce::cl
 
 ?>
 <?php echo $form->field($model, 'phone')->widget(\unclead\multipleinput\MultipleInput::class, [
-    'model' => $model,
-    'attribute' => 'phone',
+    //'model' => $model,
+    //'attribute' => 'phone',
     'max' => 5,
     'min' => 1, // should be at least 2 rows
     'allowEmptyList' => false,
@@ -35,24 +34,17 @@ $form->field($model, 'feedback_tpl_body')->widget(\panix\ext\tinymce\TinyMce::cl
         [
             'name' => 'number',
             'type' => panix\ext\telinput\PhoneInput::class,
+            'enableError' => false,
             // 'title' => 'phone',
-            // 'value' => function ($data) {
-            //     return $data['day'];
-            // },
-
             'headerOptions' => [
                 'style' => 'width: 250px;',
             ],
         ],
         [
             'name' => 'name',
+            'enableError' => false,
             'title' => 'Имя',
-            // 'value' => function ($data) {
-            //     return $data['day'];
-            // },
-
         ],
-
     ]
 ]);
 

@@ -8,7 +8,7 @@ use yii\helpers\Html;
  */
 
 
-$list = [0=>'monday', 1=>'tuesday', 2=>'wednesday', 3=>'thursday', 4=>'friday', 5=>'saturday', 6=>'sunday']
+$list = [0 => 'monday', 1 => 'tuesday', 2 => 'wednesday', 3 => 'thursday', 4 => 'friday', 5 => 'saturday', 6 => 'sunday']
 ?>
 
 
@@ -16,24 +16,26 @@ $list = [0=>'monday', 1=>'tuesday', 2=>'wednesday', 3=>'thursday', 4=>'friday', 
 echo \unclead\multipleinput\MultipleInput::widget([
     'model' => $model,
     'attribute' => 'schedule',
-    'max' => 1,
-    'min' => 1,
+    'max' => 7,
+    'min' => 7,
     'allowEmptyList' => false,
     'enableGuessTitle' => true,
     //'addButtonPosition' => \unclead\multipleinput\MultipleInput::POS_HEADER, // show add button in the header
     'columns' => [
         [
             'name' => 'static', // can be ommited in case of static column
-            'title' => 'Day',
+            'title' => $model::t('DAY'),
             'enableError' => false,
             'type' => \unclead\multipleinput\MultipleInputColumn::TYPE_STATIC,
-            'value' => function ($data, $ss) use ($model) {
-//\yii\helpers\VarDumper::dump($ss,10,true);die;
-                return Html::tag('span', 'static content'.$ss['index'], ['class' => 'label label-info']);
+            'value' => function ($data, $i) use ($model) {
+                $list = $model->getDayList();
+                return Html::tag('span', $list[(int)$i['index']]);
             },
+            'options' => ['class' => 'text-center'],
             'headerOptions' => [
                 'style' => 'width: 70px;',
-            ]
+            ],
+
         ],
         /*[
             'type' => \unclead\multipleinput\MultipleInputColumn::TYPE_CHECKBOX_LIST,
@@ -55,14 +57,15 @@ echo \unclead\multipleinput\MultipleInput::widget([
         [
             'name' => 'start_time',
             'type' => DatetimePicker::class,
-            'title' => 'Start Time',
-            //'value' => function ($data) {
-               // return $data['start_time'];
-           // },
+            'title' => $model::t('START_TIME'),
+            'enableError' => false,
             'options' => [
-                'timeFormat' => 'hh:mm',
+                'timeFormat' => 'HH:mm',
                 'mode' => 'time',
+                'class' => 'text-center',
+                'options' => ['autocomplete' => 'off', 'placeholder' => $model::t('DAY_OFF')]
             ],
+            'columnOptions' => ['class' => 'text-center'],
             'headerOptions' => [
                 'style' => 'width: 250px;',
             ],
@@ -70,13 +73,12 @@ echo \unclead\multipleinput\MultipleInput::widget([
         [
             'name' => 'end_time',
             'type' => DatetimePicker::class,
-            'title' => 'end Time',
-           // 'value' => function ($data) {
-              //  return $data['day'];
-           // },
+            'title' => $model::t('END_TIME'),
+            'enableError' => false,
             'options' => [
-                'timeFormat' => 'hh:mm',
+                'timeFormat' => 'HH:mm',
                 'mode' => 'time',
+                'options' => ['autocomplete' => 'off', 'placeholder' => $model::t('DAY_OFF')]
             ],
             'headerOptions' => [
                 'style' => 'width: 250px;',
