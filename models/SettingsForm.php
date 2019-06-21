@@ -2,8 +2,8 @@
 
 namespace panix\mod\contacts\models;
 
+use yii\helpers\Json;
 use panix\engine\SettingsModel;
-use Yii;
 
 class SettingsForm extends SettingsModel
 {
@@ -39,35 +39,13 @@ class SettingsForm extends SettingsModel
     public function rules()
     {
         return [
-            // ['schedule', 'validateSchedule', 'skipOnEmpty' => false],
+            ['schedule', 'validateSchedule', 'skipOnEmpty' => false],
             [['email', 'feedback_captcha'], "required"],
             ['phone', 'validatePhones'],
             [['feedback_tpl_body', 'phone', 'address'], 'string'],
             [['monday_time', 'tuesday_time', 'wednesday_time', 'thursday_time', 'friday_time', 'saturday_time', 'sunday_time'], 'time'],
             [['monday_time_end', 'tuesday_time_end', 'wednesday_time_end', 'thursday_time_end', 'friday_time_end', 'saturday_time_end', 'sunday_time_end'], 'time'],
         ];
-    }
-
-    public function getPhone()
-    {
-
-        return \yii\helpers\Json::decode(Yii::$app->settings->get('contacts','phone'));
-    }
-
-    public function init2()
-    {
-
-        parent::init();
-        //  $this->setAttributes(['phone'=>\yii\helpers\Json::decode($this->phone)]);
-
-        // print_r(\yii\helpers\Json::decode($this->phone));die;
-        $this->phone = \yii\helpers\Json::decode(Yii::$app->settings->get('contacts','phone'));
-    }
-
-    public function isJson($string)
-    {
-        json_decode($string);
-        return (json_last_error() == JSON_ERROR_NONE);
     }
 
     /**
@@ -100,7 +78,9 @@ class SettingsForm extends SettingsModel
     public function validateSchedule($attribute)
     {
         $requiredValidator = new \yii\validators\RequiredValidator();
-        foreach ($this->$attribute as $index => $row) {
+        $attributes = Json::decode($this->$attribute);
+       // var_dump($attributes);die;
+        foreach ($attributes as $index => $row) {
             $error = null;
             foreach (['start_time', 'end_time'] as $name) {
                 $error = null;

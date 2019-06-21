@@ -3,6 +3,7 @@
 namespace panix\mod\contacts\controllers\admin;
 
 use Yii;
+use yii\helpers\Json;
 use panix\engine\controllers\AdminController;
 use panix\mod\contacts\models\SettingsForm;
 
@@ -25,8 +26,8 @@ class SettingsController extends AdminController {
         }
 
         if ($model->load(Yii::$app->request->post())) {
-            //$model->schedule = \yii\helpers\Json::encode($model->schedule);
-            $model->phone = \yii\helpers\Json::encode($model->phone);
+            $model->schedule = Json::encode($model->schedule);
+            $model->phone = Json::encode($model->phone);
             $model->save();
         }
         return $this->render('index', [

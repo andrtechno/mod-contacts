@@ -1,11 +1,37 @@
 <?php
 
-use yii\helpers\Html;
+use panix\engine\CMS;
+use panix\engine\Html;
 use yii\bootstrap4\ActiveForm;
 
 
 $config = Yii::$app->settings->get('contacts');
+print_r($config->phone);
+$phones = $config->phone;
+$schedules = $config->schedule;
+
+print_r($schedules);
 ?>
+
+<?php foreach ($phones as $phone) { ?>
+    <div class="mb-1"><?= Html::tel($phone['phone'], ['class' => 'phone']); ?> <?= $phone['name']; ?> (<?= CMS::phoneOperator($phone['phone']); ?>)</div>
+
+    <?php
+
+
+    $phoneNumberUtil = \libphonenumber\PhoneNumberUtil::getInstance();
+
+   // $phoneNumberObject = $phoneNumberUtil->parse('0117 496 0123', 'GB');
+    $phoneNumberObject = $phoneNumberUtil->parse($phone['phone']);
+   // $phoneNumberObject = $phoneNumberUtil->parse('00 44 117 496 0123', 'FR');
+   // $phoneNumberObject = $phoneNumberUtil->parse('117 496 0123', 'GB');
+ //   print_r($phoneNumberObject);
+
+
+   // var_dump($phoneNumberUtil->getRegionCodeForNumber($phoneNumberObject));
+   // var_dump($phoneNumberUtil->format($phoneNumberObject, \libphonenumber\PhoneNumberFormat::INTERNATIONAL));
+    ?>
+<?php } ?>
     <div class="row">
         <div class="col-sm-6">
             <?php
@@ -76,8 +102,8 @@ $list = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'su
 
 foreach ($list as $day) {
     $activeClass = ($day === strtolower(date('l'))) ? 'text-bold' : '';
-    $start = $config->{$day.'_time'};
-    $end = $config->{$day.'_time_end'}
+    $start = $config->{$day . '_time'};
+    $end = $config->{$day . '_time_end'}
     ?>
     <div class="<?= $activeClass; ?>">
         <?= $model->getAttributeLabel('monday_time'); ?>

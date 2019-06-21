@@ -22,18 +22,18 @@ $form->field($model, 'feedback_tpl_body')->widget(\panix\ext\tinymce\TinyMce::cl
 <?php echo $form->field($model, 'phone')->widget(\unclead\multipleinput\MultipleInput::class,[
     'model' => $model,
     'attribute' => 'phone',
-    'data'=>$model->getPhone(),
+    //'data'=>$model->getPhone(),
     'max' => 5,
     'min' => 1, // should be at least 2 rows
     'allowEmptyList' => false,
     'enableGuessTitle' => true,
-    //'sortable'=>true,
-    'addButtonPosition' => \unclead\multipleinput\MultipleInput::POS_HEADER, // show add button in the header
+    'sortable'=>true,
+    'addButtonPosition' => \unclead\multipleinput\MultipleInput::POS_ROW, // show add button in the header
     'columns' => [
         [
             'name' => 'phone',
             'type' => panix\ext\telinput\PhoneInput::class,
-            'title' => 'phone',
+            // 'title' => 'phone',
             // 'value' => function ($data) {
             //     return $data['day'];
             // },
@@ -41,6 +41,15 @@ $form->field($model, 'feedback_tpl_body')->widget(\panix\ext\tinymce\TinyMce::cl
             'headerOptions' => [
                 'style' => 'width: 250px;',
             ],
+        ],
+        [
+            'name' => 'name',
+
+             'title' => 'Имя',
+            // 'value' => function ($data) {
+            //     return $data['day'];
+            // },
+
         ],
 
     ]
