@@ -13,20 +13,20 @@ $list = [0 => 'monday', 1 => 'tuesday', 2 => 'wednesday', 3 => 'thursday', 4 => 
 
 
 <?php
-echo \unclead\multipleinput\MultipleInput::widget([
+echo \panix\ext\multipleinput\MultipleInput::widget([
     'model' => $model,
     'attribute' => 'schedule',
     'max' => 7,
     'min' => 7,
     'allowEmptyList' => false,
     'enableGuessTitle' => true,
-    //'addButtonPosition' => \unclead\multipleinput\MultipleInput::POS_HEADER, // show add button in the header
+    //'addButtonPosition' => \panix\ext\multipleinput\MultipleInput::POS_HEADER, // show add button in the header
     'columns' => [
         [
             'name' => 'static', // can be ommited in case of static column
             'title' => $model::t('DAY'),
             'enableError' => false,
-            'type' => \unclead\multipleinput\MultipleInputColumn::TYPE_STATIC,
+            'type' => \panix\ext\multipleinput\MultipleInputColumn::TYPE_STATIC,
             'value' => function ($data, $i) use ($model) {
                 $list = $model->getDayList();
                 return Html::tag('span', $list[(int)$i['index']]);
@@ -63,7 +63,7 @@ echo \unclead\multipleinput\MultipleInput::widget([
                 'timeFormat' => 'HH:mm',
                 'mode' => 'time',
                 'class' => 'text-center',
-                'options' => ['autocomplete' => 'off', 'placeholder' => $model::t('DAY_OFF')]
+                'options' => ['class'=>'form-control m-auto','autocomplete' => 'off', 'placeholder' => $model::t('DAY_OFF')]
             ],
             'columnOptions' => ['class' => 'text-center'],
             'headerOptions' => [
@@ -78,7 +78,7 @@ echo \unclead\multipleinput\MultipleInput::widget([
             'options' => [
                 'timeFormat' => 'HH:mm',
                 'mode' => 'time',
-                'options' => ['autocomplete' => 'off', 'placeholder' => $model::t('DAY_OFF')]
+                'options' => ['class'=>'form-control m-auto','autocomplete' => 'off', 'placeholder' => $model::t('DAY_OFF')]
             ],
             'headerOptions' => [
                 'style' => 'width: 250px;',

@@ -12,7 +12,6 @@ $form->field($model, 'email')
     ->hint('Введите E-mail и нажмите Enter');
 ?>
 <?= $form->field($model, 'address'); ?>
-<?php //echo $form->field($model, 'phone')->widget(\panix\ext\telinput\PhoneInput::class); ?>
 <?= $form->field($model, 'feedback_captcha')->checkbox() ?>
 <?=
 $form->field($model, 'feedback_tpl_body')->widget(\panix\ext\tinymce\TinyMce::class, [
@@ -21,7 +20,7 @@ $form->field($model, 'feedback_tpl_body')->widget(\panix\ext\tinymce\TinyMce::cl
 
 
 ?>
-<?php echo $form->field($model, 'phone')->widget(\unclead\multipleinput\MultipleInput::class, [
+<?php echo $form->field($model, 'phone')->widget(\panix\ext\multipleinput\MultipleInput::class, [
     //'model' => $model,
     //'attribute' => 'phone',
     'max' => 5,
@@ -29,7 +28,7 @@ $form->field($model, 'feedback_tpl_body')->widget(\panix\ext\tinymce\TinyMce::cl
     'allowEmptyList' => false,
     //'enableGuessTitle' => true,
     'sortable' => true,
-    'addButtonPosition' => \unclead\multipleinput\MultipleInput::POS_ROW, // show add button in the header
+    'addButtonPosition' => \panix\ext\multipleinput\MultipleInput::POS_ROW, // show add button in the header
     'columns' => [
         [
             'name' => 'number',

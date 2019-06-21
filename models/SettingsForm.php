@@ -2,7 +2,6 @@
 
 namespace panix\mod\contacts\models;
 
-use Yii;
 use panix\engine\SettingsModel;
 
 class SettingsForm extends SettingsModel
