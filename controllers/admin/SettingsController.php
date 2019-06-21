@@ -7,11 +7,13 @@ use yii\helpers\Json;
 use panix\engine\controllers\AdminController;
 use panix\mod\contacts\models\SettingsForm;
 
-class SettingsController extends AdminController {
+class SettingsController extends AdminController
+{
 
     public $icon = 'settings';
 
-    public function actionIndex() {
+    public function actionIndex()
+    {
         $this->pageName = Yii::t('app', 'SETTINGS');
         $this->breadcrumbs = [
             [
@@ -22,11 +24,13 @@ class SettingsController extends AdminController {
         ];
         $model = new SettingsForm();
         if ($model->load(Yii::$app->request->post())) {
-            $model->save();
+            if ($model->validate()) {
+                $model->save();
+            }
         }
         return $this->render('index', [
-                    'model' => $model
-                ]);
+            'model' => $model
+        ]);
     }
 
 }

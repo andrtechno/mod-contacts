@@ -9,6 +9,7 @@ $config = Yii::$app->settings->get('contacts');
 
 
 ?>
+<h4>График работы</h4>
 <?php foreach ($config->schedule as $key => $schedule) { ?>
     <div class="mb-1">
         <strong><?= SettingsForm::getDayList()[$key]; ?>.</strong>
