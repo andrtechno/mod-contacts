@@ -4,11 +4,12 @@ namespace panix\mod\contacts\models;
 
 use panix\engine\widgets\recaptcha\ReCaptchaValidator;
 use Yii;
+use panix\engine\base\Model;
 
 /**
  * ContactForm is the model behind the contact form.
  */
-class ContactForm extends \panix\engine\base\Model
+class ContactForm extends Model
 {
     protected $module = 'contacts';
     public $name;
@@ -18,13 +19,23 @@ class ContactForm extends \panix\engine\base\Model
     public $verifyCode;
     public $reCaptcha;
 
+    public function init()
+    {
+        parent::init();
+        if (!Yii::$app->user->isGuest) {
+            $this->name = Yii::$app->user->username;
+            $this->email = Yii::$app->user->email;
+            $this->phone = Yii::$app->user->phone;
+        }
+    }
+
     /**
      * @return array the validation rules.
      */
     public function rules()
     {
         return [ //'secret' => 'your secret key',
-            ['reCaptcha', ReCaptchaValidator::class,  'uncheckedMessage' => 'Please confirm that you are not a bot.'],
+            ['reCaptcha', ReCaptchaValidator::class, 'uncheckedMessage' => 'Please confirm that you are not a bot.'],
             // name, email, subject and body are required
             [['name', 'email', 'text', 'phone'], 'required'],
 // verifyCode needs to be entered correctly
