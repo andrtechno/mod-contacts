@@ -34,13 +34,12 @@ class MapsController extends AdminController
     public function actionUpdate($id = false)
     {
         $model = Maps::findModel($id);
-
-
         $this->pageName = Yii::t('contacts/admin', ($id) ? 'UPDATE_MAP' : 'CREATE_MAP');
         $this->buttons = [
             [
-                'label' => '<i class="icon-add"></i> ' . Yii::t('contacts/admin', 'CREATE_MAP'),
+                'label' => Yii::t('contacts/admin', 'CREATE_MAP'),
                 'url' => ['create'],
+                'icon' => 'add',
                 'options' => ['class' => 'btn btn-success']
             ]
         ];

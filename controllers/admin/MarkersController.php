@@ -7,9 +7,11 @@ use panix\mod\contacts\models\Markers;
 use panix\mod\contacts\models\MarkersSearch;
 use panix\engine\controllers\AdminController;
 
-class MarkersController extends AdminController {
+class MarkersController extends AdminController
+{
 
-    public function actionIndex() {
+    public function actionIndex()
+    {
         $this->pageName = Yii::t('contacts/default', 'MODULE_NAME');
         $this->buttons = [
             [
@@ -26,19 +28,21 @@ class MarkersController extends AdminController {
         $dataProvider = $searchModel->search(Yii::$app->request->getQueryParams());
 
         return $this->render('index', [
-                    'dataProvider' => $dataProvider,
-                    'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
         ]);
     }
 
-    public function actionUpdate($id = false) {
+    public function actionUpdate($id = false)
+    {
 
         $model = Markers::findModel($id);
         $this->pageName = Yii::t('contacts/admin', 'CREATE_MARKER');
         $this->buttons = [
             [
-                'label' => '<i class="icon-add"></i> ' . Yii::t('contacts/admin', 'CREATE_MARKER'),
+                'label' => Yii::t('contacts/admin', 'CREATE_MARKER'),
                 'url' => ['create'],
+                'icon' => 'add',
                 'options' => ['class' => 'btn btn-success']
             ]
         ];
@@ -47,7 +51,6 @@ class MarkersController extends AdminController {
             'url' => ['index']
         ];
         $this->breadcrumbs[] = $this->pageName;
-
 
 
         //$model->setScenario("admin");
@@ -60,7 +63,7 @@ class MarkersController extends AdminController {
                 return Yii::$app->getResponse()->redirect($redirect);
         }
         return $this->render('update', [
-                    'model' => $model,
+            'model' => $model,
         ]);
     }
 }

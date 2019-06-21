@@ -8,100 +8,25 @@ use panix\mod\contacts\models\PagesSearch;
 use panix\engine\controllers\AdminController;
 
 
-class DefaultController extends AdminController {
+class DefaultController extends AdminController
+{
 
 
-
-    public function actionIndex() {
+    public function actionIndex()
+    {
         $this->pageName = Yii::t('contacts/default', 'MODULE_NAME');
-        $this->buttons = [
-            [
-                'label' => '<i class="fa fa-plus fa-fw"></i>' . Yii::t('contacts/default', 'CREATE_BTN'),
-                'url' => ['create'],
-                'options' => ['class' => 'btn btn-success']
-            ]
-        ];
         $this->breadcrumbs = [
             $this->pageName
         ];
 
-       // $searchModel = new PagesSearch();
-       // $dataProvider = $searchModel->search(Yii::$app->request->getQueryParams());
+        // $searchModel = new PagesSearch();
+        // $dataProvider = $searchModel->search(Yii::$app->request->getQueryParams());
 
         return $this->render('index', [
-              //      'dataProvider' => $dataProvider,
-               //     'searchModel' => $searchModel,
-                ]);
+            //      'dataProvider' => $dataProvider,
+            //     'searchModel' => $searchModel,
+        ]);
     }
 
-    public function actionUpdate($id) {
-        $this->pageName = Yii::t('contacts/default', 'CREATE_BTN');
-        $this->buttons = [
-            [
-                'label' => '<i class="fa fa-plus fa-fw"></i>' . Yii::t('contacts/default', 'CREATE_BTN'),
-                'url' => ['create'],
-                'options' => ['class' => 'btn btn-success']
-            ]
-        ];
-        $this->view->params['breadcrumbs'][] = [
-            'label' => Yii::t('contacts/default', 'MODULE_NAME'),
-            'url' => ['index']
-        ];
-        $this->view->params['breadcrumbs'][] = $this->pageName;
-
-
-
-        $model = $this->findModel($id);
-        //$model->setScenario("admin");
-        $post = Yii::$app->request->post();
-        if ($model->load($post) && $model->validate()) {
-            $model->save();
-            Yii::$app->session->addFlash('success', \Yii::t('app', 'SUCCESS_CREATE'));
-            // return $this->redirect(['index']);
-            return Yii::$app->getResponse()->redirect(['/admin/contacts']);
-        }
-        return $this->render('update', [
-                    'model' => $model,
-                ]);
-    }
-
-    public function actionCreate() {
-        $this->pageName = Yii::t('contacts/default', 'CREATE_BTN');
-        $this->buttons = [
-            [
-                'label' => '<i class="fa fa-plus fa-fw"></i>' . Yii::t('contacts/default', 'CREATE_BTN'),
-                'url' => ['create'],
-                'options' => ['class' => 'btn btn-success']
-            ]
-        ];
-        $this->view->params['breadcrumbs'][] = [
-            'label' => Yii::t('contacts/default', 'MODULE_NAME'),
-            'url' => ['index']
-        ];
-        $this->view->params['breadcrumbs'][] = $this->pageName;
-        $model = Yii::$app->getModule("contacts")->model("Pages");
-        //$model->setScenario("admin");
-
-
-        $post = Yii::$app->request->post();
-        if ($model->load($post) && $model->validate()) {
-            $model->save();
-            Yii::$app->session->addFlash('success', \Yii::t('app', 'SUCCESS_CREATE'));
-            // return $this->redirect(['index']);
-            return Yii::$app->getResponse()->redirect(['/admin/contacts/index']);
-        }
-        return $this->render('create', [
-                    'model' => $model,
-                ]);
-    }
-
-    protected function findModel($id) {
-        $model = Yii::$app->getModule("contacts")->model("Pages");
-        if (($model = $model::findOne($id)) !== null) {
-            return $model;
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
-        }
-    }
 
 }

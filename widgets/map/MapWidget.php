@@ -22,6 +22,9 @@ use yii\helpers\ArrayHelper;
 class MapWidget extends Widget
 {
 
+    /**
+     * @var Map
+     */
     private $map;
     public $map_id;
     public $options = [];
@@ -38,6 +41,8 @@ class MapWidget extends Widget
         $mapOptions = ArrayHelper::merge([
             'center' => new LatLng($model->getCenter()),
             'zoom' => $model->zoom,
+            'width'=>$model->width,
+            'height'=>$model->height,
         ], $this->options);
 
         $this->map = new Map($mapOptions);

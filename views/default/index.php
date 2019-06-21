@@ -9,92 +9,50 @@ $config = Yii::$app->settings->get('contacts');
 
 
 ?>
-<h4>График работы</h4>
-<?php foreach ($config->schedule as $key => $schedule) { ?>
-    <div class="mb-1">
-        <strong><?= SettingsForm::getDayList()[$key]; ?>.</strong>
-
-        <?php if (!empty($schedule['start_time']) || !empty($schedule['end_time'])) { ?>
-
-            с <?= $schedule['start_time']; ?> до <?= $schedule['end_time']; ?>
-        <?php } else { ?>
-            <?= SettingsForm::t('DAY_OFF'); ?>
-        <?php } ?>
-        <?php if (date('N') == $key + 1) { ?>
-            <?php if (time() >= strtotime($schedule['end_time'])) { ?>
-                <span class="font-italic text-danger">закрыто</span>
-            <?php } else { ?>
-                <span class="font-italic text-success">открыто</span>
-            <?php } ?>
-        <?php } ?>
-    </div>
-<?php } ?>
-
-<?php foreach ($config->phone as $phone) { ?>
-    <div class="mb-1"><?= Html::tel($phone['number'], ['class' => 'phone']); ?> <?= $phone['name']; ?>
-        (<?= CMS::phoneOperator($phone['number']); ?>)
-    </div>
-
-    <?php
-
-
-    $phoneNumberUtil = \libphonenumber\PhoneNumberUtil::getInstance();
-
-    // $phoneNumberObject = $phoneNumberUtil->parse('0117 496 0123', 'GB');
-    $phoneNumberObject = $phoneNumberUtil->parse($phone['number']);
-    // $phoneNumberObject = $phoneNumberUtil->parse('00 44 117 496 0123', 'FR');
-    // $phoneNumberObject = $phoneNumberUtil->parse('117 496 0123', 'GB');
-    //   print_r($phoneNumberObject);
-
-
-    // var_dump($phoneNumberUtil->getRegionCodeForNumber($phoneNumberObject));
-    // var_dump($phoneNumberUtil->format($phoneNumberObject, \libphonenumber\PhoneNumberFormat::INTERNATIONAL));
-    ?>
-<?php } ?>
 <div class="row">
-    <div class="col-sm-6">
+    <div class="col-sm-7">
         <?php
         echo panix\mod\contacts\widgets\map\MapWidget::widget(['map_id' => 1]);
         ?>
-
-
-        <?php
-        /* $coords = [];
-          $coords[] = new LatLng(['lat' => 46.468252, 'lng' => 30.740576]);
-          $coords[] = new LatLng(['lat' => 46.453163, 'lng' => 30.751179]);
-
-          $coord = new LatLng(['lat' => 46.458252, 'lng' => 30.742576]);
-          $map = new Map([
-          'center' => $coord,
-          'zoom' => 14,
-          ]);
-          $markers = [];
-          foreach ($coords as $coord) {
-
-          $markers = new Marker([
-          'position' => $coord,
-          'title' => 'My Home Town',
-          ]);
-
-          $markers->attachInfoWindow(
-          new InfoWindow([
-          'content' => '<p>This is my super cool content</p>'
-          ])
-          );
-
-          $map->addOverlay($markers);
-          }
-
-          echo $map->display(); */
-        ?>
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-5">
+
         <?php if (Yii::$app->session->hasFlash('success')) { ?>
             <div class="alert alert-success">
                 <?= Yii::$app->session->getFlash('success') ?>
             </div>
         <?php } ?>
 
+
+        <h4>График работы</h4>
+        <?php foreach ($config->schedule as $key => $schedule) { ?>
+            <div class="mb-1">
+                <strong><?= SettingsForm::getDayList()[$key]; ?>.</strong>
+
+                <?php if (!empty($schedule['start_time']) || !empty($schedule['end_time'])) { ?>
+
+                    с <?= $schedule['start_time']; ?> до <?= $schedule['end_time']; ?>
+                <?php } else { ?>
+                    <?= SettingsForm::t('DAY_OFF'); ?>
+                <?php } ?>
+                <?php if (date('N') == $key + 1) { ?>
+                    <?php if (time() >= strtotime($schedule['end_time'])) { ?>
+                        <span class="font-italic text-danger">закрыто</span>
+                    <?php } else { ?>
+                        <span class="font-italic text-success">открыто</span>
+                    <?php } ?>
+                <?php } ?>
+            </div>
+        <?php } ?>
+
+        <?php foreach ($config->phone as $phone) { ?>
+            <div class="mb-1"><?= Html::tel($phone['number'], ['class' => 'phone']); ?> <?= $phone['name']; ?>
+                (<?= CMS::phoneOperator($phone['number']); ?>)
+            </div>
+        <?php } ?>
+
+
+        <div class="text-center mt-4"><h2>Форма обратной связи</h2></div>
         <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
         <?php if (Yii::$app->user->isGuest) { ?>
             <?= $form->field($model, 'name') ?>
@@ -102,7 +60,7 @@ $config = Yii::$app->settings->get('contacts');
         <?php } ?>
 
         <?php
-        if(!Yii::$app->user->phone)
+        if (!Yii::$app->user->phone)
             echo $form->field($model, 'phone')->widget(\panix\ext\inputmask\InputMask::class);
         ?>
         <?= $form->field($model, 'text')->textArea(['rows' => 6]) ?>
@@ -119,5 +77,38 @@ $config = Yii::$app->settings->get('contacts');
             <?= Html::submitButton(Yii::t('app', 'SEND'), ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
         </div>
         <?php ActiveForm::end(); ?>
+
+
     </div>
 </div>
+
+
+<?php
+/* $coords = [];
+  $coords[] = new LatLng(['lat' => 46.468252, 'lng' => 30.740576]);
+  $coords[] = new LatLng(['lat' => 46.453163, 'lng' => 30.751179]);
+
+  $coord = new LatLng(['lat' => 46.458252, 'lng' => 30.742576]);
+  $map = new Map([
+  'center' => $coord,
+  'zoom' => 14,
+  ]);
+  $markers = [];
+  foreach ($coords as $coord) {
+
+  $markers = new Marker([
+  'position' => $coord,
+  'title' => 'My Home Town',
+  ]);
+
+  $markers->attachInfoWindow(
+  new InfoWindow([
+  'content' => '<p>This is my super cool content</p>'
+  ])
+  );
+
+  $map->addOverlay($markers);
+  }
+
+  echo $map->display(); */
+?>
