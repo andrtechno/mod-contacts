@@ -41,8 +41,8 @@ class SettingsForm extends SettingsModel
         return [
             ['schedule', 'validateSchedule', 'skipOnEmpty' => false],
             [['email', 'feedback_captcha'], "required"],
-            ['phone', 'validatePhones'],
-            [['feedback_tpl_body', 'phone', 'address'], 'string'],
+            ['phone', 'validatePhones2'],
+            [['feedback_tpl_body', 'address'], 'string'],
             [['monday_time', 'tuesday_time', 'wednesday_time', 'thursday_time', 'friday_time', 'saturday_time', 'sunday_time'], 'time'],
             [['monday_time_end', 'tuesday_time_end', 'wednesday_time_end', 'thursday_time_end', 'friday_time_end', 'saturday_time_end', 'sunday_time_end'], 'time'],
         ];
@@ -75,10 +75,32 @@ class SettingsForm extends SettingsModel
         }
     }
 
+
+    public function validatePhones2($attribute)
+    {
+        $requiredValidator = new \yii\validators\RequiredValidator();
+        // $attributes = Json::decode($this->$attribute);
+        $attributes = $this->$attribute;
+        // var_dump($attributes);die;
+        foreach ($attributes as $index => $row) {
+            $error = null;
+            foreach (['number', 'name'] as $name) {
+                $error = null;
+                $value = isset($row[$name]) ? $row[$name] : null;
+                $requiredValidator->validate($value, $error);
+                if (!empty($error)) {
+                    $key = $attribute . '[' . $index . '][' . $name . ']';
+                    $this->addError($key, $error);
+                }
+            }
+        }
+    }
+
     public function validateSchedule($attribute)
     {
         $requiredValidator = new \yii\validators\RequiredValidator();
-        $attributes = Json::decode($this->$attribute);
+       // $attributes = Json::decode($this->$attribute);
+        $attributes = $this->$attribute;
        // var_dump($attributes);die;
         foreach ($attributes as $index => $row) {
             $error = null;

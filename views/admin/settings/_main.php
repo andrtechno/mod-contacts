@@ -3,7 +3,10 @@
  * @var panix\mod\contacts\models\SettingsForm $model
  * @var panix\engine\bootstrap\ActiveForm $form
  */
+
+\yii\helpers\VarDumper::dump(Yii::$app->settings->get('contacts'),10,true);
 ?>
+
 <?=
 $form->field($model, 'email')
     ->widget(\panix\ext\taginput\TagInput::class, ['placeholder' => 'E-mail'])
@@ -19,19 +22,18 @@ $form->field($model, 'feedback_tpl_body')->widget(\panix\ext\tinymce\TinyMce::cl
 
 
 ?>
-<?php echo $form->field($model, 'phone')->widget(\unclead\multipleinput\MultipleInput::class,[
+<?php echo $form->field($model, 'phone')->widget(\unclead\multipleinput\MultipleInput::class, [
     'model' => $model,
     'attribute' => 'phone',
-    //'data'=>$model->getPhone(),
     'max' => 5,
     'min' => 1, // should be at least 2 rows
     'allowEmptyList' => false,
-    'enableGuessTitle' => true,
-    'sortable'=>true,
+    //'enableGuessTitle' => true,
+    'sortable' => true,
     'addButtonPosition' => \unclead\multipleinput\MultipleInput::POS_ROW, // show add button in the header
     'columns' => [
         [
-            'name' => 'phone',
+            'name' => 'number',
             'type' => panix\ext\telinput\PhoneInput::class,
             // 'title' => 'phone',
             // 'value' => function ($data) {
@@ -44,8 +46,7 @@ $form->field($model, 'feedback_tpl_body')->widget(\panix\ext\tinymce\TinyMce::cl
         ],
         [
             'name' => 'name',
-
-             'title' => 'Имя',
+            'title' => 'Имя',
             // 'value' => function ($data) {
             //     return $data['day'];
             // },
@@ -53,5 +54,6 @@ $form->field($model, 'feedback_tpl_body')->widget(\panix\ext\tinymce\TinyMce::cl
         ],
 
     ]
-]); ?>
+]);
+
 

@@ -16,12 +16,10 @@ $list = [0=>'monday', 1=>'tuesday', 2=>'wednesday', 3=>'thursday', 4=>'friday', 
 echo \unclead\multipleinput\MultipleInput::widget([
     'model' => $model,
     'attribute' => 'schedule',
-    //'data'=>$model->getSchedule(),
-    'max' => 2,
-    'min' => 2, // should be at least 2 rows
+    'max' => 1,
+    'min' => 1,
     'allowEmptyList' => false,
-   // 'enableGuessTitle' => true,
-    //'sortable'=>true,
+    'enableGuessTitle' => true,
     //'addButtonPosition' => \unclead\multipleinput\MultipleInput::POS_HEADER, // show add button in the header
     'columns' => [
         [
@@ -64,7 +62,6 @@ echo \unclead\multipleinput\MultipleInput::widget([
             'options' => [
                 'timeFormat' => 'hh:mm',
                 'mode' => 'time',
-
             ],
             'headerOptions' => [
                 'style' => 'width: 250px;',
@@ -80,7 +77,6 @@ echo \unclead\multipleinput\MultipleInput::widget([
             'options' => [
                 'timeFormat' => 'hh:mm',
                 'mode' => 'time',
-
             ],
             'headerOptions' => [
                 'style' => 'width: 250px;',

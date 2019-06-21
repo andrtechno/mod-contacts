@@ -6,14 +6,13 @@ use yii\bootstrap4\ActiveForm;
 
 
 $config = Yii::$app->settings->get('contacts');
-print_r($config->phone);
-$phones = $config->phone;
+
 $schedules = $config->schedule;
 
 print_r($schedules);
 ?>
 
-<?php foreach ($phones as $phone) { ?>
+<?php foreach ($config->phone as $phone) { ?>
     <div class="mb-1"><?= Html::tel($phone['phone'], ['class' => 'phone']); ?> <?= $phone['name']; ?> (<?= CMS::phoneOperator($phone['phone']); ?>)</div>
 
     <?php
