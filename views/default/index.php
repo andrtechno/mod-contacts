@@ -9,6 +9,7 @@ $config = Yii::$app->settings->get('contacts');
 
 
 ?>
+
 <div class="row">
     <div class="col-sm-7">
         <?php
@@ -26,7 +27,7 @@ $config = Yii::$app->settings->get('contacts');
 
         <h4>График работы</h4>
         <?php foreach ($config->schedule as $key => $schedule) { ?>
-            <div class="mb-1">
+            <div class="mb-1 pl-md-3">
                 <strong><?= SettingsForm::getDayList()[$key]; ?>.</strong>
 
                 <?php if (!empty($schedule['start_time']) || !empty($schedule['end_time'])) { ?>
@@ -45,11 +46,21 @@ $config = Yii::$app->settings->get('contacts');
             </div>
         <?php } ?>
 
+        <h4 class="mt-4">Почта</h4>
+        <?php foreach (explode(',', $config->email) as $email) { ?>
+            <div class="mb-1 pl-md-3"><?= Html::mailto($email); ?></div>
+        <?php } ?>
+        <h4 class="mt-4">Телефоны</h4>
         <?php foreach ($config->phone as $phone) { ?>
-            <div class="mb-1">
-                <?= Html::tel($phone['number'], ['class' => 'phone '.CMS::slug(CMS::phoneOperator($phone['number']))]); ?> <?= $phone['name']; ?>
+            <div class="mb-1 pl-md-3">
+                <?= Html::tel($phone['number'], ['class' => 'phone h5 ' . CMS::slug(CMS::phoneOperator($phone['number']))]); ?> <?= $phone['name']; ?>
             </div>
         <?php } ?>
+
+
+    </div>
+    <div class="line-title"></div>
+    <div class="col-sm-6 offset-md-3">
 
 
         <div class="text-center mt-4"><h2>Форма обратной связи</h2></div>
@@ -73,11 +84,10 @@ $config = Yii::$app->settings->get('contacts');
             ?>
         <?php } ?>
         <?= $form->field($model, 'reCaptcha')->widget(\panix\engine\widgets\recaptcha\ReCaptcha::class) ?>
-        <div class="form-group">
-            <?= Html::submitButton(Yii::t('app', 'SEND'), ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
+        <div class="form-group text-center">
+            <?= Html::submitButton(Yii::t('app', 'SEND'), ['class' => 'btn btn-warning', 'name' => 'contact-button']) ?>
         </div>
         <?php ActiveForm::end(); ?>
-
 
     </div>
 </div>
