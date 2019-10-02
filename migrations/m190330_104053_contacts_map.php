@@ -11,13 +11,12 @@ namespace panix\mod\contacts\migrations;
  * Class m190330_104053_contacts_map
  */
 
-use panix\engine\components\Settings;
 use panix\engine\db\Migration;
 use panix\mod\contacts\models\Maps;
-use panix\mod\contacts\models\SettingsForm;
 
 class m190330_104053_contacts_map extends Migration
 {
+    public $settingsForm = 'panix\mod\contacts\models\SettingsForm';
 
     public function up()
     {
@@ -41,14 +40,7 @@ class m190330_104053_contacts_map extends Migration
             'rotateControl' => $this->boolean()->notNull(),
             'auto_show_routers' => $this->boolean()->notNull(),
         ], $this->tableOptions);
-
-
-        $settings = [];
-        foreach (SettingsForm::defaultSettings() as $key => $value) {
-            $settings[] = [SettingsForm::$category, $key, $value];
-        }
-
-        $this->batchInsert(Settings::tableName(), ['category', 'param', 'value'], $settings);
+        $this->loadSettings();
     }
 
     public function down()

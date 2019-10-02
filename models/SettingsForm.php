@@ -107,4 +107,11 @@ class SettingsForm extends SettingsModel
             6 => self::t('SUNDAY')
         ];
     }
+
+    public static function defaultSettings()
+    {
+        return [
+            'test'=>1
+        ];
+    }
 }
