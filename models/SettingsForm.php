@@ -111,7 +111,10 @@ class SettingsForm extends SettingsModel
     public static function defaultSettings()
     {
         return [
-            'test'=>1
+            'feedback_captcha' => true,
+            'email' => 'me-email@example.com',
+            'address' => '',
+            'feedback_tpl_body' => ''
         ];
     }
 }

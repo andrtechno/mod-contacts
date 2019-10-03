@@ -35,44 +35,49 @@ class MapWidget extends Widget
         parent::init();
         $view = Yii::$app->getView();
         MapAsset::register($view);
-        $model = Maps::findModel($this->map_id,'Map not found.');
+        $model = Maps::findOne($this->map_id);
 
+        if ($model) {
+            $mapOptions = ArrayHelper::merge([
+                'center' => new LatLng($model->getCenter()),
+                'zoom' => $model->zoom,
+                'width' => $model->width,
+                'height' => $model->height,
+            ], $this->options);
 
-        $mapOptions = ArrayHelper::merge([
-            'center' => new LatLng($model->getCenter()),
-            'zoom' => $model->zoom,
-            'width'=>$model->width,
-            'height'=>$model->height,
-        ], $this->options);
+            $this->map = new Map($mapOptions);
 
-        $this->map = new Map($mapOptions);
+            $this->map->appendScript('var bounds = new google.maps.LatLngBounds();');
+            foreach ($model->markers as $marker) {
+                /** @var Markers $marker */
+                $markers = new Marker([
+                    'position' => new LatLng($marker->getCoords()),
+                    'title' => $marker->name,
+                    'opacity' => $marker->opacity
+                ]);
+                if ($marker->content_body) {
+                    $markers->attachInfoWindow(
+                        new InfoWindow([
+                            'content' => $marker->content_body
+                        ])
+                    );
+                }
 
-        $this->map->appendScript('var bounds = new google.maps.LatLngBounds();');
-        foreach ($model->markers as $marker) {
-            /** @var Markers $marker */
-            $markers = new Marker([
-                'position' => new LatLng($marker->getCoords()),
-                'title' => $marker->name,
-                'opacity' => $marker->opacity
-            ]);
-            if ($marker->content_body) {
-                $markers->attachInfoWindow(
-                    new InfoWindow([
-                        'content' => $marker->content_body
-                    ])
-                );
+                $this->map->addOverlay($markers);
+                $this->map->appendScript('bounds.extend(new google.maps.LatLng(' . $marker->getCoords()->lat . ',' . $marker->getCoords()->lng . '));');
             }
 
-            $this->map->addOverlay($markers);
-            $this->map->appendScript('bounds.extend(new google.maps.LatLng(' . $marker->getCoords()->lat . ',' . $marker->getCoords()->lng . '));');
+            $this->map->appendScript($this->map->getName() . ".fitBounds(bounds);");
+        } else {
+            $this->map = false;
         }
-
-        $this->map->appendScript($this->map->getName().".fitBounds(bounds);");
     }
 
     public function run()
     {
-        echo $this->map->display();
+        if ($this->map) {
+            echo $this->map->display();
+        }
     }
 
 }

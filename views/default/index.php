@@ -24,39 +24,42 @@ $config = Yii::$app->settings->get('contacts');
             </div>
         <?php } ?>
 
+        <?php if (isset($config->schedule)) { ?>
+            <h4>График работы</h4>
+            <?php foreach ($config->schedule as $key => $schedule) { ?>
+                <div class="mb-1 pl-md-3">
+                    <strong><?= SettingsForm::getDayList()[$key]; ?>.</strong>
 
-        <h4>График работы</h4>
-        <?php foreach ($config->schedule as $key => $schedule) { ?>
-            <div class="mb-1 pl-md-3">
-                <strong><?= SettingsForm::getDayList()[$key]; ?>.</strong>
+                    <?php if (!empty($schedule['start_time']) || !empty($schedule['end_time'])) { ?>
 
-                <?php if (!empty($schedule['start_time']) || !empty($schedule['end_time'])) { ?>
-
-                    с <?= $schedule['start_time']; ?> до <?= $schedule['end_time']; ?>
-                <?php } else { ?>
-                    <?= SettingsForm::t('DAY_OFF'); ?>
-                <?php } ?>
-                <?php if (date('N') == $key + 1) { ?>
-                    <?php if (time() >= strtotime($schedule['end_time'])) { ?>
-                        <span class="font-italic text-danger">закрыто</span>
+                        с <?= $schedule['start_time']; ?> до <?= $schedule['end_time']; ?>
                     <?php } else { ?>
-                        <span class="font-italic text-success">открыто</span>
+                        <?= SettingsForm::t('DAY_OFF'); ?>
                     <?php } ?>
-                <?php } ?>
-            </div>
+                    <?php if (date('N') == $key + 1) { ?>
+                        <?php if (time() >= strtotime($schedule['end_time'])) { ?>
+                            <span class="font-italic text-danger">закрыто</span>
+                        <?php } else { ?>
+                            <span class="font-italic text-success">открыто</span>
+                        <?php } ?>
+                    <?php } ?>
+                </div>
+            <?php } ?>
         <?php } ?>
-
-        <h4 class="mt-4">Почта</h4>
-        <?php foreach (explode(',', $config->email) as $email) { ?>
-            <div class="mb-1 pl-md-3"><?= Html::mailto($email); ?></div>
+        <?php if (isset($config->email)) { ?>
+            <h4 class="mt-4">Почта</h4>
+            <?php foreach (explode(',', $config->email) as $email) { ?>
+                <div class="mb-1 pl-md-3"><?= Html::mailto($email); ?></div>
+            <?php } ?>
         <?php } ?>
-        <h4 class="mt-4">Телефоны</h4>
-        <?php foreach ($config->phone as $phone) { ?>
-            <div class="mb-1 pl-md-3">
-                <?= Html::tel($phone['number'], ['class' => 'phone h5 ' . CMS::slug(CMS::phoneOperator($phone['number']))]); ?> <?= $phone['name']; ?>
-            </div>
+        <?php if (isset($config->phone)) { ?>
+            <h4 class="mt-4">Телефоны</h4>
+            <?php foreach ($config->phone as $phone) { ?>
+                <div class="mb-1 pl-md-3">
+                    <?= Html::tel($phone['number'], ['class' => 'phone h5 ' . CMS::slug(CMS::phoneOperator($phone['number']))]); ?> <?= $phone['name']; ?>
+                </div>
+            <?php } ?>
         <?php } ?>
-
 
     </div>
     <div class="line-title"></div>
