@@ -23,9 +23,12 @@ $config = Yii::$app->settings->get('contacts');
                 <?= Yii::$app->session->getFlash('success') ?>
             </div>
         <?php } ?>
-
+        <?php if (isset($config->address)) { ?>
+            <h4><?= Yii::t('contacts/default','ADDRESS'); ?></h4>
+                <div class="mb-1 pl-md-3"><?= $config->address; ?></div>
+        <?php } ?>
         <?php if (isset($config->schedule)) { ?>
-            <h4>График работы</h4>
+            <h4 class="mt-4"><?= Yii::t('contacts/default','SCHEDULE'); ?></h4>
             <?php foreach ($config->schedule as $key => $schedule) { ?>
                 <div class="mb-1 pl-md-3">
                     <strong><?= SettingsForm::getDayList()[$key]; ?>.</strong>
@@ -38,22 +41,22 @@ $config = Yii::$app->settings->get('contacts');
                     <?php } ?>
                     <?php if (date('N') == $key + 1) { ?>
                         <?php if (time() >= strtotime($schedule['end_time'])) { ?>
-                            <span class="font-italic text-danger">закрыто</span>
+                            <span class="font-italic text-danger">(<?= Yii::t('contacts/default','IS_CLOSE'); ?>)</span>
                         <?php } else { ?>
-                            <span class="font-italic text-success">открыто</span>
+                            <span class="font-italic text-success">(<?= Yii::t('contacts/default','IS_OPEN'); ?>)</span>
                         <?php } ?>
                     <?php } ?>
                 </div>
             <?php } ?>
         <?php } ?>
         <?php if (isset($config->email)) { ?>
-            <h4 class="mt-4">Почта</h4>
+            <h4 class="mt-4"><?= Yii::t('contacts/default','EMAIL'); ?></h4>
             <?php foreach (explode(',', $config->email) as $email) { ?>
                 <div class="mb-1 pl-md-3"><?= Html::mailto($email); ?></div>
             <?php } ?>
         <?php } ?>
         <?php if (isset($config->phone)) { ?>
-            <h4 class="mt-4">Телефоны</h4>
+            <h4 class="mt-4"><?= Yii::t('contacts/default','PHONES'); ?></h4>
             <?php foreach ($config->phone as $phone) { ?>
                 <div class="mb-1 pl-md-3">
                     <?= Html::tel($phone['number'], ['class' => 'phone h5 ' . CMS::slug(CMS::phoneOperator($phone['number']))]); ?> <?= $phone['name']; ?>
