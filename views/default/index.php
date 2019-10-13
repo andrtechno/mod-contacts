@@ -95,10 +95,7 @@ $config = Yii::$app->settings->get('contacts');
 
 
 
-        <?php
-
-        //echo $form->field($model, 'verifyCode')->widget(\himiklab\yii2\recaptcha\ReCaptcha3::class);
-        echo $form->field($model, 'verifyCode')->widget(Yii::$app->settings->get('app', 'captcha_class')); ?>
+        <?php echo $form->field($model, 'verifyCode')->widget(Yii::$app->settings->get('app', 'captcha_class')); ?>
 
 
         <div class="form-group text-center">

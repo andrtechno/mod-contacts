@@ -33,14 +33,9 @@ class ContactForm extends Model
      */
     public function rules()
     {
-        return [ //'secret' => 'your secret key',
-            [['verifyCode2'], \himiklab\yii2\recaptcha\ReCaptchaValidator3::class,
-                'secret' => '6LdcU70UAAAAAJ-MRrZKy8oNbRr_ZOMzYomMifQb', // unnecessary if reСaptcha is already configured
-                'threshold' => 0.5,
-                'action' => '/contacts',
-            ],
-            ['verifyCode', 'panix\engine\widgets\recaptcha\v3\ReCaptchaValidator','threshold' => 0.5],
-            //['verifyCode', ReCaptchaValidator::class, 'uncheckedMessage' => 'Please confirm that you are not a bot.'],
+        return [
+            ['verifyCode', 'panix\engine\widgets\recaptcha\v2\ReCaptchaValidator'],
+            //['verifyCode', ReCaptchaValidator::class, 'message' => 'Please confirm that you are not a bot.'],
             // name, email, subject and body are required
             [['name', 'email', 'text', 'phone'], 'required'],
 // verifyCode needs to be entered correctly
