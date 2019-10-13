@@ -196,6 +196,12 @@ use yii\helpers\Html;
                                             <tr>
                                                 <td width="100">&nbsp;</td>
                                                 <td width="400" align="center">
+
+                                                    <?php $this->beginBody() ?>
+
+                                                    <?= $content ?>
+                                                    <?php $this->endBody() ?>
+
                                                     <div class="contentEditableContainer contentTextEditable">
                                                         <div class="contentEditable" align='left' >
                                                             <p >Hi [FirstName,there],
@@ -301,11 +307,7 @@ use yii\helpers\Html;
         </td>
     </tr>
 </table>
-<?php $this->beginBody() ?>
-HEAD
-<?= $content ?>
-<?php $this->endBody() ?>
-FOOT
+
 <!-- End of wrapper table -->
 
 <!--Default Zone

@@ -54,16 +54,18 @@ class ContactForm extends Model
      */
     public function send($email)
     {
+        $list=['test'=>'dasdsa','gaga'=>'dasdsaadsdasd 1 1'];
         if ($this->validate()) {
             $mail = Yii::$app->mailer;
             //$mail->viewPath = '@contacts/mail';
-            $mail->htmlLayout = '@contacts/mail/layouts/html';
+            //$mail->htmlLayout = '@contacts/mail/layouts/html';
+            $mail->htmlLayout = '@app/mail/layouts/html';
             $mail->compose([
-                'html' => '@contacts/mail/feedback',
+                'html' => '@contacts/mail/feedback.tpl',
                 //  'view' => 'feedback'
             ], [
                 'test' => 'my param',
-                'content' => 'Tester'
+                'list' => $list
             ])
                 /*$mail->compose('@contacts/mail/feedback', [
                     'test' => 'my param',
