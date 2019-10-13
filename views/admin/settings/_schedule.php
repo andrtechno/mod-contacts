@@ -28,7 +28,7 @@ echo \panix\ext\multipleinput\MultipleInput::widget([
             'enableError' => false,
             'type' => \panix\ext\multipleinput\MultipleInputColumn::TYPE_STATIC,
             'value' => function ($data, $i) use ($model) {
-                $list = $model->getDayList();
+                $list = $model::dayList();
                 return Html::tag('span', $list[(int)$i['index']]);
             },
             'options' => ['class' => 'text-center'],

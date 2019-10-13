@@ -15,6 +15,7 @@ class SettingsForm extends SettingsModel
     public $feedback_tpl_body;
     public $feedback_captcha;
     public $schedule;
+    public $map_api_key;
 
     public function rules()
     {
@@ -22,7 +23,7 @@ class SettingsForm extends SettingsModel
             ['schedule', 'validateSchedule', 'skipOnEmpty' => true],
             [['email', 'feedback_captcha'], "required"],
             ['phone', 'validatePhones2', 'skipOnEmpty' => false],
-            [['feedback_tpl_body', 'address'], 'string'],
+            [['feedback_tpl_body', 'address', 'map_api_key'], 'string'],
         ];
     }
 
@@ -60,7 +61,6 @@ class SettingsForm extends SettingsModel
         $requiredValidator = new \yii\validators\RequiredValidator();
         // $attributes = Json::decode($this->$attribute);
         $attributes = $this->$attribute;
-        // var_dump($attributes);die;
         foreach ($attributes as $index => $row) {
             $error = null;
             foreach (['number', 'name'] as $name) {
@@ -69,6 +69,7 @@ class SettingsForm extends SettingsModel
                 $requiredValidator->validate($value, $error);
                 if (!empty($error)) {
                     $key = $attribute . '[' . $index . '][' . $name . ']';
+                   // echo $key;
                     $this->addError($key, $error);
                 }
             }
@@ -95,7 +96,7 @@ class SettingsForm extends SettingsModel
         }
     }
 
-    public static function getDayList()
+    public static function dayList()
     {
         return [
             0 => self::t('MONDAY'),
@@ -114,7 +115,8 @@ class SettingsForm extends SettingsModel
             'feedback_captcha' => true,
             'email' => 'me-email@example.com',
             'address' => '',
-            'feedback_tpl_body' => ''
+            'feedback_tpl_body' => '',
+            'map_api_key' => ''
         ];
     }
 }

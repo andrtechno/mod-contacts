@@ -31,7 +31,7 @@ $config = Yii::$app->settings->get('contacts');
             <h4 class="mt-4"><?= Yii::t('contacts/default','SCHEDULE'); ?></h4>
             <?php foreach ($config->schedule as $key => $schedule) { ?>
                 <div class="mb-1 pl-md-3">
-                    <strong><?= SettingsForm::getDayList()[$key]; ?>.</strong>
+                    <strong><?= SettingsForm::dayList()[$key]; ?>.</strong>
 
                     <?php if (!empty($schedule['start_time']) || !empty($schedule['end_time'])) { ?>
 
