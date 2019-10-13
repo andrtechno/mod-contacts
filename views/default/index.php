@@ -24,11 +24,11 @@ $config = Yii::$app->settings->get('contacts');
             </div>
         <?php } ?>
         <?php if (isset($config->address)) { ?>
-            <h4><?= Yii::t('contacts/default','ADDRESS'); ?></h4>
-                <div class="mb-1 pl-md-3"><?= $config->address; ?></div>
+            <h4><?= Yii::t('contacts/default', 'ADDRESS'); ?></h4>
+            <div class="mb-1 pl-md-3"><?= $config->address; ?></div>
         <?php } ?>
         <?php if (isset($config->schedule)) { ?>
-            <h4 class="mt-4"><?= Yii::t('contacts/default','SCHEDULE'); ?></h4>
+            <h4 class="mt-4"><?= Yii::t('contacts/default', 'SCHEDULE'); ?></h4>
             <?php foreach ($config->schedule as $key => $schedule) { ?>
                 <div class="mb-1 pl-md-3">
                     <strong><?= SettingsForm::dayList()[$key]; ?>.</strong>
@@ -41,22 +41,24 @@ $config = Yii::$app->settings->get('contacts');
                     <?php } ?>
                     <?php if (date('N') == $key + 1) { ?>
                         <?php if (time() >= strtotime($schedule['end_time'])) { ?>
-                            <span class="font-italic text-danger">(<?= Yii::t('contacts/default','IS_CLOSE'); ?>)</span>
+                            <span class="font-italic text-danger">(<?= Yii::t('contacts/default', 'IS_CLOSE'); ?>
+                                )</span>
                         <?php } else { ?>
-                            <span class="font-italic text-success">(<?= Yii::t('contacts/default','IS_OPEN'); ?>)</span>
+                            <span class="font-italic text-success">(<?= Yii::t('contacts/default', 'IS_OPEN'); ?>
+                                )</span>
                         <?php } ?>
                     <?php } ?>
                 </div>
             <?php } ?>
         <?php } ?>
         <?php if (isset($config->email)) { ?>
-            <h4 class="mt-4"><?= Yii::t('contacts/default','EMAIL'); ?></h4>
+            <h4 class="mt-4"><?= Yii::t('contacts/default', 'EMAIL'); ?></h4>
             <?php foreach (explode(',', $config->email) as $email) { ?>
                 <div class="mb-1 pl-md-3"><?= Html::mailto($email); ?></div>
             <?php } ?>
         <?php } ?>
         <?php if (isset($config->phone)) { ?>
-            <h4 class="mt-4"><?= Yii::t('contacts/default','PHONES'); ?></h4>
+            <h4 class="mt-4"><?= Yii::t('contacts/default', 'PHONES'); ?></h4>
             <?php foreach ($config->phone as $phone) { ?>
                 <div class="mb-1 pl-md-3">
                     <?= Html::tel($phone['number'], ['class' => 'phone h5 ' . CMS::slug(CMS::phoneOperator($phone['number']))]); ?> <?= $phone['name']; ?>
@@ -69,7 +71,7 @@ $config = Yii::$app->settings->get('contacts');
     <div class="col-sm-6 offset-md-3">
 
 
-        <div class="text-center mt-4"><h2>Форма обратной связи</h2></div>
+        <div class="text-center mt-4"><h2><?= Yii::t('contacts/default', 'FORM_TITLE'); ?></h2></div>
         <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
         <?php if (Yii::$app->user->isGuest) { ?>
             <?= $form->field($model, 'name') ?>
@@ -82,14 +84,23 @@ $config = Yii::$app->settings->get('contacts');
         ?>
         <?= $form->field($model, 'text')->textArea(['rows' => 6]) ?>
         <?php if ($config->feedback_captcha || Yii::$app->user->isGuest) { ?>
-            <?=
-            $form->field($model, 'verifyCode')->widget(yii\captcha\Captcha::class, [
+            <?php
+            /*echo $form->field($model, 'verifyCode')->widget(yii\captcha\Captcha::class, [
                 'captchaAction' => 'default/captcha',
                 'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-6">{input}</div></div>',
-            ])
+            ])*/
             ?>
         <?php } ?>
-        <?= $form->field($model, 'reCaptcha')->widget(\panix\engine\widgets\recaptcha\ReCaptcha::class) ?>
+
+
+
+
+        <?php
+
+        //echo $form->field($model, 'verifyCode')->widget(\himiklab\yii2\recaptcha\ReCaptcha3::class);
+        echo $form->field($model, 'verifyCode')->widget(Yii::$app->settings->get('app', 'captcha_class')); ?>
+
+
         <div class="form-group text-center">
             <?= Html::submitButton(Yii::t('app', 'SEND'), ['class' => 'btn btn-warning', 'name' => 'contact-button']) ?>
         </div>

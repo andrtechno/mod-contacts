@@ -2,7 +2,6 @@
 
 namespace panix\mod\contacts\models;
 
-use panix\engine\widgets\recaptcha\ReCaptchaValidator;
 use Yii;
 use panix\engine\base\Model;
 
@@ -17,7 +16,7 @@ class ContactForm extends Model
     public $text;
     public $phone;
     public $verifyCode;
-    public $reCaptcha;
+    //public $reCaptcha;
 
     public function init()
     {
@@ -35,7 +34,13 @@ class ContactForm extends Model
     public function rules()
     {
         return [ //'secret' => 'your secret key',
-            ['reCaptcha', ReCaptchaValidator::class, 'uncheckedMessage' => 'Please confirm that you are not a bot.'],
+            [['verifyCode2'], \himiklab\yii2\recaptcha\ReCaptchaValidator3::class,
+                'secret' => '6LdcU70UAAAAAJ-MRrZKy8oNbRr_ZOMzYomMifQb', // unnecessary if reСaptcha is already configured
+                'threshold' => 0.5,
+                'action' => '/contacts',
+            ],
+            ['verifyCode', 'panix\engine\widgets\recaptcha\v3\ReCaptchaValidator','threshold' => 0.5],
+            //['verifyCode', ReCaptchaValidator::class, 'uncheckedMessage' => 'Please confirm that you are not a bot.'],
             // name, email, subject and body are required
             [['name', 'email', 'text', 'phone'], 'required'],
 // verifyCode needs to be entered correctly
