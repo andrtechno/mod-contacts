@@ -14,12 +14,12 @@ $form = ActiveForm::begin();
             echo yii\bootstrap4\Tabs::widget([
                 'items' => [
                     [
-                        'label' => 'Общие',
+                        'label' => $model::t('TAB_GENERAL'),
                         'content' => $this->render('_main', ['form' => $form, 'model' => $model]),
                         'active' => true,
                     ],
                     [
-                        'label' => 'График работы',
+                        'label' => $model::t('TAB_SCHEDULE'),
                         'content' => $this->render('_schedule', ['form' => $form, 'model' => $model]),
                     ],
                 ],

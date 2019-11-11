@@ -1,11 +1,12 @@
 <?php
+
+use panix\ext\multipleinput\MultipleInput;
+
 /**
  * @var panix\mod\contacts\models\SettingsForm $model
  * @var panix\engine\bootstrap\ActiveForm $form
  */
 
-
-print_r(Yii::$app->settings->get('contacts', 'address'));
 ?>
 
 <?=
@@ -23,13 +24,13 @@ $form->field($model, 'feedback_tpl_body')->widget(\panix\ext\tinymce\TinyMce::cl
 
 
 ?>
-<?php echo $form->field($model, 'phone')->widget(\panix\ext\multipleinput\MultipleInput::class, [
+<?php echo $form->field($model, 'phone')->widget(MultipleInput::class, [
     'max' => 5,
-    'min' => 1, // should be at least 2 rows
+    'min' => 1,
     'allowEmptyList' => false,
     //'enableGuessTitle' => true,
     'sortable' => true,
-    'addButtonPosition' => \panix\ext\multipleinput\MultipleInput::POS_ROW, // show add button in the header
+    'addButtonPosition' => MultipleInput::POS_ROW, // show add button in the header
     'columns' => [
         [
             'name' => 'number',
@@ -51,7 +52,7 @@ $form->field($model, 'feedback_tpl_body')->widget(\panix\ext\tinymce\TinyMce::cl
     ]
 ]);
 
-echo $form->field($model, 'address')->widget(\panix\ext\multipleinput\MultipleInput::class, [
+echo $form->field($model, 'address')->widget(MultipleInput::class, [
     'max' => count(Yii::$app->languageManager->languages),
     'min' => count(Yii::$app->languageManager->languages),
     'allowEmptyList' => false,

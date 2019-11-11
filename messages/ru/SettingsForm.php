@@ -30,5 +30,7 @@ return [
     'THURSDAY' => 'Чт',
     'FRIDAY' => 'Пт',
     'SATURDAY' => 'Сб',
-    'SUNDAY' => 'Вс'
+    'SUNDAY' => 'Вс',
+    'TAB_GENERAL' => 'Общие',
+    'TAB_SCHEDULE' => 'График работы',
 ];
