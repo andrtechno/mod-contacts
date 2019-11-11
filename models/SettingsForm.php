@@ -23,7 +23,7 @@ class SettingsForm extends SettingsModel
     {
         return [
             ['schedule', 'validateSchedule', 'skipOnEmpty' => true],
-            ['address', 'validateSchedule', 'skipOnEmpty' => true],
+            ['address', 'validateLang', 'skipOnEmpty' => true],
             [['email', 'feedback_captcha'], "required"],
             ['phone', 'validatePhones2', 'skipOnEmpty' => false],
             [['feedback_tpl_body', 'map_api_key'], 'string'],
@@ -57,6 +57,23 @@ class SettingsForm extends SettingsModel
         }
     }
 
+    public function validateLang($attribute)
+    {
+        $requiredValidator = new \yii\validators\RequiredValidator();
+        // $attributes = Json::decode($this->$attribute);
+        $attributes = $this->$attribute;
+        foreach ($attributes as $index => $row) {
+            $error = null;
+            $value = isset($row) ? $row : null;
+
+            $requiredValidator->validate($value, $error);
+            if (!empty($error)) {
+                $key = $attribute . '[' . $index . ']';
+
+                $this->addError($key, $error);
+            }
+        }
+    }
 
     public function validatePhones2($attribute)
     {
@@ -72,7 +89,7 @@ class SettingsForm extends SettingsModel
                 $requiredValidator->validate($value, $error);
                 if (!empty($error)) {
                     $key = $attribute . '[' . $index . '][' . $name . ']';
-                   // echo $key;
+                    // echo $key;
                     $this->addError($key, $error);
                 }
             }

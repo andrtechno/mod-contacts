@@ -55,10 +55,12 @@ echo $form->field($model, 'address')->widget(\panix\ext\multipleinput\MultipleIn
     'max' => count(Yii::$app->languageManager->languages),
     'min' => count(Yii::$app->languageManager->languages),
     'allowEmptyList' => false,
+
     'rendererClass' => \panix\ext\multipleinput\renderers\TableLanguageRenderer::class,
     'columns' => [
         [
             'name' => 'address',
+            //'enableError' => true,
             'type' => \panix\ext\multipleinput\MultipleInputColumn::TYPE_TEXT_INPUT,
             'options' => [
                 'class' => 'input-lang',
