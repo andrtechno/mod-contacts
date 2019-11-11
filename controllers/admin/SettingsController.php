@@ -7,6 +7,10 @@ use yii\helpers\Json;
 use panix\engine\controllers\AdminController;
 use panix\mod\contacts\models\SettingsForm;
 
+/**
+ * Class SettingsController
+ * @package panix\mod\contacts\controllers\admin
+ */
 class SettingsController extends AdminController
 {
 
@@ -26,6 +30,9 @@ class SettingsController extends AdminController
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
                 $model->save();
+            }else{
+                print_r($model->getErrors());
+                die('error');
             }
         }
         return $this->render('index', [

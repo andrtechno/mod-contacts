@@ -9,6 +9,7 @@ class SettingsForm extends SettingsModel
 
     public static $category = 'contacts';
     protected $module = 'contacts';
+
     public $email;
     public $phone;
     public $address;
@@ -17,13 +18,15 @@ class SettingsForm extends SettingsModel
     public $schedule;
     public $map_api_key;
 
+
     public function rules()
     {
         return [
             ['schedule', 'validateSchedule', 'skipOnEmpty' => true],
+            ['address', 'validateSchedule', 'skipOnEmpty' => true],
             [['email', 'feedback_captcha'], "required"],
             ['phone', 'validatePhones2', 'skipOnEmpty' => false],
-            [['feedback_tpl_body', 'address', 'map_api_key'], 'string'],
+            [['feedback_tpl_body', 'map_api_key'], 'string'],
         ];
     }
 
