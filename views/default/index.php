@@ -25,7 +25,7 @@ $config = Yii::$app->settings->get('contacts');
         <?php } ?>
         <?php if (isset($config->address) && isset($config->address[Yii::$app->language])) { ?>
             <h4><?= Yii::t('contacts/default', 'ADDRESS'); ?></h4>
-            <div class="mb-1 pl-md-3"><?= $config->address[Yii::$app->language]; ?></div>
+            <div class="mb-1 pl-md-3 icon-location"><?= $config->address[Yii::$app->language]; ?></div>
         <?php } ?>
         <?php if (isset($config->schedule)) { ?>
             <h4 class="mt-4"><?= Yii::t('contacts/default', 'SCHEDULE'); ?></h4>
