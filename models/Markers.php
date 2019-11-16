@@ -5,8 +5,20 @@ namespace panix\mod\contacts\models;
 use Yii;
 use panix\mod\contacts\models\MarkersQuery;
 use panix\mod\contacts\models\Maps;
+use panix\engine\db\ActiveRecord;
 
-class Markers extends \panix\engine\db\ActiveRecord {
+/**
+ * Class Markers
+ *
+ * @property integer $id
+ * @property integer $map_id
+ * @property float $opacity
+ * @property string $name
+ * @property string $content_body
+ *
+ * @package panix\mod\contacts\models
+ */
+class Markers extends ActiveRecord {
 
     const MODULE_ID = 'contacts';
 

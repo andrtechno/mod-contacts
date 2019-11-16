@@ -22,6 +22,8 @@ class m190330_104053_contacts_map extends Migration
     {
         $this->createTable(Maps::tableName(), [
             'id' => $this->primaryKey()->unsigned(),
+            'api_key' => $this->string(255)->notNull(),
+            'boundMarkers'=>$this->boolean()->defaultValue(1),
             'name' => $this->string(255)->notNull(),
             'zoom' => $this->smallInteger()->unsigned(),
             'height' => $this->string(5)->notNull(),

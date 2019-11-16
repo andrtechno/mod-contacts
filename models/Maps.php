@@ -5,7 +5,35 @@ namespace panix\mod\contacts\models;
 use Yii;
 use panix\engine\db\ActiveRecord;
 
-
+/**
+ * Class Maps
+ *
+ * @property integer $id
+ * @property string $api_key API key google map
+ * @property string $name
+ * @property integer $zoom
+ * @property string $width
+ * @property string $height
+ * @property string $center
+ * @property string $type
+ * @property boolean $drag
+ * @property boolean $scrollwheel
+ * @property boolean $transitLayer
+ * @property boolean $trafficLayer
+ * @property boolean $fullscreenControl
+ * @property boolean $streetViewControl
+ * @property boolean $mapTypeControl
+ * @property boolean $zoomControl
+ * @property boolean $scaleControl
+ * @property boolean $rotateControl
+ * @property boolean $auto_show_routers
+ * @property boolean $boundMarkers
+ *
+ * @property Markers[] $markers
+ * @property Markers $markersCount Count
+ *
+ * @package panix\mod\contacts\models
+ */
 class Maps extends ActiveRecord
 {
     const MODULE_ID = 'contacts';
@@ -24,8 +52,9 @@ class Maps extends ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'zoom', 'height', 'width', 'center'], 'required'],
+            [['name', 'zoom', 'height', 'width', 'center', 'api_key'], 'required'],
             [['name', 'center'], 'string', 'max' => 255],
+            [['boundMarkers'], 'boolean'],
             ['zoom', 'in', 'range' => $this->getZoomList()],
             //['center', 'validateLatLng'],
 
@@ -35,13 +64,17 @@ class Maps extends ActiveRecord
 
     public function validateLatLng($attribute)
     {
-        list($lat,$lng) = explode(',',$this->{$attribute});
-        $this->addError($attribute,'err');
+        list($lat, $lng) = explode(',', $this->{$attribute});
+        $this->addError($attribute, 'err');
     }
 
     public function getMarkers()
     {
         return $this->hasMany(Markers::class, ['map_id' => 'id']);
+    }
+    public function getMarkersCount()
+    {
+        return $this->hasMany(Markers::class, ['map_id' => 'id'])->count();
     }
 
     public function beforeSave($insert)
@@ -70,13 +103,14 @@ class Maps extends ActiveRecord
 
     public function getCenter()
     {
+
         $toArray = explode(',', $this->center);
-        return (object)['lat' => $toArray[0], 'lng' => $toArray[1]];
+        return ['lat' => $toArray[0], 'lng' => $toArray[1]];
     }
 
     public function getZoomList()
     {
-        return range(1, 20);
+        return array_combine(range(1, 20), range(1, 20));
     }
 
 

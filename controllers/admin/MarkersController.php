@@ -7,22 +7,31 @@ use panix\mod\contacts\models\Markers;
 use panix\mod\contacts\models\MarkersSearch;
 use panix\engine\controllers\AdminController;
 
+/**
+ * Class MarkersController
+ * @package panix\mod\contacts\controllers\admin
+ */
 class MarkersController extends AdminController
 {
+    public $icon = 'location-marker';
 
     public function actionIndex()
     {
-        $this->pageName = Yii::t('contacts/default', 'MODULE_NAME');
-        $this->buttons = [
-            [
-                'label' => '<i class="icon-add"></i> ' . Yii::t('contacts/admin', 'CREATE_MARKER'),
-                'url' => ['create'],
-                'options' => ['class' => 'btn btn-success']
-            ]
+        $this->pageName = Yii::t('contacts/admin', 'MARKERS');
+        $this->buttons[] = [
+            'label' => Yii::t('contacts/admin', 'CREATE_MARKER'),
+            'url' => ['create'],
+            'icon'=>'add',
+            'options' => ['class' => 'btn btn-success']
         ];
         $this->breadcrumbs = [
+            [
+                'label' => Yii::t('contacts/default', 'MODULE_NAME'),
+                'url' => ['/admin/contacts'],
+            ],
             $this->pageName
         ];
+
 
         $searchModel = new MarkersSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->getQueryParams());
@@ -37,22 +46,34 @@ class MarkersController extends AdminController
     {
 
         $model = Markers::findModel($id);
-        $this->pageName = Yii::t('contacts/admin', 'CREATE_MARKER');
-        $this->buttons = [
-            [
-                'label' => Yii::t('contacts/admin', 'CREATE_MARKER'),
-                'url' => ['create'],
-                'icon' => 'add',
-                'options' => ['class' => 'btn btn-success']
-            ]
-        ];
-        $this->breadcrumbs[] = [
-            'label' => Yii::t('contacts/default', 'MODULE_NAME'),
-            'url' => ['index']
-        ];
-        $this->breadcrumbs[] = $this->pageName;
-
         $isNew = $model->isNewRecord;
+
+        if ($isNew) {
+            $this->pageName = Yii::t('contacts/admin', 'CREATE_MARKER');
+        } else {
+            $this->pageName = Yii::t('contacts/admin', 'UPDATE_MARKER', ['name' => $model->name]);
+        }
+
+        $this->buttons[] = [
+            'label' => Yii::t('contacts/admin', 'CREATE_MARKER'),
+            'url' => ['create'],
+            'icon' => 'add',
+            'options' => ['class' => 'btn btn-success']
+        ];
+
+        $this->breadcrumbs = [
+            [
+                'label' => Yii::t('contacts/default', 'MODULE_NAME'),
+                'url' => ['/admin/contacts'],
+            ],
+            [
+                'label' => Yii::t('contacts/admin', 'MARKERS'),
+                'url' => ['index'],
+            ],
+            $this->pageName
+        ];
+
+
         $post = Yii::$app->request->post();
         if ($model->load($post) && $model->validate()) {
             $model->save();

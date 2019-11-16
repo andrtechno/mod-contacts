@@ -7,7 +7,10 @@ use panix\mod\contacts\models\Pages;
 use panix\mod\contacts\models\PagesSearch;
 use panix\engine\controllers\AdminController;
 
-
+/**
+ * Class DefaultController
+ * @package panix\mod\contacts\controllers\admin
+ */
 class DefaultController extends AdminController
 {
 
