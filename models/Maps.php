@@ -28,7 +28,7 @@ use panix\engine\db\ActiveRecord;
  * @property boolean $rotateControl
  * @property boolean $auto_show_routers
  * @property boolean $boundMarkers
- *
+ * @property boolean $bikeLayer
  * @property Markers[] $markers
  * @property Markers $markersCount Count
  *
@@ -52,12 +52,23 @@ class Maps extends ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'zoom', 'height', 'width', 'center', 'api_key'], 'required'],
+            [['name', 'zoom', 'height', 'width', 'center', 'api_key', 'type'], 'required'],
             [['name', 'center'], 'string', 'max' => 255],
-            [['boundMarkers'], 'boolean'],
+            [[
+                'boundMarkers',
+                'fullscreenControl',
+                'streetViewControl',
+                'mapTypeControl',
+                'zoomControl',
+                'scaleControl',
+                'rotateControl',
+                'scrollwheel',
+                'bikeLayer',
+                'transitLayer',
+                'trafficLayer',
+            ], 'boolean'],
             ['zoom', 'in', 'range' => $this->getZoomList()],
             //['center', 'validateLatLng'],
-
 
         ];
     }
@@ -72,6 +83,7 @@ class Maps extends ActiveRecord
     {
         return $this->hasMany(Markers::class, ['map_id' => 'id']);
     }
+
     public function getMarkersCount()
     {
         return $this->hasMany(Markers::class, ['map_id' => 'id'])->count();
@@ -111,6 +123,16 @@ class Maps extends ActiveRecord
     public function getZoomList()
     {
         return array_combine(range(1, 20), range(1, 20));
+    }
+
+    public function getTypeList()
+    {
+        return [
+            'roadmap' => self::t('TYPE_ROADMAP'),
+            'satellite' => self::t('TYPE_SATELLITE'),
+            'hybrid' => self::t('TYPE_HYBRID'),
+            'terrain' => self::t('TYPE_TERRAIN'),
+        ];
     }
 
 
