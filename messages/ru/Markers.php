@@ -9,13 +9,17 @@ return [
     'COLOR' => 'Цвет маркера',
     'CONTENT_BODY' => 'Содержание балуна маркера',
     'CONTENT_HEADER' => 'Содержание заголовка балуна маркера',
-    'OPACITY'=>'Прозрачность маркера',
+    'OPACITY' => 'Прозрачность маркера',
     'PRESET' => 'Стандарный стиль маркера',
     'ICON_CONTENT' => 'Содержание маркера',
     'HINT_CONTENT' => 'Подсказка маркера (при наведении)',
     'ICON_FILE' => 'Файл иконки (только *.png)',
     'ICON_FILE_OFFSET_X' => 'Отступы иконки X',
     'ICON_FILE_OFFSET_Y' => 'Отступы иконки Y',
-    'SELECT_MAP_ID'=>'&mdash; Укажите карту &mdash;',
-    'SELECT_OPACITY'=>'&mdash; Укажите прозрачность &mdash;'
+    'SELECT_MAP_ID' => '&mdash; Укажите карту &mdash;',
+    'SELECT_OPACITY' => '&mdash; Укажите прозрачность &mdash;',
+    'SELECT_ANIMATION' => '&mdash; Анимация &mdash;',
+    'DRAGGABLE' => 'Передвигать маркер',
+    'ANIMATION'=>'Анимация',
+
 ];

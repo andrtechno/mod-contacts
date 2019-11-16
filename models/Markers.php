@@ -2,6 +2,7 @@
 
 namespace panix\mod\contacts\models;
 
+use panix\lib\google\maps\overlays\Animation;
 use Yii;
 use panix\mod\contacts\models\MarkersQuery;
 use panix\mod\contacts\models\Maps;
@@ -15,42 +16,51 @@ use panix\engine\db\ActiveRecord;
  * @property float $opacity
  * @property string $name
  * @property string $content_body
+ * @property boolean $draggable
  *
  * @package panix\mod\contacts\models
  */
-class Markers extends ActiveRecord {
+class Markers extends ActiveRecord
+{
 
     const MODULE_ID = 'contacts';
 
-    public static function find() {
+    public static function find()
+    {
         return new MarkersQuery(get_called_class());
     }
 
     /**
      * @inheritdoc
      */
-    public static function tableName() {
+    public static function tableName()
+    {
         return '{{%contacts_map_markers}}';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules() {
+    public function rules()
+    {
         return [
             [['name', 'map_id', 'coords', 'opacity'], 'required'],
             [['coords'], 'trim'],
+            [['draggable'], 'boolean'],
             [['name'], 'string', 'max' => 255],
-            [['content_body'], 'string'],
+            [['content_body','animation'], 'string'],
             [['opacity'], 'number'],
+            [['animation'], 'default'],
         ];
     }
 
-    public function getMap() {
+    public function getMap()
+    {
         return $this->hasOne(Maps::class, ['id' => 'map_id']);
     }
 
-    public function beforeSave($insert) {
+    public function beforeSave($insert)
+    {
         if (parent::beforeSave($insert)) {
             $coord = explode(',', $this->coords);
 
@@ -64,7 +74,8 @@ class Markers extends ActiveRecord {
         }
     }
 
-    public function afterFind() {
+    public function afterFind()
+    {
         $query = new \yii\db\Query();
         $query->addSelect(['coords' => new \yii\db\Expression("CONCAT(X(coords),',',Y(coords))")]);
 
@@ -72,20 +83,22 @@ class Markers extends ActiveRecord {
         $query->where('id=:id', ['id' => $this->id]);
         $result = $query->one();
 
-       $this->coords = $result['coords'];
-       //$this->coords = $this->find()->addSelect(['coords'=>new \yii\db\Expression("CONCAT(X(coords),',',Y(coords))")]);
-      // $this->coords = $this->find()->addSelect(['coords'=>new \yii\db\Expression("CONCAT(X(coords),',',Y(coords))")]);
+        $this->coords = $result['coords'];
+        //$this->coords = $this->find()->addSelect(['coords'=>new \yii\db\Expression("CONCAT(X(coords),',',Y(coords))")]);
+        // $this->coords = $this->find()->addSelect(['coords'=>new \yii\db\Expression("CONCAT(X(coords),',',Y(coords))")]);
 
-       // $this->coords =$this->find()->getCoords2();
+        // $this->coords =$this->find()->getCoords2();
         parent::afterFind();
     }
 
-    public function getCoords() {
+    public function getCoords()
+    {
         $toArray = explode(',', $this->coords);
-        return (object) ['lat' => $toArray[0], 'lng' => $toArray[1]];
+        return (object)['lat' => $toArray[0], 'lng' => $toArray[1]];
     }
 
-    public function getOpacityList() {
+    public function getOpacityList()
+    {
         return [
             '0.1' => '10%',
             '0.2' => '20%',
@@ -96,7 +109,18 @@ class Markers extends ActiveRecord {
             '0.7' => '70%',
             '0.8' => '80%',
             '0.9' => '90%',
-            '1' => '100%'];
+            '1' => '100%'
+        ];
     }
+
+
+    public function getAnimationList()
+    {
+        return [
+            Animation::DROP => 'Drop',
+            Animation::BOUNCE => 'Bounce'
+        ];
+    }
+
 
 }

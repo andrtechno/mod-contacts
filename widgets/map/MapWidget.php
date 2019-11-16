@@ -5,6 +5,7 @@ namespace panix\mod\contacts\widgets\map;
 
 use panix\lib\google\maps\Event;
 use panix\lib\google\maps\EventType;
+use panix\lib\google\maps\overlays\Animation;
 use panix\lib\google\maps\overlays\Polygon;
 use panix\lib\google\maps\overlays\PolylineOptions;
 use panix\lib\google\maps\services\DirectionsRenderer;
@@ -27,6 +28,7 @@ use panix\lib\google\maps\layers\BicyclingLayer;
 use panix\lib\google\maps\layers\TrafficLayer;
 use panix\lib\google\maps\layers\TransitLayer;
 use panix\mod\contacts\models\Markers;
+use yii\web\JsExpression;
 
 /**
  * Description of Map
@@ -70,15 +72,15 @@ class MapWidget extends Widget
             $opt['zoom'] = $this->model->zoom;
             $opt['width'] = $this->model->width;
             $opt['mapTypeId'] = $this->model->type;
-            $opt['scrollwheel'] = $this->model->scrollwheel;
+            $opt['scrollwheel'] = boolval($this->model->scrollwheel);
 
 
-            $opt['fullscreenControl'] = $this->model->fullscreenControl;
-            $opt['zoomControl'] = $this->model->zoomControl;
-            $opt['scaleControl'] = $this->model->scaleControl;
-            $opt['mapTypeControl'] = $this->model->mapTypeControl;
-            $opt['streetViewControl'] = $this->model->streetViewControl;
-            $opt['rotateControl'] = $this->model->rotateControl;
+            $opt['fullscreenControl'] = boolval($this->model->fullscreenControl);
+            $opt['zoomControl'] = boolval($this->model->zoomControl);
+            $opt['scaleControl'] = boolval($this->model->scaleControl);
+            $opt['mapTypeControl'] = boolval($this->model->mapTypeControl);
+            $opt['streetViewControl'] = boolval($this->model->streetViewControl);
+            $opt['rotateControl'] = boolval($this->model->rotateControl);
             $opt['mapTypeControlOptions'] = [
                 'style' => MapTypeControlStyle::HORIZONTAL_BAR,
                 'position' => ControlPosition::TOP_CENTER
@@ -115,7 +117,7 @@ class MapWidget extends Widget
             // setup just one waypoint (Google allows a max of 8)
             $waypoints = [
                 new DirectionsWayPoint(['location' => $myhome]),
-                new DirectionsWayPoint(['location' =>  new LatLng(['lat' => 46.430496096695265, 'lng' => 30.761869684965177])])
+                new DirectionsWayPoint(['location' => new LatLng(['lat' => 46.430496096695265, 'lng' => 30.761869684965177])])
             ];
             $polylineOptions = new PolylineOptions([
                 'strokeColor' => '#FF0000',
@@ -208,11 +210,33 @@ class MapWidget extends Widget
         foreach ($this->model->markers as $marker) {
             /** @var Markers $marker */
             $position = new LatLng($marker->getCoords());
+
+            $eventDrag = new Event([
+                'trigger' => 'dragend',
+                'js' => '
+
+                    console.log(event.latLng.lat(),event.latLng.lng());
+                ']);
+
             $markers = new Marker([
                 'position' => $position,
                 'title' => $marker->name,
-                'opacity' => $marker->opacity
+                'opacity' => $marker->opacity,
+                'draggable' => boolval($marker->draggable),
+                'crossOnDrag' => boolval(1),
+                'animation' => Animation::BOUNCE,
+                'events' => [$eventDrag]
             ]);
+
+            /*$this->map->appendScript("
+                var mark = {$markers->getName()};
+            google.maps.event.addListener(mark, 'dragend', function()
+            {
+                console.log(mark.getPosition().lat(),mark.getPosition().lng());
+            });
+            ");*/
+
+
             if ($marker->content_body) {
                 $markers->attachInfoWindow(
                     new InfoWindow([
