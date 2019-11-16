@@ -16,4 +16,6 @@ return [
     'ICON_FILE' => 'Файл иконки (только *.png)',
     'ICON_FILE_OFFSET_X' => 'Отступы иконки X',
     'ICON_FILE_OFFSET_Y' => 'Отступы иконки Y',
+    'SELECT_MAP_ID'=>'&mdash; Укажите карту &mdash;',
+    'SELECT_OPACITY'=>'&mdash; Укажите прозрачность &mdash;'
 ];

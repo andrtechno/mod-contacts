@@ -31,11 +31,11 @@ $form = ActiveForm::begin([
         <?= $form->field($model, 'coords')->textInput(['maxlength' => 255]) ?>
 
         <?= $form->field($model, 'map_id')->dropDownList(ArrayHelper::map(panix\mod\contacts\models\Maps::find()->all(), 'id', 'name'), [
-            'prompt' => '--- Укажите карту ---'
+            'prompt' => html_entity_decode($model::t('SELECT_MAP_ID'))
         ]);
         ?>
         <?= $form->field($model, 'opacity')->dropDownList($model->getOpacityList(), [
-            'prompt' => '--- Укажите прозрачность ---'
+            'prompt' => html_entity_decode($model::t('SELECT_OPACITY'))
         ]);
         ?>
         <?=
