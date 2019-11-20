@@ -15,13 +15,23 @@ class MarkersController extends AdminController
 {
     public $icon = 'location-marker';
 
+    public function actions()
+    {
+        return [
+            'delete' => [
+                'class' => 'panix\engine\actions\DeleteAction',
+                'modelClass' => Markers::class,
+            ],
+        ];
+    }
+
     public function actionIndex()
     {
         $this->pageName = Yii::t('contacts/admin', 'MARKERS');
         $this->buttons[] = [
             'label' => Yii::t('contacts/admin', 'CREATE_MARKER'),
             'url' => ['create'],
-            'icon'=>'add',
+            'icon' => 'add',
             'options' => ['class' => 'btn btn-success']
         ];
         $this->breadcrumbs = [

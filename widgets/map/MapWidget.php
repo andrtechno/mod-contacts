@@ -140,7 +140,7 @@ class MapWidget extends Widget
                 'directionsRenderer' => $directionsRenderer,
                 'directionsRequest' => $directionsRequest
             ]);
-            $this->map->appendScript($directionsService->getJs());
+            //$this->map->appendScript($directionsService->getJs());
             /*$coords = [
                 new LatLng(['lat' => 25.774252, 'lng' => -80.190262]),
                 new LatLng(['lat' => 18.466465, 'lng' => -66.118292]),
@@ -224,7 +224,7 @@ class MapWidget extends Widget
                 'opacity' => $marker->opacity,
                 'draggable' => boolval($marker->draggable),
                 'crossOnDrag' => boolval(1),
-                'animation' => Animation::BOUNCE,
+               // 'animation' => Animation::BOUNCE,
                 'events' => [$eventDrag]
             ]);
 

@@ -15,13 +15,23 @@ class MapsController extends AdminController
 {
     public $icon = 'location-map';
 
+    public function actions()
+    {
+        return [
+            'delete' => [
+                'class' => 'panix\engine\actions\DeleteAction',
+                'modelClass' => Maps::class,
+            ],
+        ];
+    }
+
     public function actionIndex()
     {
         $this->pageName = Yii::t('contacts/admin', 'MAPS');
         $this->buttons[] = [
             'label' => Yii::t('contacts/admin', 'CREATE_MAP'),
             'url' => ['create'],
-            'icon'=>'add',
+            'icon' => 'add',
             'options' => ['class' => 'btn btn-success']
         ];
         $this->breadcrumbs = [

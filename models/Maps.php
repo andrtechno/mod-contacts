@@ -100,6 +100,15 @@ class Maps extends ActiveRecord
         }
     }
 
+    public function afterDelete()
+    {
+        foreach ($this->markers as $marker) {
+            $marker->delete();
+        }
+
+        parent::afterDelete();
+    }
+
     public function afterFind()
     {
         $query = new \yii\db\Query();
