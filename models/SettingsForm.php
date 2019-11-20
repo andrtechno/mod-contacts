@@ -83,7 +83,7 @@ class SettingsForm extends SettingsModel
         $attributes = $this->$attribute;
         foreach ($attributes as $index => $row) {
             $error = null;
-            foreach (['number', 'name'] as $name) {
+            foreach (['number'] as $name) { //, 'name'
                 $error = null;
                 $value = isset($row[$name]) ? $row[$name] : null;
                 $requiredValidator->validate($value, $error);
