@@ -55,15 +55,16 @@ class MapWidget extends Widget
 
         $this->model = Maps::findOne($this->map_id);
 
-        Yii::$app->assetManager->bundles['panix\lib\google\maps\MapAsset'] = [
-            'options' => [
-                'key' => $this->model->api_key,
-                'libraries' => 'geometry,places,drawing,visualization'
-            ]
-        ];
-        MapAsset::register($view);
 
         if ($this->model) {
+
+            Yii::$app->assetManager->bundles['panix\lib\google\maps\MapAsset'] = [
+                'options' => [
+                    'key' => $this->model->api_key,
+                    'libraries' => 'geometry,places,drawing,visualization'
+                ]
+            ];
+            MapAsset::register($view);
 
             $opt = [];
 
