@@ -34,7 +34,7 @@ class ContactForm extends Model
      */
     public function rules()
     {
-        $configApp = Yii::$app->settings->get('app', 'captcha_class');
+        $configApp = Yii::$app->settings->get('app');
         $rules = [];
         $rules[] = ['email', 'email'];
         $rules[] = [['name', 'email', 'text', 'phone'], 'required'];
