@@ -15,7 +15,6 @@ $form->field($model, 'email')
     ->hint('Введите E-mail и нажмите Enter');
 ?>
 <?php //echo $form->field($model, 'address'); ?>
-<?= $form->field($model, 'map_api_key'); ?>
 <?= $form->field($model, 'feedback_captcha')->checkbox() ?>
 <?=
 $form->field($model, 'feedback_tpl_body')->widget(\panix\ext\tinymce\TinyMce::class, [

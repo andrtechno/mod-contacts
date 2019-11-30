@@ -3,7 +3,12 @@
 namespace panix\mod\contacts\models;
 
 use panix\engine\SettingsModel;
+use yii\validators\RequiredValidator;
 
+/**
+ * Class SettingsForm
+ * @package panix\mod\contacts\models
+ */
 class SettingsForm extends SettingsModel
 {
 
@@ -16,7 +21,6 @@ class SettingsForm extends SettingsModel
     public $feedback_tpl_body;
     public $feedback_captcha;
     public $schedule;
-    public $map_api_key;
 
 
     public function rules()
@@ -26,7 +30,7 @@ class SettingsForm extends SettingsModel
             ['address', 'validateLang', 'skipOnEmpty' => true],
             [['email', 'feedback_captcha'], "required"],
             ['phone', 'validatePhones2', 'skipOnEmpty' => false],
-            [['feedback_tpl_body', 'map_api_key'], 'string'],
+            [['feedback_tpl_body'], 'string'],
         ];
     }
 
@@ -59,7 +63,7 @@ class SettingsForm extends SettingsModel
 
     public function validateLang($attribute)
     {
-        $requiredValidator = new \yii\validators\RequiredValidator();
+        $requiredValidator = new RequiredValidator();
         // $attributes = Json::decode($this->$attribute);
         $attributes = $this->$attribute;
         foreach ($attributes as $index => $row) {
@@ -78,7 +82,7 @@ class SettingsForm extends SettingsModel
     public function validatePhones2($attribute)
     {
 
-        $requiredValidator = new \yii\validators\RequiredValidator();
+        $requiredValidator = new RequiredValidator();
         // $attributes = Json::decode($this->$attribute);
         $attributes = $this->$attribute;
         foreach ($attributes as $index => $row) {
@@ -98,7 +102,7 @@ class SettingsForm extends SettingsModel
 
     public function validateSchedule($attribute)
     {
-        $requiredValidator = new \yii\validators\RequiredValidator();
+        $requiredValidator = new RequiredValidator();
         // $attributes = Json::decode($this->$attribute);
         $attributes = $this->$attribute;
         // var_dump($attributes);die;
@@ -136,6 +140,7 @@ class SettingsForm extends SettingsModel
             'email' => 'me-email@example.com',
             'address' => '',
             'feedback_tpl_body' => '',
+            'captcha_class' => '\yii\captcha\Captcha',
             'map_api_key' => ''
         ];
     }

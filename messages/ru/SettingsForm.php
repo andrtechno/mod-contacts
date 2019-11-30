@@ -5,7 +5,6 @@ return [
     'FEEDBACK_TPL_BODY' => 'Шаблон письма',
     'PHONE' => 'Телефон',
     'ADDRESS' => 'Адрес',
-    'MAP_API_KEY' => 'API ключ карты',
     /*'MONDAY_TIME' => 'Понедельник',
     'TUESDAY_TIME' => 'Вторник',
     'WEDNESDAY_TIME' => 'Среда',
