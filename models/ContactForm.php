@@ -16,6 +16,7 @@ class ContactForm extends Model
     public $text;
     public $phone;
     public $verifyCode;
+
     //public $reCaptcha;
 
     public function init()
@@ -33,17 +34,21 @@ class ContactForm extends Model
      */
     public function rules()
     {
-        return [
-            ['verifyCode', 'panix\engine\widgets\recaptcha\v2\ReCaptchaValidator'],
-            //['verifyCode', ReCaptchaValidator::class, 'message' => 'Please confirm that you are not a bot.'],
-            // name, email, subject and body are required
-            [['name', 'email', 'text', 'phone'], 'required'],
-// verifyCode needs to be entered correctly
-            //   ['verifyCode', 'captcha','captchaAction'=>'/contacts/default/captcha'],
-            //   [['verifyCode'], 'required'],
-            // email has to be a valid email address
-            ['email', 'email'],
-        ];
+        $configApp = Yii::$app->settings->get('app', 'captcha_class');
+        $rules = [];
+        $rules[] = ['email', 'email'];
+        $rules[] = [['name', 'email', 'text', 'phone'], 'required'];
+        if ($configApp->captcha_class == '\panix\engine\widgets\recaptcha\v2\ReCaptcha') {
+            $rules[] = ['verifyCode', 'panix\engine\widgets\recaptcha\v2\ReCaptchaValidator'];
+        } else if ($configApp->captcha_class == '\panix\engine\widgets\recaptcha\v3\ReCaptcha') {
+            $rules[] = ['verifyCode', 'panix\engine\widgets\recaptcha\v3\ReCaptchaValidator'];
+
+        } else { // \yii\captcha\Captcha
+            $rules[] = ['verifyCode', 'captcha', 'captchaAction' => '/contacts/default/captcha'];
+            $rules[] = [['verifyCode'], 'required'];
+        }
+
+        return $rules;
     }
 
 
@@ -54,7 +59,7 @@ class ContactForm extends Model
      */
     public function send($email)
     {
-        $list=['test'=>'dasdsa','gaga'=>'dasdsaadsdasd 1 1'];
+        $list = ['test' => 'dasdsa', 'gaga' => 'dasdsaadsdasd 1 1'];
         if ($this->validate()) {
             $mail = Yii::$app->mailer;
             //$mail->viewPath = '@contacts/mail';
