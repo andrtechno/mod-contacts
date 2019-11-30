@@ -44,7 +44,7 @@ class ContactForm extends Model
             $rules[] = ['verifyCode', 'panix\engine\widgets\recaptcha\v3\ReCaptchaValidator'];
 
         } else { // \yii\captcha\Captcha
-            $rules[] = ['verifyCode', 'captcha', 'captchaAction' => '/contacts/default/captcha'];
+            $rules[] = ['verifyCode', 'captcha'];
             $rules[] = [['verifyCode'], 'required'];
         }
 

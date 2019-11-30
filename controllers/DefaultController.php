@@ -9,15 +9,6 @@ use panix\mod\contacts\models\ContactForm;
 
 class DefaultController extends WebController {
 
-    public function actions() {
-        return [
-            'captcha' => [
-                'class' => 'yii\captcha\CaptchaAction',
-                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
-            ],
-        ];
-    }
-
     public function actionIndex() {
         $this->pageName = Yii::t('contacts/default', 'MODULE_NAME');
         $this->view->title = $this->pageName;
