@@ -35,19 +35,21 @@ class ContactForm extends Model
     public function rules()
     {
         $configApp = Yii::$app->settings->get('app');
+        $config = Yii::$app->settings->get('contacts');
         $rules = [];
         $rules[] = ['email', 'email'];
         $rules[] = [['name', 'email', 'text', 'phone'], 'required'];
-        if ($configApp->captcha_class == '\panix\engine\widgets\recaptcha\v2\ReCaptcha') {
-            $rules[] = ['verifyCode', 'panix\engine\widgets\recaptcha\v2\ReCaptchaValidator'];
-        } else if ($configApp->captcha_class == '\panix\engine\widgets\recaptcha\v3\ReCaptcha') {
-            $rules[] = ['verifyCode', 'panix\engine\widgets\recaptcha\v3\ReCaptchaValidator'];
 
-        } else { // \yii\captcha\Captcha
-            $rules[] = ['verifyCode', 'captcha'];
-            $rules[] = [['verifyCode'], 'required'];
+        if ($configApp->captcha_class && $config->feedback_captcha && Yii::$app->user->isGuest) {
+            if ($configApp->captcha_class == '\panix\engine\widgets\recaptcha\v2\ReCaptcha') {
+                $rules[] = ['verifyCode', 'panix\engine\widgets\recaptcha\v2\ReCaptchaValidator'];
+            } else if ($configApp->captcha_class == '\panix\engine\widgets\recaptcha\v3\ReCaptcha') {
+                $rules[] = ['verifyCode', 'panix\engine\widgets\recaptcha\v3\ReCaptchaValidator'];
+            } else { // \yii\captcha\Captcha
+                $rules[] = ['verifyCode', 'captcha'];
+                $rules[] = [['verifyCode'], 'required'];
+            }
         }
-
         return $rules;
     }
 
@@ -69,7 +71,11 @@ class ContactForm extends Model
                 'html' => '@contacts/mail/feedback.tpl',
                 //  'view' => 'feedback'
             ], [
-                'test' => 'my param',
+                'model' => $this,
+                'email' => $this->email,
+                'text' => $this->text,
+                'phone' => $this->phone,
+                'name' => $this->name,
                 'list' => $list
             ])
                 /*$mail->compose('@contacts/mail/feedback', [
