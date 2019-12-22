@@ -80,7 +80,7 @@ $config = Yii::$app->settings->get('contacts');
 
         <?php
         if (!Yii::$app->user->phone)
-            echo $form->field($model, 'phone')->widget(\panix\ext\inputmask\InputMask::class);
+            echo $form->field($model, 'phone')->widget(\panix\engine\widgets\MaskedInput::class);
         ?>
         <?= $form->field($model, 'text')->textArea(['rows' => 6]) ?>
         <?php if (Yii::$app->settings->get('app','captcha_class') && $config->feedback_captcha && Yii::$app->user->isGuest) { ?>
