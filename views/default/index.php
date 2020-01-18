@@ -99,7 +99,7 @@ $config = Yii::$app->settings->get('contacts');
         <?php } ?>
 
         <div class="form-group text-center">
-            <?= Html::submitButton(Yii::t('app', 'SEND'), ['class' => 'btn btn-warning', 'name' => 'contact-button']) ?>
+            <?= Html::submitButton(Yii::t('app/default', 'SEND'), ['class' => 'btn btn-warning', 'name' => 'contact-button']) ?>
         </div>
         <?php ActiveForm::end(); ?>
 

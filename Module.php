@@ -72,7 +72,7 @@ class Module extends WebModule implements BootstrapInterface
                                 'icon' => 'location-marker',
                             ],
                             [
-                                'label' => Yii::t('app', 'SETTINGS'),
+                                'label' => Yii::t('app/default', 'SETTINGS'),
                                 "url" => ['/admin/contacts/settings'],
                                 'icon' => 'settings'
                             ]
