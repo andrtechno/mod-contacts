@@ -30,8 +30,9 @@ class SettingsController extends AdminController
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
                 $model->save();
+                Yii::$app->session->setFlash("success", Yii::t('app/default', 'SUCCESS_UPDATE'));
             }
-            return Yii::$app->getResponse()->redirect(['/admin/contacts/settings']);
+            return $this->refresh();
         }
         return $this->render('index', [
             'model' => $model
