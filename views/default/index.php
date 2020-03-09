@@ -2,7 +2,7 @@
 
 use panix\engine\CMS;
 use panix\engine\Html;
-use yii\bootstrap4\ActiveForm;
+use yii\widgets\ActiveForm;
 use panix\mod\contacts\models\SettingsForm;
 
 $config = Yii::$app->settings->get('contacts');
@@ -87,10 +87,10 @@ $config = Yii::$app->settings->get('contacts');
 
         <?php
         if (!Yii::$app->user->phone) {
-            echo $form->field($model, 'phone')->widget(\panix\ext\telinput\PhoneInput::class);
+            echo $form->field($model, 'phone')->widget(\panix\ext\telinput\PhoneInput::class)->label($model->getAttributeLabel('phone'),['class'=>'']);
         }
         ?>
-        <?= $form->field($model, 'text')->textArea(['rows' => 6]) ?>
+        <?= $form->field($model, 'text')->textArea(['rows' => 6])->label($model->getAttributeLabel('text'),['class'=>'']) ?>
         <?php if (Yii::$app->settings->get('app', 'captcha_class') && $config->feedback_captcha && Yii::$app->user->isGuest) { ?>
             <?php
             /*echo $form->field($model, 'verifyCode')->widget(yii\captcha\Captcha::class, [
