@@ -39,7 +39,7 @@ class ContactForm extends Model
         $rules = [];
         $rules[] = ['email', 'email'];
         $rules[] = [['name', 'email', 'text', 'phone'], 'required'];
-
+        $rules[] = ['phone', 'panix\ext\telinput\PhoneInputValidator'];
         if ($configApp->captcha_class && $config->feedback_captcha && Yii::$app->user->isGuest) {
             if ($configApp->captcha_class == '\panix\engine\widgets\recaptcha\v2\ReCaptcha') {
                 $rules[] = ['verifyCode', 'panix\engine\widgets\recaptcha\v2\ReCaptchaValidator'];
@@ -62,47 +62,44 @@ class ContactForm extends Model
     public function send($email)
     {
         $list = ['test' => 'dasdsa', 'gaga' => 'dasdsaadsdasd 1 1'];
-        if ($this->validate()) {
-            $mail = Yii::$app->mailer;
-            //$mail->viewPath = '@contacts/mail';
-            //$mail->htmlLayout = '@contacts/mail/layouts/html';
-            $mail->htmlLayout = '@app/mail/layouts/html';
-            $mail->compose([
-                'html' => '@contacts/mail/feedback.tpl',
-                //  'view' => 'feedback'
-            ], [
-                'model' => $this,
-                'email' => $this->email,
-                'text' => $this->text,
-                'phone' => $this->phone,
-                'name' => $this->name,
-                'list' => $list
-            ])
-                /*$mail->compose('@contacts/mail/feedback', [
-                    'test' => 'my param',
-                    'name' => 'Tester'
-                ])*/
-                ->setTo($email)
-                ->setFrom([$this->email => $this->name])
-                ->setSubject(Yii::t('contacts/default', 'FB_FROM_SUBJECT', [
-                    'sitename' => Yii::$app->settings->get('app', 'sitename'),
-                    'user_name' => $this->name
-                ]))
-                //$mail->setTextBody($this->body);
+
+        $mail = Yii::$app->mailer;
+        //$mail->viewPath = '@contacts/mail';
+        //$mail->htmlLayout = '@contacts/mail/layouts/html';
+        $mail->htmlLayout = '@app/mail/layouts/html';
+        $mail->compose([
+            'html' => '@contacts/mail/feedback.tpl',
+            //  'view' => 'feedback'
+        ], [
+            'model' => $this,
+            'email' => $this->email,
+            'text' => $this->text,
+            'phone' => $this->phone,
+            'name' => $this->name,
+            'list' => $list
+        ])
+            /*$mail->compose('@contacts/mail/feedback', [
+                'test' => 'my param',
+                'name' => 'Tester'
+            ])*/
+            ->setTo($email)
+            ->setFrom([$this->email => $this->name])
+            ->setSubject(Yii::t('contacts/default', 'FB_FROM_SUBJECT', [
+                'sitename' => Yii::$app->settings->get('app', 'sitename'),
+                'user_name' => $this->name
+            ]))
+            //$mail->setTextBody($this->body);
 
 // Прикрепление файла из локальной файловой системы:
-                //->attach(Yii::getAlias('@webroot/uploads/example-ru.pptx'))
+            //->attach(Yii::getAlias('@webroot/uploads/example-ru.pptx'))
 
 // Прикрепить файл на лету
-                // ->attachContent('Attachment content', ['fileName' => 'attach.txt', 'contentType' => 'text/plain'])
+            // ->attachContent('Attachment content', ['fileName' => 'attach.txt', 'contentType' => 'text/plain'])
 
 
-                ->send();
+            ->send();
 
-            return true;
-        } else {
-            return false;
-        }
+
     }
 
 }

@@ -1,13 +1,17 @@
 <?php
 
-namespace panix\mod\contacts\models;
+namespace app\modules\contacts\models;
 
+use Yii;
+use libphonenumber\PhoneNumber;
+use libphonenumber\PhoneNumberFormat;
+use libphonenumber\PhoneNumberUtil;
 use panix\engine\SettingsModel;
 use yii\validators\RequiredValidator;
 
 /**
  * Class SettingsForm
- * @package panix\mod\contacts\models
+ * @package app\modules\contacts\models
  */
 class SettingsForm extends SettingsModel
 {
@@ -81,20 +85,20 @@ class SettingsForm extends SettingsModel
 
     public function validatePhones2($attribute)
     {
-
         $requiredValidator = new RequiredValidator();
-        // $attributes = Json::decode($this->$attribute);
-        $attributes = $this->$attribute;
-        foreach ($attributes as $index => $row) {
-            $error = null;
-            foreach (['number'] as $name) { //, 'name'
+        $attributes = Yii::$app->request->post('SettingsForm');
+        if (isset($attributes['phone'])) {
+            foreach ($attributes['phone'] as $index => $row) {
                 $error = null;
-                $value = isset($row[$name]) ? $row[$name] : null;
-                $requiredValidator->validate($value, $error);
-                if (!empty($error)) {
-                    $key = $attribute . '[' . $index . '][' . $name . ']';
-                    // echo $key;
-                    $this->addError($key, $error);
+                foreach (['number'] as $name) { //, 'name'
+                    $error = null;
+                    $value = isset($row[$name]) ? $row[$name] : null;
+                    $requiredValidator->validate($value, $error);
+                    if (!empty($error)) {
+                        $key = $attribute . '[' . $index . '][' . $name . ']';
+                        // echo $key;
+                        $this->addError($key, $error);
+                    }
                 }
             }
         }

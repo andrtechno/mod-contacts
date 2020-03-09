@@ -3,7 +3,7 @@
 use panix\ext\multipleinput\MultipleInput;
 
 /**
- * @var panix\mod\contacts\models\SettingsForm $model
+ * @var app\modules\contacts\models\SettingsForm $model
  * @var panix\engine\bootstrap\ActiveForm $form
  */
 
@@ -21,9 +21,7 @@ $form->field($model, 'feedback_tpl_body')->widget(\panix\ext\tinymce\TinyMce::cl
     'options' => ['rows' => 6],
 ]);
 
-
-?>
-<?php echo $form->field($model, 'phone')->widget(MultipleInput::class, [
+echo $form->field($model, 'phone')->widget(MultipleInput::class, [
     'max' => 5,
     'min' => 1,
     'allowEmptyList' => false,
@@ -39,6 +37,11 @@ $form->field($model, 'feedback_tpl_body')->widget(\panix\ext\tinymce\TinyMce::cl
             'headerOptions' => [
                 'style' => 'width: 250px;',
             ],
+            'options' => [
+                'jsOptions' => [
+                    'hiddenInput' => 'number'
+                ],
+            ]
         ],
         [
             'name' => 'name',
@@ -65,6 +68,7 @@ echo $form->field($model, 'address')->widget(MultipleInput::class, [
             'options' => [
                 'class' => 'input-lang',
                 'placeholder' => 'Адрес',
+
             ],
         ],
     ]
