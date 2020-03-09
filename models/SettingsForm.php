@@ -1,11 +1,8 @@
 <?php
 
-namespace app\modules\contacts\models;
+namespace panix\mod\contacts\models;
 
 use Yii;
-use libphonenumber\PhoneNumber;
-use libphonenumber\PhoneNumberFormat;
-use libphonenumber\PhoneNumberUtil;
 use panix\engine\SettingsModel;
 use yii\validators\RequiredValidator;
 

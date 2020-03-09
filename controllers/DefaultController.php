@@ -1,10 +1,10 @@
 <?php
 
-namespace app\modules\contacts\controllers;
+namespace panix\mod\contacts\controllers;
 
 use Yii;
 use panix\engine\controllers\WebController;
-use app\modules\contacts\models\ContactForm;
+use panix\mod\contacts\models\ContactForm;
 
 
 class DefaultController extends WebController

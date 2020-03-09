@@ -72,15 +72,13 @@ $config = Yii::$app->settings->get('contacts');
 
 
         <div class="text-center mt-4"><h2><?= Yii::t('contacts/default', 'FORM_TITLE'); ?></h2></div>
-		
-		
-		            <?php if(Yii::$app->session->hasFlash('success')){ ?>
 
-                <div class="alert alert-success"><?= Yii::$app->session->getFlash('success'); ?></div>
 
-            <?php } ?>
-			
-			
+        <?php if (Yii::$app->session->hasFlash('success')) { ?>
+            <div class="alert alert-success"><?= Yii::$app->session->getFlash('success'); ?></div>
+        <?php } ?>
+
+
         <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
         <?php if (Yii::$app->user->isGuest) { ?>
             <?= $form->field($model, 'name') ?>
@@ -88,17 +86,12 @@ $config = Yii::$app->settings->get('contacts');
         <?php } ?>
 
         <?php
-            if (!Yii::$app->user->phone) {
-                echo $form->field($model, 'phone')->widget(\panix\ext\telinput\PhoneInput::class, [
-                    'jsOptions' => [
-                        // 'separateDialCode' => true,
-                        // 'nationalMode'=>false
-                    ]
-                ]);
-            }
+        if (!Yii::$app->user->phone) {
+            echo $form->field($model, 'phone')->widget(\panix\ext\telinput\PhoneInput::class);
+        }
         ?>
         <?= $form->field($model, 'text')->textArea(['rows' => 6]) ?>
-        <?php if (Yii::$app->settings->get('app','captcha_class') && $config->feedback_captcha && Yii::$app->user->isGuest) { ?>
+        <?php if (Yii::$app->settings->get('app', 'captcha_class') && $config->feedback_captcha && Yii::$app->user->isGuest) { ?>
             <?php
             /*echo $form->field($model, 'verifyCode')->widget(yii\captcha\Captcha::class, [
                 'captchaAction' => 'default/captcha',
@@ -107,10 +100,7 @@ $config = Yii::$app->settings->get('contacts');
             ?>
 
 
-
-
-
-        <?php echo $form->field($model, 'verifyCode')->widget(Yii::$app->settings->get('app', 'captcha_class')); ?>
+            <?php echo $form->field($model, 'verifyCode')->widget(Yii::$app->settings->get('app', 'captcha_class')); ?>
         <?php } ?>
 
         <div class="form-group text-center">
