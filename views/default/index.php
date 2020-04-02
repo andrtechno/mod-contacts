@@ -7,7 +7,7 @@ use panix\mod\contacts\models\SettingsForm;
 
 $config = Yii::$app->settings->get('contacts');
 
-
+echo date('N');
 ?>
 
 <div class="row">
@@ -39,13 +39,12 @@ $config = Yii::$app->settings->get('contacts');
                     <?php } else { ?>
                         <?= SettingsForm::t('DAY_OFF'); ?>
                     <?php } ?>
+
                     <?php if (date('N') == $key + 1) { ?>
-                        <?php if (time() >= strtotime($schedule['end_time'])) { ?>
-                            <span class="font-italic text-danger">(<?= Yii::t('contacts/default', 'IS_CLOSE'); ?>
-                                )</span>
+                        <?php if (Yii::$app->getModule('contacts')->getTodayOpen($key)) { ?>
+                            <span class="font-italic text-danger">(<?= Yii::t('contacts/default', 'IS_CLOSE'); ?>)</span>
                         <?php } else { ?>
-                            <span class="font-italic text-success">(<?= Yii::t('contacts/default', 'IS_OPEN'); ?>
-                                )</span>
+                            <span class="font-italic text-success">(<?= Yii::t('contacts/default', 'IS_OPEN'); ?>)</span>
                         <?php } ?>
                     <?php } ?>
                 </div>

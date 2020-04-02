@@ -51,6 +51,19 @@ class Module extends WebModule implements BootstrapInterface
         }
     }
 
+    public function getTodayOpen($key = 0)
+    {
+        $config = Yii::$app->settings->get($this->id);
+        $now = strtotime('2020-04-02 08:01');
+        if (date('N') == $key + 1) {
+            if ($now <= strtotime($config->schedule[$key]['start_time']) || $now >= strtotime($config->schedule[$key]['end_time'])) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
     public function getAdminMenu()
     {
         return [
