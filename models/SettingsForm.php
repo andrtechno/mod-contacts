@@ -8,7 +8,7 @@ use yii\validators\RequiredValidator;
 
 /**
  * Class SettingsForm
- * @package app\modules\contacts\models
+ * @package panix\mod\contacts\models
  */
 class SettingsForm extends SettingsModel
 {
