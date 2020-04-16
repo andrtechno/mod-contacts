@@ -3,7 +3,7 @@
 use panix\ext\multipleinput\MultipleInput;
 
 /**
- * @var app\modules\contacts\models\SettingsForm $model
+ * @var panix\mod\contacts\models\SettingsForm $model
  * @var panix\engine\bootstrap\ActiveForm $form
  */
 
