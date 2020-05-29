@@ -73,21 +73,25 @@ class Module extends WebModule implements BootstrapInterface
                         'label' => Yii::t('contacts/default', 'MODULE_NAME'),
                         //'url' => ['/admin/contacts'],
                         'icon' => $this->icon,
+                        'visible' => Yii::$app->user->can('/contacts/admin/default/index') || Yii::$app->user->can('/contacts/admin/default/*'),
                         'items' => [
                             [
                                 'label' => Yii::t('contacts/admin', 'MAPS'),
                                 'url' => ['/admin/contacts/maps'],
                                 'icon' => 'location-map',
+                                'visible' => Yii::$app->user->can('/contacts/admin/maps/index') || Yii::$app->user->can('/contacts/admin/maps/*')
                             ],
                             [
                                 'label' => Yii::t('contacts/admin', 'MARKERS'),
                                 'url' => ['/admin/contacts/markers'],
                                 'icon' => 'location-marker',
+                                'visible' => Yii::$app->user->can('/contacts/admin/markers/index') || Yii::$app->user->can('/contacts/admin/markers/*')
                             ],
                             [
                                 'label' => Yii::t('app/default', 'SETTINGS'),
                                 "url" => ['/admin/contacts/settings'],
-                                'icon' => 'settings'
+                                'icon' => 'settings',
+                                'visible' => Yii::$app->user->can('/contacts/admin/settings/index') || Yii::$app->user->can('/contacts/admin/settings/*')
                             ]
                         ]
                     ],
