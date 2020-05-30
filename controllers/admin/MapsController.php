@@ -28,12 +28,14 @@ class MapsController extends AdminController
     public function actionIndex()
     {
         $this->pageName = Yii::t('contacts/admin', 'MAPS');
-        $this->buttons[] = [
-            'label' => Yii::t('contacts/admin', 'CREATE_MAP'),
-            'url' => ['create'],
-            'icon' => 'add',
-            'options' => ['class' => 'btn btn-success']
-        ];
+        if (Yii::$app->user->can("/{$this->module->id}/{$this->id}/*") || Yii::$app->user->can("/{$this->module->id}/{$this->id}/create")) {
+            $this->buttons[] = [
+                'label' => Yii::t('contacts/admin', 'CREATE_MAP'),
+                'url' => ['create'],
+                'icon' => 'add',
+                'options' => ['class' => 'btn btn-success']
+            ];
+        }
         $this->breadcrumbs = [
             [
                 'label' => Yii::t('contacts/default', 'MODULE_NAME'),
@@ -65,12 +67,6 @@ class MapsController extends AdminController
             $this->pageName = Yii::t('contacts/admin', 'UPDATE_MAP', ['name' => $model->name]);
         }
 
-        $this->buttons[] = [
-            'label' => Yii::t('contacts/admin', 'CREATE_MAP'),
-            'url' => ['create'],
-            'icon' => 'add',
-            'options' => ['class' => 'btn btn-success']
-        ];
         $this->breadcrumbs = [
             [
                 'label' => Yii::t('contacts/default', 'MODULE_NAME'),

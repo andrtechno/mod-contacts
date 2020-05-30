@@ -28,12 +28,14 @@ class MarkersController extends AdminController
     public function actionIndex()
     {
         $this->pageName = Yii::t('contacts/admin', 'MARKERS');
-        $this->buttons[] = [
-            'label' => Yii::t('contacts/admin', 'CREATE_MARKER'),
-            'url' => ['create'],
-            'icon' => 'add',
-            'options' => ['class' => 'btn btn-success']
-        ];
+        if (Yii::$app->user->can("/{$this->module->id}/{$this->id}/*") || Yii::$app->user->can("/{$this->module->id}/{$this->id}/create")) {
+            $this->buttons[] = [
+                'label' => Yii::t('contacts/admin', 'CREATE_MARKER'),
+                'url' => ['create'],
+                'icon' => 'add',
+                'options' => ['class' => 'btn btn-success']
+            ];
+        }
         $this->breadcrumbs = [
             [
                 'label' => Yii::t('contacts/default', 'MODULE_NAME'),
@@ -63,13 +65,6 @@ class MarkersController extends AdminController
         } else {
             $this->pageName = Yii::t('contacts/admin', 'UPDATE_MARKER', ['name' => $model->name]);
         }
-
-        $this->buttons[] = [
-            'label' => Yii::t('contacts/admin', 'CREATE_MARKER'),
-            'url' => ['create'],
-            'icon' => 'add',
-            'options' => ['class' => 'btn btn-success']
-        ];
 
         $this->breadcrumbs = [
             [
