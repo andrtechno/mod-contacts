@@ -14,7 +14,7 @@ class DefaultController extends WebController
     {
         $this->pageName = Yii::t('contacts/default', 'MODULE_NAME');
         $this->view->title = $this->pageName;
-        $this->breadcrumbs = [
+        $this->view->params['breadcrumbs'] = [
             $this->pageName
         ];
         $model = new ContactForm();
