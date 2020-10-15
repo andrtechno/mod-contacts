@@ -18,7 +18,7 @@ class DefaultController extends AdminController
     public function actionIndex()
     {
         $this->pageName = Yii::t('contacts/default', 'MODULE_NAME');
-        $this->breadcrumbs = [
+        $this->view->params['breadcrumbs'][] = [
             $this->pageName
         ];
 

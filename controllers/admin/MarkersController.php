@@ -36,7 +36,7 @@ class MarkersController extends AdminController
                 'options' => ['class' => 'btn btn-success']
             ];
         }
-        $this->breadcrumbs = [
+        $this->view->params['breadcrumbs'] = [
             [
                 'label' => Yii::t('contacts/default', 'MODULE_NAME'),
                 'url' => ['/admin/contacts'],
