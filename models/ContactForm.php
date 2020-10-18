@@ -16,7 +16,7 @@ class ContactForm extends Model
     public $text;
     public $phone;
     public $verifyCode;
-
+    public $requireFields = ['name', 'email', 'text'];
     //public $reCaptcha;
 
     public function init()
@@ -38,7 +38,7 @@ class ContactForm extends Model
         $config = Yii::$app->settings->get('contacts');
         $rules = [];
         $rules[] = ['email', 'email'];
-        $rules[] = [['name', 'email', 'text', 'phone'], 'required'];
+        $rules[] = [$this->requireFields, 'required'];
         $rules[] = ['phone', 'panix\ext\telinput\PhoneInputValidator'];
         if ($configApp->captcha_class && $config->feedback_captcha && Yii::$app->user->isGuest) {
             if ($configApp->captcha_class == '\panix\engine\widgets\recaptcha\v2\ReCaptcha') {

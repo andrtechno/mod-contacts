@@ -5,6 +5,8 @@ namespace panix\mod\contacts\controllers;
 use Yii;
 use panix\engine\controllers\WebController;
 use panix\mod\contacts\models\ContactForm;
+use yii\web\Response;
+use yii\widgets\ActiveForm;
 
 
 class DefaultController extends WebController
@@ -18,7 +20,12 @@ class DefaultController extends WebController
             $this->pageName
         ];
         $model = new ContactForm();
+
         if ($model->load(Yii::$app->request->post())) {
+            if (Yii::$app->request->isAjax) {
+                Yii::$app->response->format = Response::FORMAT_JSON;
+                return ActiveForm::validate($model);
+            }
             if($model->validate()){
                 $emails = explode(',',Yii::$app->settings->get('contacts', 'email'));
                 foreach ($emails as $email){

@@ -1,8 +1,8 @@
 <?php
 return [
-    'EMAIL' => 'Почта',
-    'NAME' => 'Имя',
+    'EMAIL' => 'E-mail',
+    'NAME' => 'Ваше имя',
     'TEXT' => 'Сообщение',
     'VERIFYCODE' => 'Код',
-    'PHONE' => 'Телефон'
+    'PHONE' => 'Номер телефона'
 ];
