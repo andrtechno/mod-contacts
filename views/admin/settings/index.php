@@ -2,6 +2,7 @@
 
 use panix\engine\Html;
 use panix\engine\bootstrap\ActiveForm;
+use panix\engine\bootstrap\Modal;
 
 $form = ActiveForm::begin();
 ?>
@@ -28,6 +29,17 @@ $form = ActiveForm::begin();
         </div>
         <div class="card-footer text-center">
             <?= Html::submitButton(Yii::t('app/default', 'SAVE'), ['class' => 'btn btn-success']) ?>
+            <?php
+            Modal::begin([
+                'title' => 'Предварительный просмотр',
+                'size'=>Modal::SIZE_LARGE,
+                'toggleButton' => ['label' => 'Пред. просмотр шаблона','class'=>'btn btn-outline-secondary'],
+            ]);
+            ?>
+            <div class="embed-responsive embed-responsive-4by3">
+                <iframe class="embed-responsive-item" src="<?= \yii\helpers\Url::to(['preview-mail','view'=>Yii::$app->settings->get('contacts','feedbackMailBody')]); ?>"></iframe>
+            </div>
+            <?php Modal::end(); ?>
         </div>
     </div>
 <?php ActiveForm::end(); ?>
