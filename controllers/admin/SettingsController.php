@@ -2,6 +2,7 @@
 
 namespace panix\mod\contacts\controllers\admin;
 
+use panix\mod\contacts\models\ContactForm;
 use Yii;
 use yii\helpers\Json;
 use panix\engine\controllers\AdminController;
@@ -14,7 +15,24 @@ use panix\mod\contacts\models\SettingsForm;
 class SettingsController extends AdminController
 {
 
+
     public $icon = 'settings';
+
+    public function actions()
+    {
+        $fake = new ContactForm();
+        $fake->email = 'example@' . Yii::$app->request->serverName;
+        $fake->name = 'Andrew';
+        $fake->text = 'My Text';
+        $fake->phone = '+380689999999';
+
+        return [
+            'preview-mail' => [
+                'class' => 'panix\engine\actions\PreviewMailAction',
+                'data' => ['model' => $fake]
+            ],
+        ];
+    }
 
     public function actionIndex()
     {

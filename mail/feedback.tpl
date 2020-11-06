@@ -1,5 +1,9 @@
 {use class="panix\engine\Html"}
 
+
+{if $model.name }
+    <p>{$model->getAttributeLabel('name')}: <strong>{Html::mailto($model.name)}</strong></p>
+{/if}
 {if $model.email }
     <p>{$model->getAttributeLabel('email')}: <strong>{Html::mailto($model.email)}</strong></p>
 {/if}

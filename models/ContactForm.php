@@ -7,6 +7,12 @@ use panix\engine\base\Model;
 
 /**
  * ContactForm is the model behind the contact form.
+ *
+ * @property string $name
+ * @property string $email
+ * @property string $text
+ * @property string $phone
+ * @property string $verifyCode
  */
 class ContactForm extends Model
 {
@@ -17,6 +23,7 @@ class ContactForm extends Model
     public $phone;
     public $verifyCode;
     public $requireFields = ['name', 'email', 'text'];
+
     //public $reCaptcha;
 
     public function init()
@@ -55,9 +62,8 @@ class ContactForm extends Model
 
 
     /**
-     * Sends an email to the specified email address using the information collected by this model.
-     * @param  string $email the target email address
-     * @return boolean whether the model passes validation
+     * @param $email
+     * @return \yii\mail\MailerInterface
      */
     public function send($email)
     {
@@ -67,7 +73,7 @@ class ContactForm extends Model
         //$mail->htmlLayout = '@contacts/mail/layouts/html';
         $mail->htmlLayout = '@app/mail/layouts/html';
         $mail->compose([
-            'html' => Yii::$app->settings->get('contacts','feedbackMailBody'),
+            'html' => Yii::$app->settings->get('contacts', 'feedbackMailBody'),
             //  'view' => 'feedback'
         ], [
             'model' => $this,
@@ -96,7 +102,7 @@ class ContactForm extends Model
 
 
             ->send();
-
+        return $mail;
 
     }
 
