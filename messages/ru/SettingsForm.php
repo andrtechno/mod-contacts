@@ -2,7 +2,7 @@
 return [
     'EMAIL' => 'E-mail на которую будет отправлено письмо с формы обратной связи',
     'FEEDBACK_CAPTCHA' => 'Активировать капчу',
-    'FEEDBACK_TPL_BODY' => 'Шаблон письма',
+    'FEEDBACKMAILBODY' => 'Шаблон письма',
     'PHONE' => 'Телефон',
     'ADDRESS' => 'Адрес',
     /*'MONDAY_TIME' => 'Понедельник',
