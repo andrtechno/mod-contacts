@@ -152,6 +152,9 @@ class SettingsForm extends SettingsModel
     {
         parent::init();
         $this->_feedbackMailBody = $this->feedbackMailBody;
+        if(!file_exists(Yii::getAlias($this->_feedbackMailBody))){
+            $this->_feedbackMailBody = '@contacts/mail/feedback.tpl';
+        }
         $this->feedbackMailBody = file_get_contents(Yii::getAlias($this->_feedbackMailBody));
     }
 
