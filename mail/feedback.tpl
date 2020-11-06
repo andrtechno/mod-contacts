@@ -10,5 +10,3 @@
     <p>{$model->getAttributeLabel('text')}:<br/>{$model.text}</p>
 {/if}
 
-
-<a href="#" class="btn btn-primary">Кнопка</a>

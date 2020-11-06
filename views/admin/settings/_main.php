@@ -16,11 +16,18 @@ $form->field($model, 'email')
 ?>
 <?php //echo $form->field($model, 'address'); ?>
 <?= $form->field($model, 'feedback_captcha')->checkbox() ?>
-<?=
-$form->field($model, 'feedback_tpl_body')->widget(\panix\ext\tinymce\TinyMce::class, [
-    'options' => ['rows' => 6],
-]);
+<?php
+//echo $form->field($model, 'feedback_tpl_body')->widget(\panix\ext\tinymce\TinyMce::class, ['options' => ['rows' => 6]]);
+echo $form->field($model, 'feedbackMailBody')->widget(\panix\ext\codemirror\CodeMirrorTextArea::class, [
+    //  'modes' => ['php', 'css', 'xml', 'javascript', 'smarty'],
+    'mode' => ['name' => 'smarty', 'version' => 3, 'baseMode' => 'text/html'],
+    'theme'=>'elegant',//'solarized', ttcn
+    'options' => [
+        'rows' => 6,
+        'class' => 'form-control'
+    ],
 
+]);
 echo $form->field($model, 'phone')->widget(MultipleInput::class, [
     'max' => 5,
     'min' => 1,

@@ -10,7 +10,7 @@ class Module extends WebModule implements BootstrapInterface
 {
 
     public $icon = 'phone';
-
+    public $mailPath = '@contacts/mail';
 
     public function bootstrap($app)
     {

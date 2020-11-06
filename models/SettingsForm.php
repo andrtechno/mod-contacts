@@ -19,10 +19,10 @@ class SettingsForm extends SettingsModel
     public $email;
     public $phone;
     public $address;
-    public $feedback_tpl_body;
+    public $feedbackMailBody;
     public $feedback_captcha;
     public $schedule;
-
+    private $_feedbackMailBody;
 
     public function rules()
     {
@@ -31,7 +31,7 @@ class SettingsForm extends SettingsModel
             ['address', 'validateLang', 'skipOnEmpty' => true],
             [['email', 'feedback_captcha'], "required"],
             ['phone', 'validatePhones2', 'skipOnEmpty' => false],
-            [['feedback_tpl_body'], 'string'],
+            [['feedbackMailBody'], 'string'],
         ];
     }
 
@@ -140,9 +140,33 @@ class SettingsForm extends SettingsModel
             'feedback_captcha' => true,
             'email' => 'me-email@example.com',
             'address' => '',
-            'feedback_tpl_body' => '',
+            'feedbackMailBody' => '@contacts/mail/feedback.tpl',
             'captcha_class' => '\yii\captcha\Captcha',
-            'map_api_key' => ''
         ];
+    }
+
+
+
+
+    public function init()
+    {
+        parent::init();
+        $this->_feedbackMailBody = $this->feedbackMailBody;
+        $this->feedbackMailBody = file_get_contents(Yii::getAlias($this->_feedbackMailBody));
+    }
+
+
+    public function save()
+    {
+        if (!file_exists(Yii::getAlias('@app/mail') . '/' . basename($this->_feedbackMailBody))) {
+            if (!copy(Yii::getAlias($this->_feedbackMailBody), Yii::getAlias('@app/mail') . '/' . basename($this->_feedbackMailBody))) {
+                $this->addError('feedbackMailBody','не удалось скопировать file...');
+                return false;
+            }
+        }
+        file_put_contents(Yii::getAlias('@app/mail') . '/' . basename($this->_feedbackMailBody), $this->feedbackMailBody);
+        $this->feedbackMailBody = '@app/mail/' . basename($this->_feedbackMailBody);
+
+        parent::save();
     }
 }
