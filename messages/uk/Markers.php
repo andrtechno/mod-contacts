@@ -1,0 +1,25 @@
+<?php
+return [
+    'NAME' => 'Назва маркера',
+    'COORDS' => 'Координати положення маркера',
+    'MAP_ID' => 'На якій карті маркер буде',
+    'TAB_GENERAL' => 'Основний',
+    'TAB_DEF_ICON' => 'Іконка за замовчуванням',
+    'TAB_MY_ICON' => 'Власна ікона',
+    'COLOR' => 'Колір маркера',
+    'CONTENT_BODY' => 'Зміст Балунов маркера',
+    'CONTENT_HEADER' => 'Зміст заголовка Балунов маркера',
+    'OPACITY' => 'Прозорість маркера',
+    'PRESET' => 'Стандарний стиль маркера',
+    'ICON_CONTENT' => 'Зміст маркера',
+    'HINT_CONTENT' => 'Підказка маркера (при наведенні)',
+    'ICON_FILE' => 'Файл іконки (тільки * .png)',
+    'ICON_FILE_OFFSET_X' => 'Відступи іконки X',
+    'ICON_FILE_OFFSET_Y' => 'Відступи іконки Y',
+    'SELECT_MAP_ID' => '& mdash; Вкажіть карту & mdash; ',
+    'SELECT_OPACITY' => '& mdash; Вкажіть прозорість & mdash; ',
+    'SELECT_ANIMATION' => '& mdash; Анімація & mdash; ',
+    'DRAGGABLE' => 'Пересувати маркер',
+    'ANIMATION' => 'Анімація',
+
+];
