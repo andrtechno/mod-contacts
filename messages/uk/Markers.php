@@ -16,9 +16,9 @@ return [
     'ICON_FILE' => 'Файл іконки (тільки * .png)',
     'ICON_FILE_OFFSET_X' => 'Відступи іконки X',
     'ICON_FILE_OFFSET_Y' => 'Відступи іконки Y',
-    'SELECT_MAP_ID' => '& mdash; Вкажіть карту & mdash; ',
-    'SELECT_OPACITY' => '& mdash; Вкажіть прозорість & mdash; ',
-    'SELECT_ANIMATION' => '& mdash; Анімація & mdash; ',
+    'SELECT_MAP_ID' => '&mdash; Вкажіть карту &mdash;',
+    'SELECT_OPACITY' => '&mdash; Вкажіть прозорість &mdash;',
+    'SELECT_ANIMATION' => '&mdash; Анімація &mdash;',
     'DRAGGABLE' => 'Пересувати маркер',
     'ANIMATION' => 'Анімація',
 

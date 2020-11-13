@@ -16,9 +16,9 @@ return [
     'ICON_FILE' => 'Icon file (* .png only)',
     'ICON_FILE_OFFSET_X' => 'Icon X indentation',
     'ICON_FILE_OFFSET_Y' => 'Icon padding Y',
-    'SELECT_MAP_ID' => '& mdash; Specify the card & mdash; ',
-    'SELECT_OPACITY' => '& mdash; Specify transparency & mdash; ',
-    'SELECT_ANIMATION' => '& mdash; Animation & mdash; ',
+    'SELECT_MAP_ID' => '&mdash; Specify the card &mdash;',
+    'SELECT_OPACITY' => '&mdash; Specify transparency &mdash;',
+    'SELECT_ANIMATION' => '&mdash; Animation &mdash;',
     'DRAGGABLE' => 'Move marker',
     'ANIMATION' => 'Animation',
 
