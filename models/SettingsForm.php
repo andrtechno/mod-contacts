@@ -30,6 +30,7 @@ class SettingsForm extends SettingsModel
             ['schedule', 'validateSchedule', 'skipOnEmpty' => true],
             ['address', 'validateLang', 'skipOnEmpty' => true],
             [['email', 'feedback_captcha'], "required"],
+            [['email'], '\panix\engine\validators\EmailListValidator'],
             ['phone', 'validatePhones2', 'skipOnEmpty' => false],
             [['feedbackMailBody'], 'string'],
         ];
