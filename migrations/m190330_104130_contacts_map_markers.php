@@ -1,7 +1,5 @@
 <?php
 
-namespace panix\mod\contacts\migrations;
-
 /**
  * Generation migrate by PIXELION CMS
  *
