@@ -21,7 +21,7 @@ $form->field($model, 'email')
 echo $form->field($model, 'feedbackMailBody')->widget(\panix\ext\codemirror\CodeMirrorTextArea::class, [
     //  'modes' => ['php', 'css', 'xml', 'javascript', 'smarty'],
     'mode' => ['name' => 'smarty', 'version' => 3, 'baseMode' => 'text/html'],
-    'theme'=>'elegant',//'solarized', ttcn
+    'theme' => 'elegant',//'solarized', ttcn
     'options' => [
         'rows' => 6,
         'class' => 'form-control'
@@ -73,7 +73,6 @@ echo $form->field($model, 'address')->widget(MultipleInput::class, [
             //'enableError' => true,
             'type' => \panix\ext\multipleinput\MultipleInputColumn::TYPE_TEXT_INPUT,
             'options' => [
-                'class' => 'input-lang',
                 'placeholder' => 'Адрес',
 
             ],
