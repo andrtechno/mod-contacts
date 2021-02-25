@@ -87,7 +87,6 @@ class ContactForm extends Model
                 'name' => 'Tester'
             ])*/
             ->setTo($email)
-            ->setFrom([$this->email => $this->name])
             ->setSubject(Yii::t('contacts/default', 'FB_FROM_SUBJECT', [
                 'sitename' => Yii::$app->settings->get('app', 'sitename'),
                 'user_name' => $this->name
