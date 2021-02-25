@@ -26,16 +26,22 @@ class DefaultController extends WebController
                 Yii::$app->response->format = Response::FORMAT_JSON;
                 return ActiveForm::validate($model);
             }
-            if($model->validate()){
-                $emails = explode(',',Yii::$app->settings->get('contacts', 'email'));
-                foreach ($emails as $email){
+            if ($model->validate()) {
+                $emails = explode(',', Yii::$app->settings->get('contacts', 'email'));
+                foreach ($emails as $email) {
                     $model->send($email);
                 }
 
                 Yii::$app->session->setFlash('success', Yii::t('contacts/default', 'SUCCESS_SEND_FORM'));
+            } else {
+                $errors = [];
+                foreach ($model->errors as $key => $error) {
+                    $errors[] = $model->getAttributeLabel($key) . ': ' . $error[0];
+                }
+                Yii::$app->session->setFlash('error', implode(',', $errors));
 
-                return $this->refresh();
             }
+            return $this->refresh();
         }
         return $this->render('index', [
             'model' => $model,
