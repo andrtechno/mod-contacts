@@ -23,6 +23,12 @@ echo date('N');
                 <?= Yii::$app->session->getFlash('success') ?>
             </div>
         <?php } ?>
+
+        <?php if (Yii::$app->session->hasFlash('error')) { ?>
+            <div class="alert alert-danger">
+                <?= Yii::$app->session->getFlash('error') ?>
+            </div>
+        <?php } ?>
         <?php if (isset($config->address) && isset($config->address[Yii::$app->language])) { ?>
             <h4><?= Yii::t('contacts/default', 'ADDRESS'); ?></h4>
             <div class="mb-1 pl-md-3 icon-location"><?= $config->address[Yii::$app->language]; ?></div>
