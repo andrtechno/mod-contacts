@@ -66,7 +66,7 @@ class MarkersController extends AdminController
             $this->pageName = Yii::t('contacts/admin', 'UPDATE_MARKER', ['name' => $model->name]);
         }
 
-        $this->breadcrumbs = [
+        $this->view->params['breadcrumbs'] = [
             [
                 'label' => Yii::t('contacts/default', 'MODULE_NAME'),
                 'url' => ['/admin/contacts'],
