@@ -23,7 +23,7 @@ class m190330_104130_contacts_map_markers extends Migration
             'map_id' => $this->string(255)->null(),
             'coords' => 'POINT',
             'name' => $this->text()->null(),
-            'draggable' => $this->boolean()->notNull()->defaultValue(0),
+            'draggable' => $this->boolean()->notNull()->defaultValue(false),
             'animation'=>$this->string(100)->null(),
             'icon_file' => $this->string(255)->null(),
             'icon_file_offset_x' => $this->string(5)->null(),
