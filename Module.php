@@ -6,11 +6,21 @@ use Yii;
 use panix\engine\WebModule;
 use yii\base\BootstrapInterface;
 
+/**
+ * Class Module
+ * @package panix\mod\contacts
+ *
+ * @property array $requireFields
+ * @property yii\validators\Validator $phoneValidator
+ * @property string $mailPath
+ */
 class Module extends WebModule implements BootstrapInterface
 {
 
     public $icon = 'phone';
     public $mailPath = '@contacts/mail';
+    public $phoneValidator = 'panix\ext\telinput\PhoneInputValidator';
+    public $requireFields = ['name', 'phone', 'text'];
 
     public function bootstrap($app)
     {

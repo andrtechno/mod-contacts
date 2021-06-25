@@ -22,7 +22,6 @@ class ContactForm extends Model
     public $text;
     public $phone;
     public $verifyCode;
-    public $requireFields = ['name', 'email', 'text'];
 
     //public $reCaptcha;
 
@@ -41,12 +40,13 @@ class ContactForm extends Model
      */
     public function rules()
     {
+        $module = Yii::$app->getModule($this->module);
         $configApp = Yii::$app->settings->get('app');
         $config = Yii::$app->settings->get('contacts');
         $rules = [];
         $rules[] = ['email', 'email'];
-        $rules[] = [$this->requireFields, 'required'];
-        $rules[] = ['phone', 'panix\ext\telinput\PhoneInputValidator'];
+        $rules[] = [$module->requireFields, 'required'];
+        $rules[] = ['phone', $module->phoneValidator];
         if ($configApp->captcha_class && $config->feedback_captcha && Yii::$app->user->isGuest) {
             if ($configApp->captcha_class == '\panix\engine\widgets\recaptcha\v2\ReCaptcha') {
                 $rules[] = ['verifyCode', 'panix\engine\widgets\recaptcha\v2\ReCaptchaValidator'];
