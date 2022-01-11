@@ -68,7 +68,8 @@ class MapWidget extends Widget
 
             $opt = [];
 
-
+            if(isset($this->options['styles']))
+                $opt['styles'] = $this->options['styles'];
             $opt['center'] = new LatLng($this->model->getCenter());
             $opt['zoom'] = $this->model->zoom;
             $opt['width'] = $this->model->width;
