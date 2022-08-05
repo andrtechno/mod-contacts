@@ -73,6 +73,7 @@ class MapWidget extends Widget
             $opt['center'] = new LatLng($this->model->getCenter());
             $opt['zoom'] = $this->model->zoom;
             $opt['width'] = $this->model->width;
+            $opt['height'] = $this->model->height;
             $opt['mapTypeId'] = $this->model->type;
             $opt['scrollwheel'] = boolval($this->model->scrollwheel);
 
