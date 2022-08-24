@@ -124,9 +124,12 @@ class Maps extends ActiveRecord
 
     public function getCenter()
     {
-
-        $toArray = explode(',', $this->center);
-        return ['lat' => $toArray[0], 'lng' => $toArray[1]];
+        if ($this->center) {
+            $toArray = explode(',', $this->center);
+            return ['lat' => $toArray[0], 'lng' => $toArray[1]];
+        } else {
+            return null;
+        }
     }
 
     public function getZoomList()
