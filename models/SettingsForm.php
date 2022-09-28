@@ -141,8 +141,7 @@ class SettingsForm extends SettingsModel
             'feedback_captcha' => true,
             'email' => 'me-email@example.com',
             'address' => '',
-            'feedbackMailBody' => '@contacts/mail/feedback.tpl',
-            'captcha_class' => '\yii\captcha\Captcha',
+            'feedbackMailBody' => '@contacts/mail/feedback.tpl'
         ];
     }
 
